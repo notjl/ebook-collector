@@ -7,5 +7,6 @@ $ git clone git@github.com:CPE025-Team-6/ebook-collector.git
 $ cd ebook-collector
 $ pip install pipenv
 $ pipenv shell
+$ pipenv lock
 $ pipenv sync
 ```
