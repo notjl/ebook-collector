@@ -11,13 +11,18 @@ license = {text = "MIT"}
 [project.optional-dependencies]
 
 [tool.pdm]
+[tool.pdm.scripts]
+run.cmd = "uvicorn backend.main:app --reload"
+run.env_file = ".env"
+black = "black backend"
+
 [[tool.pdm.source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 [tool.pdm.dev-dependencies]
 dev = [
-    "autopep8>=1.7.0",
+    "black>=22.8.0",
 ]
 
 [build-system]

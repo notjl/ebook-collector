@@ -7,8 +7,8 @@ app.include_router(users.router)
 
 
 # Minimal application
-@app.get('/', tags=['ROOT'])
+@app.get("/", tags=["ROOT"])
 async def index():
     return {
-        'hello': 'world',
+        "hello": "world",
     }

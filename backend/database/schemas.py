@@ -9,4 +9,5 @@ class User(BaseModel):
 
 
 class ShowUser(BaseModel):
-    pass
+    username: str
+    email: EmailStr
