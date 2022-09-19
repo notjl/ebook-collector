@@ -1,0 +1,25 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "NotJL", email = "58279268+notjl@users.noreply.github.com"},
+]
+dependencies = ["fastapi[all]", "pydantic[email]", "passlib", "python-jose[cryptography]", "motor", "argon2-cffi"]
+requires-python = ">=3.10"
+license = {text = "MIT"}
+[project.optional-dependencies]
+
+[tool.pdm]
+[[tool.pdm.source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+[tool.pdm.dev-dependencies]
+dev = [
+    "autopep8>=1.7.0",
+]
+
+[build-system]
+requires = ["pdm-pep517>=1.0.0"]
+build-backend = "pdm.pep517.api"

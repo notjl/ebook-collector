@@ -161,3 +161,9 @@ cython_debug/
 
 # Scratch python file
 scratch.py
+
+# Ignore vscode settings
+.vscode/
+
+# Ignore PEP582 pypackage
+__pypackage__/
