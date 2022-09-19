@@ -11,7 +11,6 @@ $ pdm plugin add pdm-vscode # This is to assume you are using VSCode / Code - OS
 
 $ git clone git@github.com:CPE025-Team-6/ebook-collector.git
 $ cd ebook-collector
-$ pdm init
 $ pdm install
 ```
 These instructions assume you are using VSCode / Code - OSS as IDE, if not follow [Working with PEP582](https://pdm.fming.dev/latest/usage/pep582/) for PEP582 IDE Support.
