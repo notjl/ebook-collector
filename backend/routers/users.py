@@ -29,7 +29,7 @@ async def get_all() -> List[schemas.ShowUser]:
     Get all users with their password filtered out
 
     Returns:
-    * **schemas._ShowUser_**: List of Users
+    * List[**schemas._ShowUser_**]: List of Users
     """
     return await user_handlers.get_all_user()
 
@@ -69,8 +69,10 @@ async def update(username: str, changes: schemas.User) -> schemas.User:
     return await user_handlers.update_user(username, changes.dict())
 
 
-@router.delete("/{username}/delete", summary="Delete a user")
-async def delete(username: str) -> schemas.User:
+@router.delete(
+    "/{username}/delete", response_model=List[schemas.ShowUser], summary="Delete a user"
+)
+async def delete(username: str) -> List[schemas.ShowUser]:
     """
     Delete a specfic user
 
@@ -78,6 +80,6 @@ async def delete(username: str) -> schemas.User:
     * **username** (str): Use for querying the database
 
     Returns:
-    * pass
+    * List[**schemas._ShowUser_**]: List of Users
     """
     return await user_handlers.delete_user(username)
