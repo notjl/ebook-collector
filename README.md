@@ -14,3 +14,6 @@ $ cd ebook-collector
 $ pdm install
 ```
 These instructions assume you are using VSCode / Code - OSS as IDE, if not follow [Working with PEP582](https://pdm.fming.dev/latest/usage/pep582/) for PEP582 IDE Support.
+
+### License
+This project is licensed under the terms of the [Expat License (MIT)](LICENSE).
