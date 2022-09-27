@@ -12,8 +12,8 @@ license = {text = "MIT"}
 
 [tool.pdm]
 [tool.pdm.scripts]
-run.cmd = "uvicorn backend.main:app --reload"
-run.env_file = ".env"
+server.cmd = "uvicorn backend.main:app --reload"
+server.env_file = ".env"
 black = "black backend"
 
 [[tool.pdm.source]]

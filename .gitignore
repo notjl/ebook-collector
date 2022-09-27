@@ -160,7 +160,7 @@ cython_debug/
 #.idea/
 
 # Scratch python file
-scratch.py
+scratch*.py
 
 # Ignore vscode settings
 .vscode/
