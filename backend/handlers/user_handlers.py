@@ -1,4 +1,5 @@
 from fastapi import HTTPException, status
+from typing import List
 
 from ..utils.hashing import argon2h, verify
 from ..utils.checks import check_if_exists
@@ -28,7 +29,7 @@ async def create_user(user: schemas.User) -> schemas.User:
     return user
 
 
-async def get_user(username: str) -> schemas.ShowUser:
+async def get_user(username: str) -> schemas.User:
     document: schemas.User = await collection.find_one({"username": username})
     if not document:
         raise HTTPException(
@@ -36,3 +37,15 @@ async def get_user(username: str) -> schemas.ShowUser:
             detail=f"User [{username}] does not exist!",
         )
     return document
+
+
+async def get_all_user() -> List[schemas.User]:
+    return [schemas.User(**document) async for document in collection.find({})]
+
+
+async def update_user(username: str) -> schemas.User:
+    pass
+
+
+async def delete_user(username: str) -> schemas.User:
+    pass
