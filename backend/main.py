@@ -28,12 +28,7 @@ license_info = {
     "url": "https://mit-license.org/",
 }
 
-tags_metadata = [
-    {
-        "name": "users",
-        "description": "Operations with users."
-    }
-]
+tags_metadata = [{"name": "users", "description": "Operations with users."}]
 
 
 app = FastAPI(

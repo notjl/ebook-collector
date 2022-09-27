@@ -34,7 +34,9 @@ async def get_all() -> List[schemas.ShowUser]:
     return await user_handlers.get_all_user()
 
 
-@router.get("/{username}", response_model=schemas.ShowUser, summary="Get a specific user")
+@router.get(
+    "/{username}", response_model=schemas.ShowUser, summary="Get a specific user"
+)
 async def get(username: str) -> schemas.ShowUser:
     """
     Get a user with their password filtered out
@@ -49,7 +51,7 @@ async def get(username: str) -> schemas.ShowUser:
 
 
 @router.put("/{username}/update", response_model=schemas.User, summary="Update a user")
-async def update(username: str) -> schemas.User:
+async def update(username: str, changes: schemas.User) -> schemas.User:
     """
     Update a specific user's information
 
@@ -64,7 +66,7 @@ async def update(username: str) -> schemas.User:
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    pass
+    return await user_handlers.update_user(username, changes.dict())
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
@@ -78,4 +80,4 @@ async def delete(username: str) -> schemas.User:
     Returns:
     * pass
     """
-    pass
+    return await user_handlers.delete_user(username)

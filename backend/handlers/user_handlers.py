@@ -43,9 +43,28 @@ async def get_all_user() -> List[schemas.User]:
     return [schemas.User(**document) async for document in collection.find({})]
 
 
-async def update_user(username: str) -> schemas.User:
-    pass
+async def update_user(username: str, changes: dict) -> schemas.User:
+    changes["password"] = argon2h(changes["password"])
+    await collection.update_one(
+        {
+            "username": username,
+        },
+        {
+            "$set": changes,
+        },
+    )
+
+    document: schemas.User = await collection.find_one(
+        {"username": changes["username"]}
+    )
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User [{username}] does not exist!",
+        )
+    return document
 
 
-async def delete_user(username: str) -> schemas.User:
-    pass
+async def delete_user(username: str) -> List[schemas.User]:
+    await collection.delete_one({"username": username})
+    return [schemas.User(**document) async for document in collection.find({})]
