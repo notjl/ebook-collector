@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from motor.motor_asyncio import AsyncIOMotorCollection as MCollection
+from motor.motor_asyncio import AsyncIOMotorCollection
 from typing import List
 
 from ..utils.hashing import argon2h
@@ -9,7 +9,7 @@ from ..database import schemas
 
 # Take User schema and hash the password using argon2id
 async def create_user(
-    user: schemas.User, collection: MCollection
+    user: schemas.User, collection: AsyncIOMotorCollection
 ) -> schemas.User:
     tmp = user.dict()
 
@@ -33,7 +33,9 @@ async def create_user(
     return user
 
 
-async def get_user(username: str, collection: MCollection) -> schemas.User:
+async def get_user(
+    username: str, collection: AsyncIOMotorCollection
+) -> schemas.User:
     document: schemas.User = await collection.find_one(
         {"$or": [{"username": username}, {"email": username}]}
     )
@@ -45,12 +47,14 @@ async def get_user(username: str, collection: MCollection) -> schemas.User:
     return document
 
 
-async def get_all_user(collection: MCollection) -> List[schemas.User]:
+async def get_all_user(
+    collection: AsyncIOMotorCollection,
+) -> List[schemas.User]:
     return [schemas.User(**document) async for document in collection.find({})]
 
 
 async def update_user(
-    username: str, changes: schemas.User, collection: MCollection
+    username: str, changes: schemas.User, collection: AsyncIOMotorCollection
 ) -> schemas.User:
     tmp = changes.dict()
     tmp["password"] = argon2h(tmp["password"])
@@ -76,7 +80,7 @@ async def update_user(
 
 
 async def delete_user(
-    username: str, collection: MCollection
+    username: str, collection: AsyncIOMotorCollection
 ) -> List[schemas.User]:
     await collection.delete_one({"username": username})
     return [schemas.User(**document) async for document in collection.find({})]
