@@ -34,7 +34,9 @@ async def create_user(
 
 
 async def get_user(username: str, collection: MCollection) -> schemas.User:
-    document: schemas.User = await collection.find_one({"username": username})
+    document: schemas.User = await collection.find_one(
+        {"$or": [{"username": username}, {"email": username}]}
+    )
     if not document:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
