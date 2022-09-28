@@ -1,17 +1,22 @@
 from fastapi import APIRouter, Depends
-from motor.motor_asyncio import AsyncIOMotorCollection as MCollection
+from motor.motor_asyncio import AsyncIOMotorCollection
 from typing import List
 
 from ..database import schemas, db
 from ..handlers import user_handlers
+from ..utils import checks
 
-router = APIRouter(prefix="/user", tags=["users"])
+super_access = checks.RoleChecker(["admin"])
+
+router = APIRouter(
+    prefix="/user", tags=["users"], dependencies=[Depends(super_access)]
+)
 
 
 @router.post("/create", response_model=schemas.User, summary="Create a user")
 async def create(
     user: schemas.User,
-    collection: MCollection = Depends(db.get_user_collection),
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.User:
     """
     Create a user with the required credentials
@@ -31,7 +36,7 @@ async def create(
     "/all", response_model=List[schemas.ShowUser], summary="Get all users"
 )
 async def get_all(
-    collection: MCollection = Depends(db.get_user_collection),
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> List[schemas.User]:
     """
     Get all users with their password filtered out
@@ -48,7 +53,8 @@ async def get_all(
     summary="Get a specific user",
 )
 async def get(
-    username: str, collection: MCollection = Depends(db.get_user_collection)
+    username: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.User:
     """
     Get a user with their password filtered out
@@ -68,7 +74,7 @@ async def get(
 async def update(
     username: str,
     changes: schemas.User,
-    collection: MCollection = Depends(db.get_user_collection),
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.User:
     """
     Update a specific user's information
@@ -89,7 +95,8 @@ async def update(
 
 @router.delete("/{username}/delete", summary="Delete a user")
 async def delete(
-    username: str, collection: MCollection = Depends(db.get_user_collection)
+    username: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> List[schemas.User]:
     """
     Delete a specfic user

@@ -1,20 +1,25 @@
 from fastapi import FastAPI
 
-from .routers import users
+from .routers import users, auth
 
 description = """
 E-book Collector by Team 6 of CPE41S1
 
+#### Legend:
+* 🔒 - Admin
+* 🧑‍🏫 - User / Professor
+
 ## Users
 ### Features:
-* **Create Users**
-* **Read User/Users**
-* **Update User**
-* **Delete User**
+* **Create Users** 🔒
+* **Read User/Users** 🔒
+* **Update User** 🔒
+* **Delete User** 🔒
 
 ## Library
 ### Features:
 * _To be implemented_
+
 """
 
 contact = {
@@ -40,6 +45,7 @@ app = FastAPI(
     openapi_tags=tags_metadata,
 )
 app.include_router(users.router)
+app.include_router(auth.router)
 
 
 # Minimal application
