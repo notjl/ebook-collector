@@ -5,7 +5,15 @@ description = ""
 authors = [
     {name = "NotJL", email = "58279268+notjl@users.noreply.github.com"},
 ]
-dependencies = ["fastapi[all]", "pydantic[email]", "passlib", "python-jose[cryptography]", "motor", "argon2-cffi"]
+dependencies = [
+    "fastapi[all]",
+    "pydantic[email]",
+    "passlib",
+    "python-jose[cryptography]",
+    "motor",
+    "argon2-cffi",
+    "vt-py>=0.17.0",
+]
 requires-python = ">=3.10"
 license = {text = "MIT"}
 [project.optional-dependencies]
@@ -20,9 +28,13 @@ black = "black backend"
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
+
 [tool.pdm.dev-dependencies]
 dev = [
     "black>=22.8.0",
+    "flake8>=5.0.4",
+    "pytest>=7.1.3",
+    "mypy>=0.981",
 ]
 
 [build-system]

@@ -37,7 +37,7 @@ async def get_all(
     Get all users with their password filtered out
 
     Returns:
-    * **schemas._ShowUser_**: List of Users
+    * List[**schemas._ShowUser_**]: List of Users
     """
     return await user_handlers.get_all_user(collection)
 
@@ -100,6 +100,6 @@ async def delete(
     * **username** (str): Use for querying the database
 
     Returns:
-    * pass
+    * List[**schemas._ShowUser_**]: List of Users
     """
     return await user_handlers.delete_user(username, collection)

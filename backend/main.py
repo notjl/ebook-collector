@@ -9,8 +9,8 @@ E-book Collector by Team 6 of CPE41S1
 ### Features:
 * **Create Users**
 * **Read User/Users**
-* **Update User** (_not implemented_)
-* **Delete User** (_not implemented_)
+* **Update User**
+* **Delete User**
 
 ## Library
 ### Features:
