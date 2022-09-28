@@ -13,4 +13,14 @@ async def login(
     request: OAuth2PasswordRequestForm = Depends(),
     collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.Token:
+    """
+    Provides user authentication
+
+    Parameters:
+    * **username** or **email** (str)
+    * **password** (str)
+
+    Returns:
+    * **schemas._Token_**: Token necessary for authentication or API access
+    """
     return await auth_handlers.authenticate_user(request, collection)

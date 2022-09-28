@@ -3,22 +3,27 @@ from fastapi import FastAPI
 from .routers import users, auth
 
 description = """
-E-book Collector by Team 6 of CPE41S1
+📚 E-book Collector by Team 6 of CPE41S1 🐙
 
-#### Legend:
+#### Legend (enclosed in square bracket):
 * 🔒 - Admin
 * 🧑‍🏫 - User / Professor
 
-## Users
+## Users 🧑‍💻
 ### Features:
-* **Create Users** 🔒
-* **Read User/Users** 🔒
-* **Update User** 🔒
-* **Delete User** 🔒
+* **Create Users** [🔒]
+* **Read User/Users** [🔒]
+* **Update User** [🔒]
+* **Delete User** [🔒]
 
-## Library
+## Authentication 🔐
 ### Features:
-* _To be implemented_
+* **JWT Token** 🔑 - _defaults_ to 30 minutes
+* **Argon2 Password Verification** 🔓
+
+## Library 📚
+### Features:
+* _To be implemented_ 🤷
 
 """
 
@@ -33,13 +38,19 @@ license_info = {
     "url": "https://mit-license.org/",
 }
 
-tags_metadata = [{"name": "users", "description": "Operations with users."}]
+tags_metadata = [
+    {"name": "users", "description": "Operations with users for admins."},
+    {
+        "name": "authentication",
+        "description": "Authentication of users for login purposes.",
+    },
+]
 
 
 app = FastAPI(
     title="< L I B R A R Y >",
     description=description,
-    version="AdamantInkling 0.1",
+    version="AdamantInkling 0.2",
     contact=contact,
     license_info=license_info,
     openapi_tags=tags_metadata,

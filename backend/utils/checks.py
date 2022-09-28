@@ -26,11 +26,11 @@ class RoleChecker:
             )
 
 
-async def check_if_exists(document, collection, key) -> bool:
+async def check_if_exists(query, collection, key) -> bool:
     # Wrapper for checking a document exists in the collection
-    temp_data = await collection.find_one({key: document[key]})
+    temp_data = await collection.find_one({key: query})
     with suppress(Exception):
-        if document[key] == temp_data[key]:
+        if query == temp_data[key]:
             return True
 
     return False

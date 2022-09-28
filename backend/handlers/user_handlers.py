@@ -13,7 +13,7 @@ async def create_user(
 ) -> schemas.User:
     tmp = user.dict()
 
-    if await check_if_exists(tmp, collection, "username"):
+    if await check_if_exists(tmp["username"], collection, "username"):
         raise HTTPException(
             status_code=status.HTTP_302_FOUND,
             detail=f'User [{tmp["username"]}] exists',
@@ -57,6 +57,13 @@ async def update_user(
     username: str, changes: schemas.User, collection: AsyncIOMotorCollection
 ) -> schemas.User:
     tmp = changes.dict()
+
+    if not await check_if_exists(username, collection, "username"):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User [{username}] does not exist!",
+        )
+
     tmp["password"] = argon2h(tmp["password"])
 
     await collection.update_one(
