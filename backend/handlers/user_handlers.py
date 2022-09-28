@@ -11,15 +11,18 @@ from ..database import schemas
 async def create_user(
     user: schemas.User, collection: MCollection
 ) -> schemas.User:
-    if await check_if_exists(user, collection, "username"):
+    tmp = user.dict()
+
+    if await check_if_exists(tmp, collection, "username"):
         raise HTTPException(
             status_code=status.HTTP_302_FOUND,
-            detail=f'User [{user["username"]}] exists',
+            detail=f'User [{tmp["username"]}] exists',
         )
 
-    user["password"] = argon2h(user["password"])
+    tmp["password"] = argon2h(tmp["password"])
 
-    result = await collection.insert_one(user)
+    result = await collection.insert_one(tmp)
+    user.password = tmp["password"]
 
     if not result:
         raise HTTPException(
@@ -45,20 +48,22 @@ async def get_all_user(collection: MCollection) -> List[schemas.User]:
 
 
 async def update_user(
-    username: str, changes: dict, collection: MCollection
+    username: str, changes: schemas.User, collection: MCollection
 ) -> schemas.User:
-    changes["password"] = argon2h(changes["password"])
+    tmp = changes.dict()
+    tmp["password"] = argon2h(tmp["password"])
+
     await collection.update_one(
         {
             "username": username,
         },
         {
-            "$set": changes,
+            "$set": tmp,
         },
     )
 
     document: schemas.User = await collection.find_one(
-        {"username": changes["username"]}
+        {"username": tmp["username"]}
     )
     if not document:
         raise HTTPException(

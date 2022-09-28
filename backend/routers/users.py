@@ -24,7 +24,7 @@ async def create(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.create_user(user.dict(), collection)
+    return await user_handlers.create_user(user, collection)
 
 
 @router.get(
@@ -32,7 +32,7 @@ async def create(
 )
 async def get_all(
     collection: MCollection = Depends(db.get_user_collection),
-) -> List[schemas.ShowUser]:
+) -> List[schemas.User]:
     """
     Get all users with their password filtered out
 
@@ -49,7 +49,7 @@ async def get_all(
 )
 async def get(
     username: str, collection: MCollection = Depends(db.get_user_collection)
-) -> schemas.ShowUser:
+) -> schemas.User:
     """
     Get a user with their password filtered out
 
@@ -84,15 +84,13 @@ async def update(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.update_user(
-        username, changes.dict(), collection
-    )
+    return await user_handlers.update_user(username, changes, collection)
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
 async def delete(
     username: str, collection: MCollection = Depends(db.get_user_collection)
-) -> schemas.User:
+) -> List[schemas.User]:
     """
     Delete a specfic user
 

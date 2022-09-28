@@ -37,6 +37,16 @@ dev = [
     "mypy>=0.981",
 ]
 
+[tool.black]
+line-length = 79
+
+[[tool.mypy.overrides]]
+module = [
+    "motor.*",
+    "motor",
+]
+ignore_missing_imports = true
+
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"

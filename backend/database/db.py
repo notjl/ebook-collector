@@ -8,5 +8,5 @@ def get_user_collection():
     # Create a database named LibraryDB
     # Create a collection inside LibraryDB named users
     client = motor.motor_asyncio.AsyncIOMotorClient(getenv("DB_URI"))
-    db = client['LibraryDB']
+    db = client["LibraryDB"]
     yield db.users
