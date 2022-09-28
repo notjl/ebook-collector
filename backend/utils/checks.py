@@ -34,3 +34,17 @@ async def check_if_exists(query, collection, key) -> bool:
             return True
 
     return False
+
+
+async def check_if_exists_x(query, key, collection, status_code, detail):
+    print("running")
+    temp_data = await collection.find_one({key: query})
+    with suppress(Exception):
+        if query == temp_data[key]:
+            print("Train: It's true")
+            return HTTPException(
+                status_code=status_code,
+                detail=detail,
+            )
+
+    return None

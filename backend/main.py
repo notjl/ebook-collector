@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .routers import users, auth
+from .routers import users, auth, library
 
 description = """
 📚 E-book Collector by Team 6 of CPE41S1 🐙
@@ -8,6 +8,10 @@ description = """
 #### Legend (enclosed in square bracket):
 * 🔒 - Admin
 * 🧑‍🏫 - User / Professor
+
+## Library 📚
+### Features:
+* _To be implemented_ 🤷
 
 ## Users 🧑‍💻
 ### Features:
@@ -20,10 +24,6 @@ description = """
 ### Features:
 * **JWT Token** 🔑 - _defaults_ to 30 minutes
 * **Argon2 Password Verification** 🔓
-
-## Library 📚
-### Features:
-* _To be implemented_ 🤷
 
 """
 
@@ -39,6 +39,10 @@ license_info = {
 }
 
 tags_metadata = [
+    {
+        "name": "library",
+        "description": "Library operations for users and admins",
+    },
     {"name": "users", "description": "Operations with users for admins."},
     {
         "name": "authentication",
@@ -55,6 +59,7 @@ app = FastAPI(
     license_info=license_info,
     openapi_tags=tags_metadata,
 )
+app.include_router(library.router)
 app.include_router(users.router)
 app.include_router(auth.router)
 

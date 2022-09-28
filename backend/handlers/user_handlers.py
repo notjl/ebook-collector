@@ -22,7 +22,6 @@ async def create_user(
     tmp["password"] = argon2h(tmp["password"])
 
     result = await collection.insert_one(tmp)
-    user.password = tmp["password"]
 
     if not result:
         raise HTTPException(
@@ -30,7 +29,7 @@ async def create_user(
             detail="Something went wrong / Bad request",
         )
 
-    return user
+    return tmp
 
 
 async def get_user(

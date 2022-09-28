@@ -8,7 +8,9 @@ from ..handlers import auth_handlers
 router = APIRouter(tags=["authentication"])
 
 
-@router.post("/login", response_model=schemas.Token)
+@router.post(
+    "/login", response_model=schemas.Token, summary="Route for user login"
+)
 async def login(
     request: OAuth2PasswordRequestForm = Depends(),
     collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
