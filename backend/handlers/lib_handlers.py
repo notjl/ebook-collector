@@ -8,7 +8,7 @@ from motor.motor_asyncio import (
 )
 
 from ..database import schemas
-from ..utils.checks import check_if_exists
+from ..utils.checks import check_if_exists, virus_analysis
 from ..utils.hashing import file_hashing
 
 
@@ -38,6 +38,15 @@ async def upload_ebook(
         raise HTTPException(
             status_code=status.HTTP_302_FOUND,
             detail=f"Book with hashing [{tmp['hashes']}] exists",
+        )
+
+    if await virus_analysis(tmp["hashes"]["md5"], ebook):
+        raise HTTPException(
+            status_code=status.HTTP_406_NOT_ACCEPTABLE,
+            detail=f"""
+            Book [{ebook.filename}] is suspected of having malicious
+            and suspicious software by VirusTotal.
+            """,
         )
 
     async with gridfs.open_upload_stream(ebook.filename) as grid_in:

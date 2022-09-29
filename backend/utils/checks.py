@@ -1,9 +1,13 @@
 from contextlib import suppress
+from os import getenv
 
+import vt
 from fastapi import Depends, HTTPException, status
 
 from ..database import schemas
 from ..utils import oauth2
+
+client = vt.Client(getenv("VT_API_KEY"))
 
 
 class RoleChecker:
@@ -24,6 +28,34 @@ class RoleChecker:
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Operation not permitted",
             )
+
+
+async def virus_analysis_hash(md5_hash):
+    with suppress(Exception):
+        result = await client.get_object_async(f"/files/{md5_hash}")
+        return result.last_analysis_stats
+
+    return None
+
+
+async def virus_analysis_file(file):
+    tmp_file = None
+    with suppress(Exception):
+        tmp_file = file.file
+        tmp_file = file.file._file
+        tmp_file = file.file._file.file
+
+    result = await client.scan_file_async(tmp_file, True)
+    return result.stats
+
+
+async def virus_analysis(md5_hash, file):
+    if not (result := await virus_analysis_hash(md5_hash)):
+        result = await virus_analysis_file(file)
+
+    return (
+        True if result["malicious"] > 0 or result["suspicious"] > 0 else False
+    )
 
 
 async def check_if_exists(query, collection, key) -> bool:
