@@ -11,7 +11,12 @@ description = """
 
 ## Library 📚
 ### Features:
-* _To be implemented_ 🤷
+* **Upload Books** [🧑‍🏫]
+* **Download Books** [🧑‍🏫]
+* **Read Books** [🧑‍🏫]
+* **Delete Books** [🔒]
+* **Update Books** - _To be implemented_ [🔒]
+* **Preview Books** - _Cannot implement (FastAPI delimitation)_
 
 ## Users 🧑‍💻
 ### Features:
@@ -54,7 +59,7 @@ tags_metadata = [
 app = FastAPI(
     title="< L I B R A R Y >",
     description=description,
-    version="AdamantInkling 0.2",
+    version="AdamantInkling 0.5",
     contact=contact,
     license_info=license_info,
     openapi_tags=tags_metadata,

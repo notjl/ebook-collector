@@ -7,10 +7,10 @@ from ..utils.checks import check_if_exists
 from ..database import schemas
 
 
-# Take User schema and hash the password using argon2id
 async def create_user(
     user: schemas.User, collection: AsyncIOMotorCollection
 ) -> schemas.User:
+    # Take User schema and hash the password using argon2id
     tmp = user.dict()
 
     if await check_if_exists(tmp["username"], collection, "username"):
@@ -94,9 +94,7 @@ async def update_user(
 async def delete_user(
     username: str, collection: AsyncIOMotorCollection
 ) -> List[schemas.User]:
-    document: schemas.User = await collection.find_one(
-        {"username": username}
-    )
+    document: schemas.User = await collection.find_one({"username": username})
     if not document:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

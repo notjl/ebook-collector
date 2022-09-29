@@ -9,6 +9,7 @@ from ..database import schemas, db
 from ..handlers import lib_handlers as handler
 
 professor_access = checks.RoleChecker(["professor"])
+super_access = checks.RoleChecker(["admin"])
 
 router = APIRouter(
     prefix="/library",
@@ -25,33 +26,90 @@ async def upload(
     book: schemas.Book = Depends(schemas.Book.as_form),
     ebook: UploadFile = File(...),
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
-    access = Depends(professor_access)
+    access=Depends(professor_access),
 ) -> schemas.ShowBook:
+    """
+    Upload a book / ebook
+
+    Allowed Roles:
+    * **professor**
+
+    Parameters:
+    * **ebook** (file): ebook file (pdf, epub, etc.)
+    * **title** (str): book title
+    * **course_code** (str): appropriate course code
+    * **description** _Optional_ (str): description of the book
+
+    Returns:
+    * **schemas._Book_**: JSON of the book details
+    """
     return await handler.upload_ebook(
         book, ebook, collection, db.get_ebooks_gridfs()
     )
 
 
 @router.get(
-    "/library/books",
+    "/books",
     response_model=List[schemas.ShowBook],
     summary="Get all books in the gridfs",
 )
 async def get_all(
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
 ) -> List[schemas.ShowBook]:
+    """
+    Get all the books available
+
+    Returns:
+    * List[**schemas._Book_**]: List of Books
+    """
     return await handler.get_all_book(collection)
+
+
+@router.get("/{book_title}/download", summary="Download a specific book")
+async def download(
+    book_title: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+    access=Depends(professor_access),
+):
+    """
+    Download a book / ebook
+
+    Allowed Roles:
+    * **professor**
+
+    Path Paramters:
+    * **book_title** (str): Used for querying database
+
+    Returns:
+    * **FileAPI.StreamingResponse**: A download stream response
+    """
+    return await handler.download_book(
+        book_title, collection, db.get_ebooks_gridfs()
+    )
 
 
 @router.delete(
     "/{book_title}/delete",
     response_model=List[schemas.ShowBook],
-    summary="Delet a book in the gridfs",
+    summary="Delete a book in the gridfs",
 )
 async def delete(
     book_title: str,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+    access=Depends(super_access),
 ) -> List[schemas.ShowBook]:
+    """
+    Delete a book / ebook
+
+    Allowed Roles:
+    * **admin**
+
+    Path Parameters:
+    * **book_title** (str): Used for querying database
+
+    Returns:
+    * List[**schemas._Book_**]: List of Books
+    """
     return await handler.delete_book(
         book_title, collection, db.get_ebooks_gridfs()
     )

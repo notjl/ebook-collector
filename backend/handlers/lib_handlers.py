@@ -1,15 +1,16 @@
 import asyncio
-from copy import deepcopy
+import pathlib
 from typing import List
 
 from fastapi import HTTPException, UploadFile, status
+from fastapi.responses import StreamingResponse
 from motor.motor_asyncio import (
     AsyncIOMotorCollection,
     AsyncIOMotorGridFSBucket,
 )
 
 from ..database import schemas
-from ..utils.checks import check_if_exists, virus_analysis
+from ..utils.checks import check_if_exists
 from ..utils.hashing import file_hashing
 
 
@@ -20,7 +21,6 @@ async def upload_ebook(
     gridfs: AsyncIOMotorGridFSBucket,
 ) -> schemas.Book:
     tmp = book.dict()
-    tmp_file = deepcopy(ebook)
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
@@ -42,15 +42,6 @@ async def upload_ebook(
             detail=f"Book with hashing [{tmp['hashes']}] exists",
         )
 
-    if await virus_analysis(tmp["hashes"]["sha256"], tmp_file.file):
-        raise HTTPException(
-            status_code=status.HTTP_406_NOT_ACCEPTABLE,
-            detail=f"""
-            Book [{ebook.filename}] is suspected of having malicious
-            and suspicious software by VirusTotal.
-            """,
-        )
-
     async with gridfs.open_upload_stream(ebook.filename) as grid_in:
         await asyncio.gather(*[grid_in.set(k, v) for k, v in tmp.items()])
         await grid_in.write(ebook.file)
@@ -69,7 +60,32 @@ async def upload_ebook(
 async def get_all_book(
     collection: AsyncIOMotorCollection,
 ) -> List[schemas.Book]:
-    return [schemas.ShowBook(**document) async for document in collection.find({})]
+    return [
+        schemas.ShowBook(**document) async for document in collection.find({})
+    ]
+
+
+async def download_book(
+    book_title: str,
+    collection: AsyncIOMotorCollection,
+    gridfs: AsyncIOMotorGridFSBucket,
+):
+    async def iterfile(document):
+        grid_out = await gridfs.open_download_stream(document["_id"])
+        content = await grid_out.read()
+        yield content
+
+    document: schemas.Book = await collection.find_one({"title": book_title})
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+
+    file_ext = pathlib.Path(document["filename"]).suffix
+    filename = document["title"] + file_ext
+    headers = {"Content-Disposition": f"attachment; filename={filename}"}
+    return StreamingResponse(iterfile(document), headers=headers)
 
 
 async def delete_book(

@@ -1,12 +1,9 @@
 from fastapi import Form
 from pydantic import BaseModel, EmailStr
 
-from datetime import date
-from typing import List
 
-
-# User schema for basic user
 class User(BaseModel):
+    # User schema for basic user
     username: str
     email: EmailStr
     password: str
@@ -27,11 +24,11 @@ class Hashes(BaseModel):
 class Book(BaseModel):
     title: str
     course_code: str
-    author: List[str] | str | None = None
-    publisher: str | None = None
-    isbn: List[str] | str | None = None
-    doi: str | None = None
-    date_published: date | None = None
+    # author: List[str] | str | None = None
+    # publisher: str | None = None
+    # isbn: List[str] | str | None = None
+    # doi: str | None = None
+    # date_published: date | None = None
     description: str | None = None
 
     @classmethod
@@ -39,32 +36,31 @@ class Book(BaseModel):
         cls,
         title=Form(...),
         course_code=Form(...),
-        author=Form(None),
-        publisher=Form(None),
-        isbn=Form(None),
-        doi=Form(None),
+        # author=Form(None),
+        # publisher=Form(None),
+        # isbn=Form(None),
+        # doi=Form(None),
         description=Form(None),
     ):
         return cls(
             title=title,
             course_code=course_code,
-            author=author,
-            publisher=publisher,
-            isbn=isbn,
-            doi=doi,
+            # author=author,
+            # publisher=publisher,
+            # isbn=isbn,
+            # doi=doi,
             description=description,
         )
-        pass
 
 
 class ShowBook(BaseModel):
     filename: str
     title: str
     course_code: str
-    author: List[str] | str | None = None
-    publisher: str | None = None
-    isbn: List[str] | str | None = None
-    doi: str | None = None
+    # author: List[str] | str | None = None
+    # publisher: str | None = None
+    # isbn: List[str] | str | None = None
+    # doi: str | None = None
     description: str | None = None
     hashes: Hashes
 
