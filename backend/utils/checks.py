@@ -30,7 +30,7 @@ class RoleChecker:
             )
 
 
-async def virus_analysis_hash(md5_hash):
+async def virus_analysis_hash(sha256_hash):
     with suppress(Exception):
         result = await client.get_object_async(f"/files/{md5_hash}")
         return result.last_analysis_stats
@@ -49,8 +49,8 @@ async def virus_analysis_file(file):
     return result.stats
 
 
-async def virus_analysis(md5_hash, file):
-    if not (result := await virus_analysis_hash(md5_hash)):
+async def virus_analysis(sha256_hash, file):
+    if not (result := await virus_analysis_hash(sha256_hash)):
         result = await virus_analysis_file(file)
 
     return (

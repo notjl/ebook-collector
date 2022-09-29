@@ -40,7 +40,7 @@ async def upload_ebook(
             detail=f"Book with hashing [{tmp['hashes']}] exists",
         )
 
-    if await virus_analysis(tmp["hashes"]["md5"], ebook):
+    if await virus_analysis(tmp["hashes"]["sha256"], ebook):
         raise HTTPException(
             status_code=status.HTTP_406_NOT_ACCEPTABLE,
             detail=f"""
