@@ -63,6 +63,12 @@ async def update_user(
             detail=f"User [{username}] does not exist!",
         )
 
+    if await check_if_exists(tmp["username"], collection, "username"):
+        raise HTTPException(
+            status_code=status.HTTP_302_FOUND,
+            detail=f'User [{tmp["username"]}] exists',
+        )
+
     tmp["password"] = argon2h(tmp["password"])
 
     await collection.update_one(
@@ -88,5 +94,13 @@ async def update_user(
 async def delete_user(
     username: str, collection: AsyncIOMotorCollection
 ) -> List[schemas.User]:
+    document: schemas.User = await collection.find_one(
+        {"username": username}
+    )
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"User [{username}] does not exist!",
+        )
     await collection.delete_one({"username": username})
     return [schemas.User(**document) async for document in collection.find({})]

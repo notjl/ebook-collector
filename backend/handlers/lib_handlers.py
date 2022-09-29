@@ -78,5 +78,10 @@ async def delete_book(
     gridfs: AsyncIOMotorGridFSBucket,
 ) -> List[schemas.Book]:
     document: schemas.Book = await collection.find_one({"title": book_title})
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
     await gridfs.delete(document["_id"])
     return [schemas.ShowBook(**doc) async for doc in collection.find({})]
