@@ -1,4 +1,5 @@
 import asyncio
+from copy import deepcopy
 from typing import List
 
 from fastapi import HTTPException, UploadFile, status
@@ -19,6 +20,7 @@ async def upload_ebook(
     gridfs: AsyncIOMotorGridFSBucket,
 ) -> schemas.Book:
     tmp = book.dict()
+    tmp_file = deepcopy(ebook)
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
@@ -40,7 +42,7 @@ async def upload_ebook(
             detail=f"Book with hashing [{tmp['hashes']}] exists",
         )
 
-    if await virus_analysis(tmp["hashes"]["sha256"], ebook):
+    if await virus_analysis(tmp["hashes"]["sha256"], tmp_file.file):
         raise HTTPException(
             status_code=status.HTTP_406_NOT_ACCEPTABLE,
             detail=f"""
@@ -67,7 +69,7 @@ async def upload_ebook(
 async def get_all_book(
     collection: AsyncIOMotorCollection,
 ) -> List[schemas.Book]:
-    return [schemas.Book(**document) async for document in collection.find({})]
+    return [schemas.ShowBook(**document) async for document in collection.find({})]
 
 
 async def delete_book(
@@ -77,4 +79,4 @@ async def delete_book(
 ) -> List[schemas.Book]:
     document: schemas.Book = await collection.find_one({"title": book_title})
     await gridfs.delete(document["_id"])
-    return [schemas.Book(**doc) async for doc in collection.find({})]
+    return [schemas.ShowBook(**doc) async for doc in collection.find({})]

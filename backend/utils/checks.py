@@ -41,9 +41,8 @@ async def virus_analysis_hash(sha256_hash):
 async def virus_analysis_file(file):
     tmp_file = None
     with suppress(Exception):
-        tmp_file = file.file
-        tmp_file = file.file._file
-        tmp_file = file.file._file.file
+        tmp_file = file._file
+        tmp_file = file._file.file
 
     result = await client.scan_file_async(tmp_file, True)
     return result.stats
