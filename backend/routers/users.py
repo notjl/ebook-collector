@@ -3,7 +3,7 @@ from motor.motor_asyncio import AsyncIOMotorCollection
 from typing import List
 
 from ..database import schemas, db
-from ..handlers import user_handlers
+from ..handlers import user_handlers as handler
 from ..utils import checks
 
 super_access = checks.RoleChecker(["admin"])
@@ -29,7 +29,7 @@ async def create(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.create_user(user, collection)
+    return await handler.create_user(user, collection)
 
 
 @router.get(
@@ -44,7 +44,7 @@ async def get_all(
     Returns:
     * List[**schemas._ShowUser_**]: List of Users
     """
-    return await user_handlers.get_all_user(collection)
+    return await handler.get_all_user(collection)
 
 
 @router.get(
@@ -65,7 +65,7 @@ async def get(
     Returns:
     * **schemas._ShowUser_**: JSON of the user details
     """
-    return await user_handlers.get_user(username, collection)
+    return await handler.get_user(username, collection)
 
 
 @router.put(
@@ -90,7 +90,7 @@ async def update(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.update_user(username, changes, collection)
+    return await handler.update_user(username, changes, collection)
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
@@ -107,4 +107,4 @@ async def delete(
     Returns:
     * List[**schemas._ShowUser_**]: List of Users
     """
-    return await user_handlers.delete_user(username, collection)
+    return await handler.delete_user(username, collection)

@@ -1,4 +1,5 @@
 import asyncio
+from typing import List
 
 from fastapi import HTTPException, UploadFile, status
 from motor.motor_asyncio import (
@@ -52,3 +53,19 @@ async def upload_ebook(
         )
 
     return book_document
+
+
+async def get_all_book(
+    collection: AsyncIOMotorCollection,
+) -> List[schemas.Book]:
+    return [schemas.Book(**document) async for document in collection.find({})]
+
+
+async def delete_book(
+    book_title: str,
+    collection: AsyncIOMotorCollection,
+    gridfs: AsyncIOMotorGridFSBucket,
+) -> List[schemas.Book]:
+    document: schemas.Book = await collection.find_one({"title": book_title})
+    await gridfs.delete(document["_id"])
+    return [schemas.Book(**doc) async for doc in collection.find({})]

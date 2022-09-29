@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from motor.motor_asyncio import AsyncIOMotorCollection
 
 from ..database import schemas, db
-from ..handlers import auth_handlers
+from ..handlers import auth_handlers as handler
 
 router = APIRouter(tags=["authentication"])
 
@@ -25,4 +25,4 @@ async def login(
     Returns:
     * **schemas._Token_**: Token necessary for authentication or API access
     """
-    return await auth_handlers.authenticate_user(request, collection)
+    return await handler.authenticate_user(request, collection)
