@@ -8,9 +8,7 @@ from ..database import schemas
 
 
 # Take User schema and hash the password using argon2id
-async def create_user(
-    user: schemas.User, collection: MCollection
-) -> schemas.User:
+async def create_user(user: schemas.User, collection: MCollection) -> schemas.User:
     if await check_if_exists(user, collection, "username"):
         raise HTTPException(
             status_code=status.HTTP_302_FOUND,
@@ -68,8 +66,6 @@ async def update_user(
     return document
 
 
-async def delete_user(
-    username: str, collection: MCollection
-) -> List[schemas.User]:
+async def delete_user(username: str, collection: MCollection) -> List[schemas.User]:
     await collection.delete_one({"username": username})
     return [schemas.User(**document) async for document in collection.find({})]

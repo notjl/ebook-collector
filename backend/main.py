@@ -34,7 +34,12 @@ license_info = {
 tags_metadata = [{"name": "users", "description": "Operations with users."}]
 
 # To have smooth communication between React (frontend) and FastAPI (backend)
-origins = ["https://localhost:3000", "http://localhost:3000", "https://127.0.0.1:3000", "http://127.0.0.1:3000"]
+origins = [
+    "https://localhost:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1:3000",
+    "http://127.0.0.1:3000",
+]
 
 app = FastAPI(
     title="< L I B R A R Y >",

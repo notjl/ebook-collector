@@ -27,9 +27,7 @@ async def create(
     return await user_handlers.create_user(user.dict(), collection)
 
 
-@router.get(
-    "/all", response_model=List[schemas.ShowUser], summary="Get all users"
-)
+@router.get("/all", response_model=List[schemas.ShowUser], summary="Get all users")
 async def get_all(
     collection: MCollection = Depends(db.get_user_collection),
 ) -> List[schemas.ShowUser]:
@@ -62,9 +60,7 @@ async def get(
     return await user_handlers.get_user(username, collection)
 
 
-@router.put(
-    "/{username}/update", response_model=schemas.User, summary="Update a user"
-)
+@router.put("/{username}/update", response_model=schemas.User, summary="Update a user")
 async def update(
     username: str,
     changes: schemas.User,
@@ -84,9 +80,7 @@ async def update(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.update_user(
-        username, changes.dict(), collection
-    )
+    return await user_handlers.update_user(username, changes.dict(), collection)
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
