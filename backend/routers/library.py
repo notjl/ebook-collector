@@ -1,12 +1,11 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, UploadFile, File
+from fastapi import APIRouter, BackgroundTasks, Depends, File, UploadFile
 from motor.motor_asyncio import AsyncIOMotorCollection
 
-
-from ..utils import checks
-from ..database import schemas, db
+from ..database import db, schemas
 from ..handlers import lib_handlers as handler
+from ..utils import checks
 
 professor_access = checks.RoleChecker(["professor"])
 super_access = checks.RoleChecker(["admin"])
@@ -65,22 +64,49 @@ async def get_all(
     return await handler.get_all_book(collection)
 
 
-@router.get("/book", response_model=schemas.ShowBook, summary="Get a book in the gridfs",)
-async def get(book_title: str, collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection)) -> schemas.ShowBook:
+@router.get(
+    "/book",
+    response_model=schemas.ShowBook,
+    summary="Get a book in the gridfs",
+)
+async def get(
+    book_title: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+) -> schemas.ShowBook:
     """
     Get a book [if available]
-    
+
     Returns:
     * **schemas._Book_**: Book information
     """
     return await handler.get_book(book_title, collection)
 
 
+@router.get(
+    "/preview",
+    summary="Preview a book",
+)
+async def preview(
+    book_title: str,
+    background_tasks: BackgroundTasks,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+):
+    """
+    Preview a book
+
+    Returns:
+    * **FileAPI.Response**: Custom response for a chunk of a file
+    """
+    return await handler.preview_book(
+        book_title, collection, background_tasks, db.get_ebooks_gridfs()
+    )
+
+
 @router.get("/{book_title}/download", summary="Download a specific book")
 async def download(
     book_title: str,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
-    access=Depends(professor_access),
+    # access=Depends(professor_access),
 ):
     """
     Download a book / ebook
