@@ -44,6 +44,12 @@ async def upload_ebook(
             detail=f"Book with hashing [{tmp['hashes']}] exists",
         )
 
+    with suppress(Exception):
+        tmp["author"] = [x.strip() for x in tmp["author"].split(",")]
+
+    with suppress(Exception):
+        tmp["isbn"] = [x.strip() for x in tmp["isbn"].split(",")]
+
     async with gridfs.open_upload_stream(ebook.filename) as grid_in:
         await asyncio.gather(*[grid_in.set(k, v) for k, v in tmp.items()])
         await grid_in.write(ebook.file)
