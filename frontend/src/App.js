@@ -7,6 +7,8 @@ import AboutPage from './pages/AboutPage';
 import ArticlePage from './pages/ArticlePage';
 import ArticlesListPage from './pages/ArticlesListPage';
 import NotFoundPage from './pages/NotFoundPage';
+import UploadPage from './pages/UploadPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -17,8 +19,10 @@ function App() {
             <Routes>
             <Route path="/" element={<HomePage/>} />
             <Route path="/about" element={<AboutPage/>} />
-            <Route path="/articles" element={<ArticlesListPage/>} />
-            <Route path="/articles/:articleID" element={<ArticlePage/>} />
+            <Route path="/a" element={<ArticlesListPage/>} />
+            <Route path="/a/:articleID" element={<ArticlePage/>} />
+            <Route path="/upload" element={<UploadPage/>} />
+            <Route path="/login" element={<LoginPage />}/>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </div>

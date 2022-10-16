@@ -1,6 +1,11 @@
+import ConnectionTest from "../components/ConnectionTest";
+
 const HomePage = () => {
     return (
-        <h1>HomePage!</h1>
+        <div>
+            <h1>HELLO REACT</h1>
+            <ConnectionTest />
+        </div>
     )
 }
 

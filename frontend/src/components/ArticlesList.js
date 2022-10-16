@@ -4,7 +4,7 @@ const ArticlesList = ( { articles } ) => {
     return (
         <>
         {articles.map(article => (
-            <Link key={article.name} to={`/articles/${article.name}`}>
+            <Link key={article.name} to={`/a/${article.name}`}>
                 <h3>{article.title}</h3>
                 <p>{article.content}</p>
             </Link>
