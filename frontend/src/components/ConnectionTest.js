@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 
 export default function ConnectionTest() {
     
@@ -7,7 +7,7 @@ export default function ConnectionTest() {
 
     const message = async () => {
         try{
-            let res = await axios.get('http://127.0.0.1:8000/');
+            let res = await axios.get();
             let result = res.data;
             setResult(result)
         } catch (e) {
