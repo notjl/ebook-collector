@@ -57,6 +57,16 @@ async def upload_ebook(
     return book_document
 
 
+async def get_book(book_title: str, collection: AsyncIOMotorCollection) -> schemas.Book:
+    document: schemas.Book = await collection.find_one({"title": book_title})
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+    return document
+
+
 async def get_all_book(
     collection: AsyncIOMotorCollection,
 ) -> List[schemas.Book]:

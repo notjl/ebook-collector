@@ -65,6 +65,17 @@ async def get_all(
     return await handler.get_all_book(collection)
 
 
+@router.get("/book", response_model=schemas.ShowBook, summary="Get a book in the gridfs",)
+async def get(book_title: str, collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection)) -> schemas.ShowBook:
+    """
+    Get a book [if available]
+    
+    Returns:
+    * **schemas._Book_**: Book information
+    """
+    return await handler.get_book(book_title, collection)
+
+
 @router.get("/{book_title}/download", summary="Download a specific book")
 async def download(
     book_title: str,

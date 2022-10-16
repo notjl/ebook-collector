@@ -13,7 +13,8 @@ description = """
 ### Features:
 * **Upload Books** [🧑‍🏫]
 * **Download Books** [🧑‍🏫]
-* **Read Books** [🧑‍🏫]
+* **Read Book/Books**
+* **Search using Course Code / Book Title** - _To be implemented_
 * **Delete Books** [🔒]
 * **Update Books** - _To be implemented_ [🔒]
 * **Preview Books** - _Cannot implement (FastAPI delimitation)_
