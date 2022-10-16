@@ -1,12 +1,22 @@
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 
 from os import getenv
 
 
+def get_library_database():
+    return AsyncIOMotorClient(getenv("DB_URI"))["LibraryDB"]
+
+
 def get_user_collection():
-    # Initiate local MongoDB client
-    # Create a database named LibraryDB
-    # Create a collection inside LibraryDB named users
-    client = motor.motor_asyncio.AsyncIOMotorClient(getenv("DB_URI"))
-    db = client["LibraryDB"]
-    yield db.users
+    db = get_library_database()
+    yield db["users"]
+
+
+def get_ebooks_collection():
+    db = get_library_database()
+    yield db["ebooks.files"]
+
+
+def get_ebooks_gridfs():
+    db = get_library_database()
+    return AsyncIOMotorGridFSBucket(db, "ebooks")
