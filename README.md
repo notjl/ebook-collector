@@ -15,5 +15,21 @@ $ pdm install
 ```
 These instructions assume you are using VSCode / Code - OSS as IDE, if not follow [Working with PEP582](https://pdm.fming.dev/latest/usage/pep582/) for PEP582 IDE Support.
 
+#### MongoDB
+Make sure you have [MongoDB](https://mongodb.com/) installed (MongoDB 6.0). If you have the luxury to do so, install MongoDB Compass.
+
+Open MongoSH or MongoDB Compass (you should see mongosh in Compass)
+Type in MongoSH
+```
+test >> use local
+local >> db.startup_log.find().sort({startTime:-1}).limit(1).pretty()
+```
+Look for `storage: {dbPath: ...}`. Paste the given db in Discord group DMs.
+
+You can change the default dbPath by going to `path/to/mongodb_install_dir/bin/mongod.cfg`
+
+### Contributing
+If you have problems with the backend / API, send me a message at Discord or create an Issue.
+
 ### License
 This project is licensed under the terms of the [Expat License (MIT)](LICENSE).

@@ -1,17 +1,22 @@
 from fastapi import APIRouter, Depends
-from motor.motor_asyncio import AsyncIOMotorCollection as MCollection
+from motor.motor_asyncio import AsyncIOMotorCollection
 from typing import List
 
 from ..database import schemas, db
-from ..handlers import user_handlers
+from ..handlers import user_handlers as handler
+from ..utils import checks
 
-router = APIRouter(prefix="/user", tags=["users"])
+super_access = checks.RoleChecker(["admin"])
+
+router = APIRouter(
+    prefix="/user", tags=["users"], dependencies=[Depends(super_access)]
+)
 
 
 @router.post("/create", response_model=schemas.User, summary="Create a user")
 async def create(
     user: schemas.User,
-    collection: MCollection = Depends(db.get_user_collection),
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.User:
     """
     Create a user with the required credentials
@@ -24,22 +29,20 @@ async def create(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.create_user(user.dict(), collection)
+    return await handler.create_user(user, collection)
 
 
-@router.get(
-    "/all", response_model=List[schemas.ShowUser], summary="Get all users"
-)
+@router.get("/all", response_model=List[schemas.ShowUser], summary="Get all users")
 async def get_all(
-    collection: MCollection = Depends(db.get_user_collection),
-) -> List[schemas.ShowUser]:
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
+) -> List[schemas.User]:
     """
     Get all users with their password filtered out
 
     Returns:
     * List[**schemas._ShowUser_**]: List of Users
     """
-    return await user_handlers.get_all_user(collection)
+    return await handler.get_all_user(collection)
 
 
 @router.get(
@@ -48,8 +51,9 @@ async def get_all(
     summary="Get a specific user",
 )
 async def get(
-    username: str, collection: MCollection = Depends(db.get_user_collection)
-) -> schemas.ShowUser:
+    username: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
+) -> schemas.User:
     """
     Get a user with their password filtered out
 
@@ -59,16 +63,14 @@ async def get(
     Returns:
     * **schemas._ShowUser_**: JSON of the user details
     """
-    return await user_handlers.get_user(username, collection)
+    return await handler.get_user(username, collection)
 
 
-@router.put(
-    "/{username}/update", response_model=schemas.User, summary="Update a user"
-)
+@router.put("/{username}/update", response_model=schemas.User, summary="Update a user")
 async def update(
     username: str,
     changes: schemas.User,
-    collection: MCollection = Depends(db.get_user_collection),
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> schemas.User:
     """
     Update a specific user's information
@@ -84,15 +86,14 @@ async def update(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await user_handlers.update_user(
-        username, changes.dict(), collection
-    )
+    return await handler.update_user(username, changes, collection)
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
 async def delete(
-    username: str, collection: MCollection = Depends(db.get_user_collection)
-) -> schemas.User:
+    username: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
+) -> List[schemas.User]:
     """
     Delete a specfic user
 
@@ -102,4 +103,4 @@ async def delete(
     Returns:
     * List[**schemas._ShowUser_**]: List of Users
     """
-    return await user_handlers.delete_user(username, collection)
+    return await handler.delete_user(username, collection)
