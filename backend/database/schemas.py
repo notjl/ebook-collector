@@ -5,7 +5,6 @@ from pydantic import BaseModel, EmailStr
 
 
 class User(BaseModel):
-    # User schema for basic user
     username: str
     email: EmailStr
     password: str

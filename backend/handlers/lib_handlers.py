@@ -65,6 +65,21 @@ async def upload_ebook(
     return book_document
 
 
+async def search_book(
+    query: str, collection: AsyncIOMotorCollection
+) -> schemas.Book:
+    return [
+        schemas.ShowBook(**document)
+        async for document in collection.find(
+            {
+                "$text": {
+                    "$search": query,
+                },
+            }
+        )
+    ]
+
+
 async def get_book(
     book_title: str, collection: AsyncIOMotorCollection
 ) -> schemas.Book:

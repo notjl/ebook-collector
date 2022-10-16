@@ -37,6 +37,10 @@ async def upload(
     * **ebook** (file): ebook file (pdf, epub, etc.)
     * **title** (str): book title
     * **course_code** (str): appropriate course code
+    * **author** _Optional_ List(str): names of authors (FN MI LN, FN MI LN, ...)
+    * **publisher** _Optional_ (str): publishing company
+    * **isbn** _Optional_ List(int): ISBN codes (int, int)
+    * **doi** _Optional_ (str): DOI code
     * **description** _Optional_ (str): description of the book
 
     Returns:
@@ -45,6 +49,29 @@ async def upload(
     return await handler.upload_ebook(
         book, ebook, collection, db.get_ebooks_gridfs()
     )
+
+
+@router.get(
+    "/search",
+    response_model=List[schemas.ShowBook],
+    summary="Search for book in the gridfs",
+)
+async def search(
+    query: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+) -> List[schemas.ShowBook]:
+    """
+    Use fuzzy search to look for books in the gridfs
+
+    Parameters:
+    * **query** (str) <Book Title> / <Course Code>
+
+    NOTE: Course Code should be with no spaces
+
+    Returns:
+    * List[**schemas._Book_**]: List of Books
+    """
+    return await handler.search_book(query, collection)
 
 
 @router.get(
@@ -76,6 +103,9 @@ async def get(
     """
     Get a book [if available]
 
+    Parameters:
+    * **book_title**: title of the book
+
     Returns:
     * **schemas._Book_**: Book information
     """
@@ -94,6 +124,9 @@ async def preview(
     """
     Preview a book
 
+    Parameters:
+    * **book_title**: title of the book
+
     Returns:
     * **FileAPI.Response**: Custom response for a chunk of a file
     """
@@ -106,7 +139,6 @@ async def preview(
 async def download(
     book_title: str,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
-    # access=Depends(professor_access),
 ):
     """
     Download a book / ebook
@@ -141,6 +173,15 @@ async def update(
 
     Allowed ROles:
     * **admin**
+
+    Parameters:
+    * **title** (str): book title
+    * **course_code** (str): appropriate course code
+    * **author** _Optional_ List(str): names of authors (FN MI LN, FN MI LN, ...)
+    * **publisher** _Optional_ (str): publishing company
+    * **isbn** _Optional_ List(int): ISBN codes (int, int)
+    * **doi** _Optional_ (str): DOI code
+    * **description** _Optional_ (str): description of the book
 
     Path Parameters:
     * **book_title** (str): Used for querying database

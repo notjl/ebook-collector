@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from pymongo import TEXT
 
 from .routers import users, auth, library
+from .database import db
 
 description = """
 📚 E-book Collector by Team 6 of CPE41S1 🐙
@@ -12,12 +14,12 @@ description = """
 ## Library 📚
 ### Features:
 * **Upload Books** [🧑‍🏫]
-* **Download Books** [🧑‍🏫]
+* **Search using Course Code / Book Title**
 * **Read Book/Books**
-* **Search using Course Code / Book Title** - _To be implemented_
+* **Preview Books**
+* **Download Books** [🧑‍🏫]
+* **Update Books** [🔒]
 * **Delete Books** [🔒]
-* **Update Books** - _To be implemented_ [🔒]
-* **Preview Books** - _Cannot implement (FastAPI delimitation)_
 
 ## Users 🧑‍💻
 ### Features:
@@ -60,7 +62,7 @@ tags_metadata = [
 app = FastAPI(
     title="< L I B R A R Y >",
     description=description,
-    version="AdamantInkling 0.5",
+    version="AdamantInkling 0.7",
     contact=contact,
     license_info=license_info,
     openapi_tags=tags_metadata,
@@ -70,7 +72,15 @@ app.include_router(users.router)
 app.include_router(auth.router)
 
 
-# Minimal application
+@app.on_event("startup")
+async def startup_event():
+    # Temp fix for index creation
+    await db.get_library_database()["ebooks.files"].create_index(
+        [("title", TEXT), ("course_code", TEXT)],
+        name="book_title_course_code_search",
+    )
+
+
 @app.get("/", tags=["ROOT"])
 async def index():
     return {
