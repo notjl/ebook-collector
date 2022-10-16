@@ -80,15 +80,7 @@ async def update_user(
         },
     )
 
-    document: schemas.User = await collection.find_one(
-        {"username": tmp["username"]}
-    )
-    if not document:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User [{username}] does not exist!",
-        )
-    return document
+    return await get_user(tmp["username"], collection)
 
 
 async def delete_user(

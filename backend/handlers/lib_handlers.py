@@ -6,8 +6,10 @@ from typing import List
 import fitz
 from fastapi import BackgroundTasks, HTTPException, UploadFile, status
 from fastapi.responses import Response, StreamingResponse
-from motor.motor_asyncio import (AsyncIOMotorCollection,
-                                 AsyncIOMotorGridFSBucket)
+from motor.motor_asyncio import (
+    AsyncIOMotorCollection,
+    AsyncIOMotorGridFSBucket,
+)
 
 from ..database import schemas
 from ..utils.checks import check_if_exists
@@ -129,6 +131,35 @@ async def download_book(
     filename = document["title"] + file_ext
     headers = {"Content-Disposition": f"attachment; filename={filename}"}
     return StreamingResponse(iterfile(document), headers=headers)
+
+
+async def update_book(
+    book_title: str, changes: schemas.Book, collection: AsyncIOMotorCollection
+) -> schemas.Book:
+    tmp = changes.dict()
+
+    if not await check_if_exists(book_title, collection, "title"):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+
+    if await check_if_exists(tmp["title"], collection, "title"):
+        raise HTTPException(
+            status_code=status.HTTP_302_FOUND,
+            detail=f'Book [{tmp["title"]}] exists',
+        )
+
+    await collection.update_one(
+        {
+            "title": book_title,
+        },
+        {
+            "$set": tmp,
+        },
+    )
+
+    return await get_book(tmp["title"], collection)
 
 
 async def delete_book(

@@ -125,6 +125,32 @@ async def download(
     )
 
 
+@router.put(
+    "/{book_title}/update",
+    response_model=schemas.ShowBook,
+    summary="Update a book in the gridfs",
+)
+async def update(
+    book_title: str,
+    changes: schemas.Book = Depends(schemas.Book.as_form),
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+    access=Depends(super_access),
+) -> schemas.ShowBook:
+    """
+    Update a book / ebook
+
+    Allowed ROles:
+    * **admin**
+
+    Path Parameters:
+    * **book_title** (str): Used for querying database
+
+    Returns:
+    * **schemas._Book_**: JSON of the book details
+    """
+    return await handler.update_book(book_title, changes, collection)
+
+
 @router.delete(
     "/{book_title}/delete",
     response_model=List[schemas.ShowBook],
