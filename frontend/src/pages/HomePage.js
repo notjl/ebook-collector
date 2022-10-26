@@ -4,10 +4,12 @@ import "./HomePage.css";
 
 const HomePage = () => {
     return (
-        
+        <>
         <div className="search">
             <Searchbar placeholder="SEARCH <BOOK>, <COURSE CODE>" />
         </div>
+        <ConnectionTest/>
+        </>
     )
 }
 
