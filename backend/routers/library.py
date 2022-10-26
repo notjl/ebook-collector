@@ -18,12 +18,13 @@ router = APIRouter(
 
 @router.post(
     "/upload",
-    response_model=schemas.ShowBook,
+    # response_model=schemas.ShowBook,
     summary="Upload a file to the gridfs with the neccessary details",
 )
 async def upload(
     book: schemas.Book = Depends(schemas.Book.as_form),
     ebook: UploadFile = File(...),
+    cover_page: UploadFile | None = None,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
     access=Depends(professor_access),
 ) -> schemas.ShowBook:
@@ -47,7 +48,7 @@ async def upload(
     * **schemas._Book_**: JSON of the book details
     """
     return await handler.upload_ebook(
-        book, ebook, collection, db.get_ebooks_gridfs()
+        book, ebook, cover_page, collection, db.get_ebooks_gridfs()
     )
 
 
@@ -118,7 +119,6 @@ async def get(
 )
 async def preview(
     book_title: str,
-    background_tasks: BackgroundTasks,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
 ):
     """
@@ -131,7 +131,7 @@ async def preview(
     * **FileAPI.Response**: Custom response for a chunk of a file
     """
     return await handler.preview_book(
-        book_title, collection, background_tasks, db.get_ebooks_gridfs()
+        book_title, collection, db.get_ebooks_gridfs()
     )
 
 

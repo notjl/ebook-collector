@@ -3,8 +3,9 @@ import pathlib
 from contextlib import suppress
 from typing import List
 
+import aiofiles
 import fitz
-from fastapi import BackgroundTasks, HTTPException, UploadFile, status
+from fastapi import HTTPException, UploadFile, status
 from fastapi.responses import Response, StreamingResponse
 from motor.motor_asyncio import (
     AsyncIOMotorCollection,
@@ -16,13 +17,24 @@ from ..utils.checks import check_if_exists
 from ..utils.hashing import file_hashing
 
 
+ALLOWED_EXT = [".pdf", ".xps", ".oxps", ".cbz", ".fb2", ".epub"]
+
+
 async def upload_ebook(
     book: schemas.Book,
     ebook: UploadFile,
+    cover: UploadFile,
     collection: AsyncIOMotorCollection,
     gridfs: AsyncIOMotorGridFSBucket,
 ) -> schemas.Book:
     tmp = book.dict()
+    file_type = pathlib.Path(ebook.filename).suffix
+
+    if not file_type in ALLOWED_EXT:
+        raise HTTPException(
+            status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+            detail=f"File extension is not in {ALLOWED_EXT}",
+        )
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
@@ -103,7 +115,6 @@ async def get_all_book(
 async def preview_book(
     book_title: str,
     collection: AsyncIOMotorCollection,
-    background_tasks: BackgroundTasks,
     gridfs: AsyncIOMotorGridFSBucket,
 ):
     async def get_file(document):
@@ -119,16 +130,17 @@ async def preview_book(
         )
 
     file_ext = pathlib.Path(document["filename"]).suffix
-    tmp_file = fitz.open(file_ext, await get_file(document))
-    preview_file = fitz.open()
-    preview_file.insert_pdf(tmp_file, to_page=9)
-    tmp_file.close()
-    background_tasks.add_task(preview_file.close)
+    with fitz.open(
+        file_ext, await get_file(document)
+    ) as tmp_file, fitz.open() as preview_file:
+        preview_file.insert_pdf(tmp_file, to_page=9)
 
-    headers = {"Content-Disposition": "inline"}
-    return Response(
-        preview_file.tobytes(), headers=headers, media_type="application/pdf"
-    )
+        headers = {"Content-Disposition": "inline"}
+        return Response(
+            preview_file.tobytes(),
+            headers=headers,
+            media_type="application/pdf",
+        )
 
 
 async def download_book(
