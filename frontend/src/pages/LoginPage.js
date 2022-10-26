@@ -1,11 +1,17 @@
-import { useRef, useState, useEffect, useContext } from 'react';
-import AuthContext from '../context/AuthProvider';
+import { useRef, useState, useEffect } from 'react';
+import useAuth from '../hooks/useAuth';
+import { link, useNavigate, useLocation } from 'react-router-dom';
 import axios from '../api/axios';
-const LOGIN_URL = '/auth';
+const LOGIN_URL = '/login';
 
 const LoginPage = () => {
 
-    const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -23,22 +29,24 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user, pwd)
+        var body = 'grant_type=&username='+user+'&password='+pwd+'&scope=&client_id=&client_secret='
 
         try {
-            const response = await axios.post(LOGIN_URL, 
-                JSON.stringify({username: user, password: pwd}),
-                {
-                    headers: {'Content-Type': 'applicaiton/json'},
-                    withCredentials: true
+            const response = await axios.post(LOGIN_URL, body, {
+                headers: {
+                    'accept': 'application/json',
+                    'Content-type': 'application/x-www-form-urlencoded'
                 }
-            );
+            })
             console.log(JSON.stringify(response?.data))
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken})
-            setSuccess(true);
             setUser('');
             setPwd('');
+            setSuccess(true);
+
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
@@ -60,7 +68,7 @@ const LoginPage = () => {
                 <h1>You are logged In!</h1>
                 <br />
                 <p>
-                    <a href="#">Go to Home</a>
+                    <a href="/">Go to Home</a>
                 </p>
             </section>
          ) : (
@@ -92,7 +100,8 @@ const LoginPage = () => {
             <p>
                 Need an account?<br/>
                 <span className="line">
-                    <a href="#">SIgn Up</a>
+                    <p>Contact your institute administration</p>
+                    
                 </span>
             </p>
         </section>

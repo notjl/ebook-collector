@@ -1,4 +1,5 @@
 import './App.css';
+import RequireAuth from './components/RequireAuth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
@@ -21,8 +22,10 @@ function App() {
             <Route path="/about" element={<AboutPage/>} />
             <Route path="/a" element={<ArticlesListPage/>} />
             <Route path="/a/:articleID" element={<ArticlePage/>} />
-            <Route path="/upload" element={<UploadPage/>} />
             <Route path="/login" element={<LoginPage />}/>
+            <Route element={<RequireAuth />}>
+              <Route path="/upload" element={<UploadPage/>} />
+            </Route>
             <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </div>
