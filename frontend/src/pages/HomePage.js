@@ -1,10 +1,12 @@
 import ConnectionTest from "../components/ConnectionTest";
+import Searchbar from "../components/Searchbar";
+import "./HomePage.css";
 
 const HomePage = () => {
     return (
-        <div>
-            <h1>HELLO REACT</h1>
-            <ConnectionTest />
+        
+        <div className="search">
+            <Searchbar placeholder="SEARCH <BOOK>, <COURSE CODE>" />
         </div>
     )
 }
