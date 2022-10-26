@@ -49,7 +49,12 @@ async def upload(
     * **schemas._Book_**: JSON of the book details
     """
     return await handler.upload_ebook(
-        book, ebook, cover_page, collection, db.get_ebooks_gridfs()
+        book,
+        ebook,
+        cover_page,
+        collection,
+        db.get_ebooks_gridfs(),
+        db.get_covers_gridfs(),
     )
 
 
@@ -213,5 +218,24 @@ async def delete(
     * List[**schemas._Book_**]: List of Books
     """
     return await handler.delete_book(
-        book_title, collection, db.get_ebooks_gridfs()
+        book_title, collection, db.get_ebooks_gridfs(), db.get_covers_gridfs()
+    )
+
+
+@router.get("/{book_title}/cover", summary="Get a book's cover")
+async def get_cover(
+    book_title: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+):
+    """
+    Get a book's cover from the gridfs
+
+    Path Parameters:
+    * **book_title** (str): Used for querying database
+
+    Returns:
+    * **image/png** MIME type file
+    """
+    return await handler.get_cover(
+        book_title, collection, db.get_covers_gridfs()
     )
