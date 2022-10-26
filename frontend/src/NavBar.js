@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
+import "./NavBar.css";
+
 
 const NavBar = () => {
     return(
-        <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/a">Articles</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/upload">Upload</Link></li>
-                <li><Link to="/login">Login</Link></li>
+        <nav className="nav">  
+            <h1><Link style={{textDecoration: 'none'}} to="/">&lt; L I B R A R Y &gt;</Link></h1>
+            <ul id="navitems">
+                <li><Link style={{textDecoration: 'none'}} to="/a">Articles</Link></li>
+                <li><Link style={{textDecoration: 'none'}} to="/About">About</Link></li>
+                <li><Link style={{textDecoration: 'none'}} to="/upload">Upload</Link></li>
+                <li><Link style={{textDecoration: 'none'}} to="/Login">Login</Link></li>
             </ul>
         </nav>
     );
