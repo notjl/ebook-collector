@@ -3,7 +3,6 @@ import pathlib
 from contextlib import suppress
 from typing import List
 
-import aiofiles
 import fitz
 from fastapi import HTTPException, UploadFile, status
 from fastapi.responses import Response, StreamingResponse
@@ -18,6 +17,7 @@ from ..utils.hashing import file_hashing
 
 
 ALLOWED_EXT = [".pdf", ".xps", ".oxps", ".cbz", ".fb2", ".epub"]
+ALLOWED_IMG_EXT = [".png", ".jpeg", ".jpg"]
 
 
 async def upload_ebook(
@@ -61,6 +61,30 @@ async def upload_ebook(
 
     with suppress(Exception):
         tmp["isbn"] = [x.strip() for x in tmp["isbn"].split(",")]
+
+    if not cover:
+        with fitz.open(file_type, await ebook.read()) as tmp_doc:
+            content = tmp_doc[0].get_pixmap().tobytes()
+            tmp_filename = ebook.filename + ".png"
+            cover_grid_id = await gridfs.upload_from_stream(
+                tmp_filename, content
+            )
+    else:
+        if pathlib.Path(cover.filename).suffix in ALLOWED_IMG_EXT:
+            cover_grid_id = await gridfs.upload_from_stream(
+                cover.filename, cover.file
+            )
+        else:
+            with fitz.open(file_type, await ebook.read()) as tmp_doc:
+                content = tmp_doc[0].get_pixmap().tobytes()
+                tmp_filename = ebook.filename + ".png"
+                cover_grid_id = await gridfs.upload_from_stream(
+                    tmp_filename, content
+                )
+
+    tmp["cover_id"] = cover_grid_id
+
+    await ebook.seek(0)
 
     async with gridfs.open_upload_stream(ebook.filename) as grid_in:
         await asyncio.gather(*[grid_in.set(k, v) for k, v in tmp.items()])
@@ -207,4 +231,5 @@ async def delete_book(
             detail=f"Book [{book_title}] does not exist!",
         )
     await gridfs.delete(document["_id"])
+    await gridfs.delete(document["cover_id"])
     return [schemas.ShowBook(**doc) async for doc in collection.find({})]

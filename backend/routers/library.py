@@ -18,7 +18,7 @@ router = APIRouter(
 
 @router.post(
     "/upload",
-    # response_model=schemas.ShowBook,
+    response_model=schemas.ShowBook,
     summary="Upload a file to the gridfs with the neccessary details",
 )
 async def upload(
@@ -36,6 +36,7 @@ async def upload(
 
     Parameters:
     * **ebook** (file): ebook file (pdf, epub, etc.)
+    * **cover_page** (file): image file (png, jpg, jpeg)
     * **title** (str): book title
     * **course_code** (str): appropriate course code
     * **author** _Optional_ List(str): names of authors (FN MI LN, FN MI LN, ...)
@@ -143,9 +144,6 @@ async def download(
     """
     Download a book / ebook
 
-    Allowed Roles:
-    * **professor**
-
     Path Paramters:
     * **book_title** (str): Used for querying database
 
@@ -171,7 +169,7 @@ async def update(
     """
     Update a book / ebook
 
-    Allowed ROles:
+    Allowed Roles:
     * **admin**
 
     Parameters:
