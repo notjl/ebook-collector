@@ -86,7 +86,7 @@ async def update(
     Returns:
     * **schemas._User_**: JSON of the user details
     """
-    return await handler.update_user(username, changes, collection)
+    return await handler.update_user(username, changes.dict(), collection)
 
 
 @router.delete("/{username}/delete", summary="Delete a user")
