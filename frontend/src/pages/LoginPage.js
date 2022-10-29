@@ -1,9 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { link, useNavigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from '../api/axios';
+import "./LoginPage.css";
 const LOGIN_URL = '/login';
 
+const errmsg = ()=> {
+    toast.error();
+}
 const LoginPage = () => {
 
     const { setAuth } = useAuth();
@@ -50,16 +56,21 @@ const LoginPage = () => {
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
+                
             } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
+                
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
+                
             } else {
                 setErrMsg('Login Failed');
+
             }
             errRef.current.focus();
         }
     }
+
 
     return (
         <>
@@ -73,11 +84,11 @@ const LoginPage = () => {
             </section>
          ) : (
         <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"><ToastContainer/>{errMsg}</p>
+            <h1>&lt; L O G I N &gt;</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor='username'>Username:</label>
-                <input type="text" 
+                <label htmlFor='username'></label>
+                <input classname="email" type="text" placeholder='EMAIL'
                     name="" 
                     id="username" 
                     ref={userRef}
@@ -86,8 +97,9 @@ const LoginPage = () => {
                     value={user}
                     required
                 />
-                <label htmlFor='password'>Password:</label>
-                <input type="password" 
+                
+                <label htmlFor='password'></label>
+                <input classname="password" type="password" placeholder='PASSWORD'
                     name="" 
                     id="password" 
                     autoComplete="off"
@@ -95,12 +107,13 @@ const LoginPage = () => {
                     value={pwd}
                     required
                 />
-                <button>Login</button>
+                <button>LOG IN</button>
+
             </form>
             <p>
-                Need an account?<br/>
+                Need an Account?<br/>
                 <span className="line">
-                    <p>Contact your institute administration</p>
+                    <p>Contact your Institute Administration</p>
                     
                 </span>
             </p>
