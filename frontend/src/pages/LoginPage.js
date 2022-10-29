@@ -1,15 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { link, useNavigate, useLocation } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';//install toastify package
+import 'react-toastify/dist/ReactToastify.css'; 
 import axios from '../api/axios';
 import "./LoginPage.css";
 const LOGIN_URL = '/login';
 
-const errmsg = ()=> {
-    toast.error();
-}
+
 const LoginPage = () => {
 
     const { setAuth } = useAuth();
@@ -26,12 +24,14 @@ const LoginPage = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState('');
 
+
     useEffect(() => {
         userRef.current.focus();
     }, [])
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -52,31 +52,49 @@ const LoginPage = () => {
             setUser('');
             setPwd('');
             setSuccess(true);
+            
 
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
-                
+                toast.error('No server response')
             } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
-                
+                toast.error('Missing Username or Password')
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
-                
+                toast.error('Unauthorized')
             } else {
                 setErrMsg('Login Failed');
-
+                toast.error('Login Failed')
             }
             errRef.current.focus();
+            
+             
         }
+        
     }
-
+    
 
     return (
         <>
          {success ? (
             <section>
                 <h1>You are logged In!</h1>
+              
+                <ToastContainer //not yet tested  
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable={false}
+                    pauseOnHover
+                    theme="light"
+                    />
+
                 <br />
                 <p>
                     <a href="/">Go to Home</a>
@@ -84,7 +102,20 @@ const LoginPage = () => {
             </section>
          ) : (
         <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"><ToastContainer/>{errMsg}</p>
+            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"></p> 
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+                theme="light"
+                />
+                
             <h1>&lt; L O G I N &gt;</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'></label>
