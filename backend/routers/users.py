@@ -32,7 +32,9 @@ async def create(
     return await handler.create_user(user, collection)
 
 
-@router.get("/all", response_model=List[schemas.ShowUser], summary="Get all users")
+@router.get(
+    "/all", response_model=List[schemas.ShowUser], summary="Get all users"
+)
 async def get_all(
     collection: AsyncIOMotorCollection = Depends(db.get_user_collection),
 ) -> List[schemas.User]:
@@ -66,7 +68,9 @@ async def get(
     return await handler.get_user(username, collection)
 
 
-@router.put("/{username}/update", response_model=schemas.User, summary="Update a user")
+@router.put(
+    "/{username}/update", response_model=schemas.User, summary="Update a user"
+)
 async def update(
     username: str,
     changes: schemas.User,
