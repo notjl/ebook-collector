@@ -239,3 +239,25 @@ async def get_cover(
     return await handler.get_cover(
         book_title, collection, db.get_covers_gridfs()
     )
+
+
+@router.get(
+    "/{book_title}/approve",
+    response_model=schemas.ShowBook,
+    summary="Approve a book",
+)
+async def approve(
+    book_title: str,
+    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
+    access=Depends(super_access),
+) -> schemas.ShowBook:
+    """
+    Approve a newly uploaded or unapproved book
+
+    Path Parameters:
+    * **book_title** (str): Used for querying database
+
+    Returns:
+    * **schemas._Book_**: JSON of the book details
+    """
+    return await handler.approve_book(book_title, collection)

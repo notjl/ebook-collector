@@ -84,6 +84,7 @@ async def upload_ebook(
                 )
 
     tmp["cover_id"] = cover_grid_id
+    tmp["approved"] = False
 
     await ebook.seek(0)
 
@@ -112,6 +113,7 @@ async def search_book(
                 "$text": {
                     "$search": query,
                 },
+                "approved": True,
             }
         )
     ]
@@ -261,3 +263,26 @@ async def get_cover(
         headers=headers,
         media_type="image/png",
     )
+
+
+async def approve_book(
+    book_title: str, collection: AsyncIOMotorCollection
+) -> schemas.ShowBook:
+    if not await check_if_exists(book_title, collection, "title"):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+
+    await collection.update_one(
+        {
+            "title": book_title,
+        },
+        {
+            "$set": {
+                "approved": True,
+            },
+        },
+    )
+
+    return await get_book(book_title, collection)
