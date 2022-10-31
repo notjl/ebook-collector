@@ -2,6 +2,7 @@ import React from 'react';
 import { useState,useEffect } from "react";
 import axios from "../api/axios";
 import ArticlesList from "../components/ArticlesList";
+import CoursesList from '../components/CoursesList';
 const BOOKS_URL = "/library/books";
 
 const ArticlesListPage = () => {
@@ -24,6 +25,7 @@ const ArticlesListPage = () => {
     
     return (
         <>
+        <CoursesList articles={articles} />
         <h1>Articles!</h1>
         <ArticlesList articles={articles} />
         </>
