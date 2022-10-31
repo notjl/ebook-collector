@@ -568,7 +568,7 @@ summary = "Fast implementation of asyncio event loop on top of libuv"
 
 [[package]]
 name = "vt-py"
-version = "0.17.0"
+version = "0.17.1"
 requires_python = ">=3.6.0"
 summary = "The official Python client library for VirusTotal"
 dependencies = [
