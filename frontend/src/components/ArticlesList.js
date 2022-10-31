@@ -1,7 +1,4 @@
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
-
-const BOOKS_URL = "/library/books";
 
 const ArticlesList = ({articles}) => {                        
 
