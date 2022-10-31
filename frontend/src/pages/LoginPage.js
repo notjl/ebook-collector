@@ -119,7 +119,7 @@ const LoginPage = () => {
             <h1>&lt; L O G I N &gt;</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'></label>
-                <input classname="email" type="text" placeholder='EMAIL'
+                <input className="email" type="text" placeholder='EMAIL'
                     name="" 
                     id="username" 
                     ref={userRef}
@@ -130,7 +130,7 @@ const LoginPage = () => {
                 />
                 
                 <label htmlFor='password'></label>
-                <input classname="password" type="password" placeholder='PASSWORD'
+                <input className="password" type="password" placeholder='PASSWORD'
                     name="" 
                     id="password" 
                     autoComplete="off"
@@ -138,7 +138,7 @@ const LoginPage = () => {
                     value={pwd}
                     required
                 />
-                <button>LOG IN</button>
+                <button className='submit'>LOG IN</button>
 
             </form>
             <p>

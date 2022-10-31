@@ -1,26 +1,20 @@
-form {
+.uploadPdf {
     width: 60vw;
     max-width: 500px;
     min-width: 300px;
     margin: 0 auto;
     padding-bottom: 2em;
-    
 }
-label, button {
-    display: block;
-    margin: 0.5rem 0;
-}
-
-section {
-    margin-top: 50px;
+.uploadDiv{
+    margin-top: 25px;
     margin-bottom: auto;
     margin-left: auto;
     margin-right: auto;
     background-color: #e1e3eb;
-    height: 450px;
+    height: 350px;
     width: 500px;
     box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
-    padding-top: 30px;
+    padding-top: 5px;
     padding-left: 0px;
     padding-right: 0px;
     border-radius: 60px; 
@@ -30,8 +24,8 @@ section {
     align-items: center;
 }
 
-.email, .password {
-    width: 250px;
+.uploadDiv input {
+    width: 270px;
     height: 30px;
     border-radius: 10px;
     border: none;
@@ -41,24 +35,22 @@ section {
     padding-left: 15px;
     padding-right: 15px;
     font-size: medium;
+    display: block;
+    margin-bottom: 0.5rem ;
+    margin-left: 105px;
 }
 
-.submit {
-    width: 200px;
+.uploadDiv button{
+    margin-bottom: 0.5rem ;
+    margin-left: 160px;
+    width: 150px;
     height: 30px;
     border-radius: 10px;
     border: none;
     outline: none;
     background-color: #52adf8;
     display: block;
-    margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
-
 }
 
-button:hover {
-    background-color:#3e88c5;
-    transition: 0.7s;
-    cursor: pointer;
-}
