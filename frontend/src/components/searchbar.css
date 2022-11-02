@@ -9,6 +9,7 @@
     text-align: center;
     top: 25px;
     width: 100%;
+    
 }
 .search input {
     background-color: #eeeeee;
@@ -16,21 +17,29 @@
     border-radius: 2px;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
-    font-size: 18px;
-    padding: 15px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    font-size: x-large;
     height: 30px;
     width: 600px;
+    margin-top: 50px;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
-  
+
 .searchIcon {
     height: 60px;
     width: 50px;
-    background-color: #eeeeee;
+    background-color: #4b4b4b;
     border-radius: 2px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
-
 }
+
   
 input:focus {
     outline: none;

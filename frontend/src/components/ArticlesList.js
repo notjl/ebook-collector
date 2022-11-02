@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
-const ArticlesList = ( { articles } ) => {
+const ArticlesList = ({articles}) => {                        
+
     return (
         <>
         {articles.map(article => (
-            <Link key={article.name} to={`/a/${article.name}`}>
+            <Link key={article.title} to={`/a/${article.title}`}>
                 <h3>{article.title}</h3>
-                <p>{article.content}</p>
             </Link>
             ))
         }
