@@ -81,19 +81,7 @@ const LoginPage = () => {
          {success ? (
             <section>
                 <h1>You are logged In!</h1>
-              
-                <ToastContainer //not yet tested  
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable={false}
-                    pauseOnHover
-                    theme="light"
-                    />
+
 
                 <br />
                 <p>

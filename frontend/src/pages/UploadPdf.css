@@ -42,7 +42,7 @@
 
 .uploadDiv button{
     margin-bottom: 0.5rem ;
-    margin-left: 160px;
+    margin-left: 175px;
     width: 150px;
     height: 30px;
     border-radius: 10px;
@@ -54,3 +54,8 @@
     font-size: 1.1rem;
 }
 
+.uploadDiv button:hover {
+    background-color:#3e88c5;
+    transition: 0.7s;
+    cursor: pointer;
+}
