@@ -14,6 +14,12 @@ const NavBar = () => {
                 <li><Link style={{textDecoration: 'none'}} to="/upload">Upload</Link></li>
                 <li><Link style={{textDecoration: 'none'}} to="/Login">Login</Link></li>
             </ul>
+            <div class="hamburger">
+                <span class='bar'></span>
+                <span class='bar'></span>
+                <span class='bar'></span>
+                <span class='bar'></span>
+            </div>
         </nav>
     );
 }
