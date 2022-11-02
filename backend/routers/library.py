@@ -24,7 +24,6 @@ router = APIRouter(
 async def upload(
     book: schemas.Book = Depends(schemas.Book.as_form),
     ebook: UploadFile = File(...),
-    cover_page: UploadFile | None = None,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
     access=Depends(professor_access),
 ) -> schemas.ShowBook:
@@ -36,7 +35,6 @@ async def upload(
 
     Parameters:
     * **ebook** (file): ebook file (pdf, epub, etc.)
-    * **cover_page** (file): image file (png, jpg, jpeg)
     * **title** (str): book title
     * **course_code** (str): appropriate course code
     * **author** _Optional_ List(str): names of authors (FN MI LN, FN MI LN, ...)
@@ -49,12 +47,7 @@ async def upload(
     * **schemas._Book_**: JSON of the book details
     """
     return await handler.upload_ebook(
-        book,
-        ebook,
-        cover_page,
-        collection,
-        db.get_ebooks_gridfs(),
-        db.get_covers_gridfs(),
+        book, ebook, collection, db.get_ebooks_gridfs()
     )
 
 
@@ -125,6 +118,7 @@ async def get(
 )
 async def preview(
     book_title: str,
+    background_tasks: BackgroundTasks,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
 ):
     """
@@ -137,7 +131,7 @@ async def preview(
     * **FileAPI.Response**: Custom response for a chunk of a file
     """
     return await handler.preview_book(
-        book_title, collection, db.get_ebooks_gridfs()
+        book_title, collection, background_tasks, db.get_ebooks_gridfs()
     )
 
 
@@ -148,6 +142,9 @@ async def download(
 ):
     """
     Download a book / ebook
+
+    Allowed Roles:
+    * **professor**
 
     Path Paramters:
     * **book_title** (str): Used for querying database
@@ -174,7 +171,7 @@ async def update(
     """
     Update a book / ebook
 
-    Allowed Roles:
+    Allowed ROles:
     * **admin**
 
     Parameters:
@@ -218,46 +215,5 @@ async def delete(
     * List[**schemas._Book_**]: List of Books
     """
     return await handler.delete_book(
-        book_title, collection, db.get_ebooks_gridfs(), db.get_covers_gridfs()
+        book_title, collection, db.get_ebooks_gridfs()
     )
-
-
-@router.get("/{book_title}/cover", summary="Get a book's cover")
-async def get_cover(
-    book_title: str,
-    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
-):
-    """
-    Get a book's cover from the gridfs
-
-    Path Parameters:
-    * **book_title** (str): Used for querying database
-
-    Returns:
-    * **image/png** MIME type file
-    """
-    return await handler.get_cover(
-        book_title, collection, db.get_covers_gridfs()
-    )
-
-
-@router.get(
-    "/{book_title}/approve",
-    response_model=schemas.ShowBook,
-    summary="Approve a book",
-)
-async def approve(
-    book_title: str,
-    collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
-    access=Depends(super_access),
-) -> schemas.ShowBook:
-    """
-    Approve a newly uploaded or unapproved book
-
-    Path Parameters:
-    * **book_title** (str): Used for querying database
-
-    Returns:
-    * **schemas._Book_**: JSON of the book details
-    """
-    return await handler.approve_book(book_title, collection)

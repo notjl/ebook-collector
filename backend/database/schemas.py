@@ -29,6 +29,7 @@ class Book(BaseModel):
     publisher: str | None = None
     isbn: List[str] | str | None = None
     doi: str | None = None
+    # date_published: date | None = None
     description: str | None = None
 
     @classmethod
@@ -63,7 +64,6 @@ class ShowBook(BaseModel):
     doi: str | None = None
     description: str | None = None
     hashes: Hashes
-    approved: bool
 
 
 class Token(BaseModel):

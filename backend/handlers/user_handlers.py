@@ -95,9 +95,7 @@ async def delete_user(
     return document
 
 
-async def get_all_user(
-    collection: AsyncIOMotorCollection,
-) -> List[schemas.User]:
+async def get_all_user(collection: AsyncIOMotorCollection) -> List[schemas.User]:
     return [schemas.User(**document) async for document in collection.find({})]
 
 
@@ -125,8 +123,6 @@ async def update_user(
     return document
 
 
-async def delete_user(
-    username: str, collection: AsyncIOMotorCollection
-) -> List[schemas.User]:
+async def delete_user(username: str, collection: AsyncIOMotorCollection) -> List[schemas.User]:
     await collection.delete_one({"username": username})
     return [schemas.User(**document) async for document in collection.find({})]

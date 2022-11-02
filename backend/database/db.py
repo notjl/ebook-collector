@@ -20,8 +20,3 @@ def get_ebooks_collection():
 def get_ebooks_gridfs():
     db = get_library_database()
     return AsyncIOMotorGridFSBucket(db, "ebooks")
-
-
-def get_covers_gridfs():
-    db = get_library_database()
-    return AsyncIOMotorGridFSBucket(db, "covers")

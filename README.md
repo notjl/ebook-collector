@@ -28,20 +28,6 @@ Look for `storage: {dbPath: ...}`. Paste the given db in Discord group DMs.
 
 You can change the default dbPath by going to `path/to/mongodb_install_dir/bin/mongod.cfg`
 
-
-#### Start server
-```
-$ pdm run server
-```
-Go to `localhost:8000/docs` to access API documentation
-
-
-#### API Access
-Use [hoppscotch](https://hoppscotch.io/) - a postman alternative, to try accessing the API.
-
-**NOTE:** Install the extension first then add `http://localhost:8000` or `http://127.0.0.1:8000` as origin
-
-
 ### Contributing
 If you have problems with the backend / API, send me a message at Discord or create an Issue.
 
