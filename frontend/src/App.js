@@ -11,7 +11,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import UploadPage from './pages/UploadPage';
 import LoginPage from './pages/LoginPage';
 
-import Footer from './components/Footer';
+import"./components/background/background.css";
+import Main from './components/background/homeBG';
 
 function App() {
   return (
@@ -32,9 +33,10 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Footer />
+      <Main/>
+
     </BrowserRouter>
-    
+
   );
 }
 

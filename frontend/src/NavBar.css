@@ -2,7 +2,7 @@ nav,header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
+    background: #cfd8dc;
     padding: 20px 80px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -51,4 +51,9 @@ nav,header{
 
 #navitems.active {
     right: 0px;
+}
+
+img {
+    max-width: 10%;
+    height: auto;
 }

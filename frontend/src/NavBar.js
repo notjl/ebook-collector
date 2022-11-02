@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 
 const NavBar = () => {
     return(
-        <nav className="nav">  
-            <h1><Link style={{textDecoration: 'none'}} to="/">&lt; L I B R A R Y &gt;</Link></h1>
+        <nav className="nav">
+            <NavLink to='/'>
+                <img src={require('./components/background/titleLogo.png')} alt='logo'></img>
+            </NavLink>
             <ul id="navitems">
                 <li><Link style={{textDecoration: 'none'}} to="/a">Articles</Link></li>
                 <li><Link style={{textDecoration: 'none'}} to="/About">About</Link></li>

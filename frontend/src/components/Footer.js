@@ -11,32 +11,21 @@ import {
 const Footer = () => {
   return (
     <Box>
-      <h1 style={{ color: "green", 
-                   textAlign: "center", 
-                   marginTop: "-50px" }}>
-        GeeksforGeeks: A Computer Science Portal for Geeks
-      </h1>
       <Container>
         <Row>
           <Column>
             <Heading>About Us</Heading>
-            <FooterLink href="#">Aim</FooterLink>
-            <FooterLink href="#">Vision</FooterLink>
-            <FooterLink href="#">Testimonials</FooterLink>
+            <FooterLink href="#">Project</FooterLink>
+            <FooterLink href="#">Adviser</FooterLink>
+            <FooterLink href="#">Pillow fight na nauwi sa alam mo na</FooterLink>
           </Column>
           <Column>
-            <Heading>Services</Heading>
-            <FooterLink href="#">Writing</FooterLink>
-            <FooterLink href="#">Internships</FooterLink>
-            <FooterLink href="#">Coding</FooterLink>
-            <FooterLink href="#">Teaching</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Contact Us</Heading>
-            <FooterLink href="#">Uttar Pradesh</FooterLink>
-            <FooterLink href="#">Ahemdabad</FooterLink>
-            <FooterLink href="#">Indore</FooterLink>
-            <FooterLink href="#">Mumbai</FooterLink>
+            <Heading>Developers</Heading>
+            <FooterLink href="#">Clefford M. Canoy</FooterLink>
+            <FooterLink href="#">Kai Sotto</FooterLink>
+            <FooterLink href="#">Andrew Tate</FooterLink>
+            <FooterLink href="#">Niño Barzaga</FooterLink>
+            <FooterLink href="#">Xian Gaza</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>
