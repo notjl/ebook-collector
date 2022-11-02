@@ -35,10 +35,11 @@ function App() {
             <Route path="/s/:searchID"  element={<SearchPage/>} />
             <Route path="/login"        element={<LoginPage />}/>
             <Route                      element={<RequireAuth />}>
-              <Route path="/upload"     element={<UploadPage/>}>
+              <Route path="/admin"     element={<UploadPage/>}>
                 <Route path="pdf"       element={<UploadPdf/>}/>
                 <Route path="edit"      element={<UploadEdit/>}/>
                 <Route path="delete"    element={<UploadDelete/>}/>
+              </Route>
             </Route>
             <Route path="*"             element={<NotFoundPage/>} />
           </Routes>

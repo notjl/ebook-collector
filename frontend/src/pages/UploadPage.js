@@ -5,9 +5,9 @@ function UploadNav() {
     return(
         <div className="upload">
         <div className="uploadNav">
-          <Link style={{textDecoration: 'none'}} to="/upload/pdf"> <button>UPLOAD</button> </Link>
-          <Link style={{textDecoration: 'none'}} to="/upload/edit"> <button>EDIT</button> </Link>
-          <Link style={{textDecoration: 'none'}} to="/upload/delete"><button>DELETE</button> </Link>
+          <Link style={{textDecoration: 'none'}} to="/admin/pdf"> <button>UPLOAD</button> </Link>
+          <Link style={{textDecoration: 'none'}} to="/admin/edit"> <button>EDIT</button> </Link>
+          <Link style={{textDecoration: 'none'}} to="/admin/delete"><button>DELETE</button> </Link>
         </div>
   
         <Outlet />

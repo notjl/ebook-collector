@@ -51,7 +51,6 @@ const LoginPage = () => {
             setAuth({ user, pwd, roles, accessToken})
             setUser('');
             setPwd('');
-            setSuccess(true);
             
 
         } catch (err) {
