@@ -4,7 +4,7 @@ from contextlib import suppress
 from typing import List
 
 import fitz
-from fastapi import BackgroundTasks, HTTPException, UploadFile, status
+from fastapi import HTTPException, UploadFile, status
 from fastapi.responses import Response, StreamingResponse
 from motor.motor_asyncio import (
     AsyncIOMotorCollection,
@@ -16,13 +16,26 @@ from ..utils.checks import check_if_exists
 from ..utils.hashing import file_hashing
 
 
+ALLOWED_EXT = [".pdf", ".xps", ".oxps", ".cbz", ".fb2", ".epub"]
+ALLOWED_IMG_EXT = [".png", ".jpeg", ".jpg"]
+
+
 async def upload_ebook(
     book: schemas.Book,
     ebook: UploadFile,
+    cover: UploadFile,
     collection: AsyncIOMotorCollection,
     gridfs: AsyncIOMotorGridFSBucket,
+    gridfs_cover: AsyncIOMotorGridFSBucket,
 ) -> schemas.Book:
     tmp = book.dict()
+    file_type = pathlib.Path(ebook.filename).suffix
+
+    if not file_type in ALLOWED_EXT:
+        raise HTTPException(
+            status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+            detail=f"File extension is not in {ALLOWED_EXT}",
+        )
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
@@ -50,6 +63,31 @@ async def upload_ebook(
     with suppress(Exception):
         tmp["isbn"] = [x.strip() for x in tmp["isbn"].split(",")]
 
+    if not cover:
+        with fitz.open(file_type, await ebook.read()) as tmp_doc:
+            content = tmp_doc[0].get_pixmap().tobytes()
+            tmp_filename = ebook.filename + ".png"
+            cover_grid_id = await gridfs_cover.upload_from_stream(
+                tmp_filename, content
+            )
+    else:
+        if pathlib.Path(cover.filename).suffix in ALLOWED_IMG_EXT:
+            cover_grid_id = await gridfs_cover.upload_from_stream(
+                cover.filename, cover.file
+            )
+        else:
+            with fitz.open(file_type, await ebook.read()) as tmp_doc:
+                content = tmp_doc[0].get_pixmap().tobytes()
+                tmp_filename = ebook.filename + ".png"
+                cover_grid_id = await gridfs_cover.upload_from_stream(
+                    tmp_filename, content
+                )
+
+    tmp["cover_id"] = cover_grid_id
+    tmp["approved"] = False
+
+    await ebook.seek(0)
+
     async with gridfs.open_upload_stream(ebook.filename) as grid_in:
         await asyncio.gather(*[grid_in.set(k, v) for k, v in tmp.items()])
         await grid_in.write(ebook.file)
@@ -75,6 +113,7 @@ async def search_book(
                 "$text": {
                     "$search": query,
                 },
+                "approved": True,
             }
         )
     ]
@@ -103,7 +142,6 @@ async def get_all_book(
 async def preview_book(
     book_title: str,
     collection: AsyncIOMotorCollection,
-    background_tasks: BackgroundTasks,
     gridfs: AsyncIOMotorGridFSBucket,
 ):
     async def get_file(document):
@@ -119,16 +157,17 @@ async def preview_book(
         )
 
     file_ext = pathlib.Path(document["filename"]).suffix
-    tmp_file = fitz.open(file_ext, await get_file(document))
-    preview_file = fitz.open()
-    preview_file.insert_pdf(tmp_file, to_page=9)
-    tmp_file.close()
-    background_tasks.add_task(preview_file.close)
+    with fitz.open(
+        file_ext, await get_file(document)
+    ) as tmp_file, fitz.open() as preview_file:
+        preview_file.insert_pdf(tmp_file, to_page=9)
 
-    headers = {"Content-Disposition": "inline"}
-    return Response(
-        preview_file.tobytes(), headers=headers, media_type="application/pdf"
-    )
+        headers = {"Content-Disposition": "inline"}
+        return Response(
+            preview_file.tobytes(),
+            headers=headers,
+            media_type="application/pdf",
+        )
 
 
 async def download_book(
@@ -187,6 +226,7 @@ async def delete_book(
     book_title: str,
     collection: AsyncIOMotorCollection,
     gridfs: AsyncIOMotorGridFSBucket,
+    gridfs_cover: AsyncIOMotorGridFSBucket,
 ) -> List[schemas.Book]:
     document: schemas.Book = await collection.find_one({"title": book_title})
     if not document:
@@ -195,4 +235,54 @@ async def delete_book(
             detail=f"Book [{book_title}] does not exist!",
         )
     await gridfs.delete(document["_id"])
+    await gridfs_cover.delete(document["cover_id"])
     return [schemas.ShowBook(**doc) async for doc in collection.find({})]
+
+
+async def get_cover(
+    book_title: str,
+    collection: AsyncIOMotorCollection,
+    gridfs: AsyncIOMotorGridFSBucket,
+):
+    async def get_file(id):
+        grid_out = await gridfs.open_download_stream(id)
+        content = await grid_out.read()
+        return content
+
+    document: schemas.Book = await collection.find_one({"title": book_title})
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+    cover_grid_id = document["cover_id"]
+
+    headers = {"Content-Disposition": "inline"}
+    return Response(
+        await get_file(cover_grid_id),
+        headers=headers,
+        media_type="image/png",
+    )
+
+
+async def approve_book(
+    book_title: str, collection: AsyncIOMotorCollection
+) -> schemas.ShowBook:
+    if not await check_if_exists(book_title, collection, "title"):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Book [{book_title}] does not exist!",
+        )
+
+    await collection.update_one(
+        {
+            "title": book_title,
+        },
+        {
+            "$set": {
+                "approved": True,
+            },
+        },
+    )
+
+    return await get_book(book_title, collection)

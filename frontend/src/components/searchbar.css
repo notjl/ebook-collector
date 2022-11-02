@@ -31,6 +31,14 @@
     padding-right: 30px;
 }
 
+.searchIcon {
+    height: 60px;
+    width: 50px;
+    background-color: #4b4b4b;
+    border-radius: 2px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+
   
 input:focus {
     outline: none;
