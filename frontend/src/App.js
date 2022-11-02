@@ -16,7 +16,8 @@ import UploadPdf from './pages/UploadPdf';
 import UploadEdit from './pages/UploadEdit';
 import UploadDelete from './pages/UploadDelete';
 
-import Footer from './components/Footer';
+import"./components/background/background.css";
+import Main from './components/background/homeBG';
 
 
 function App() {
@@ -45,8 +46,12 @@ function App() {
           </Routes>
         </div>
       </div>
+
+      <Main/>
+
+
     </BrowserRouter>
-    
+
   );
 }
 
