@@ -1,4 +1,4 @@
-nav,header{
+.nav,header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,12 +33,12 @@ nav,header{
 }
 
 #navitems li a:hover,
-#navitems li a:active{
+#navitems li a:active, header a:hover, header a:active{
     color:#808080;
 }
 
 #navitems li a:hover::after,
-#navitems li a.active::after{
+#navitems li a.active::after, header a:hover::after, header a:active::after{
     content: "";
     width: 30%;
     height: 2px;
