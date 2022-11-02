@@ -12,8 +12,12 @@ import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UploadPage from './pages/UploadPage';
 import LoginPage from './pages/LoginPage';
+import UploadPdf from './pages/UploadPdf';
+import UploadEdit from './pages/UploadEdit';
+import UploadDelete from './pages/UploadDelete';
 
 import Footer from './components/Footer';
+
 
 function App() {
   return (
@@ -27,11 +31,14 @@ function App() {
             <Route path="/a"            element={<ArticlesListPage/>} />
             <Route path="/a/:articleID" element={<ArticlePage/>} />
             <Route path="/c/:courseID"  element={<CoursesListPage/>} />
-            <Route path="/s/:searchID"  element={<SearchPage/>} />
             <Route path="/s/"           element={<ArticlesListPage/>} />
+            <Route path="/s/:searchID"  element={<SearchPage/>} />
             <Route path="/login"        element={<LoginPage />}/>
-            <Route element={<RequireAuth />}>
-              <Route path="/admin"      element={<UploadPage/>} />
+            <Route                      element={<RequireAuth />}>
+              <Route path="/upload"     element={<UploadPage/>}>
+                <Route path="pdf"       element={<UploadPdf/>}/>
+                <Route path="edit"      element={<UploadEdit/>}/>
+                <Route path="delete"    element={<UploadDelete/>}/>
             </Route>
             <Route path="*"             element={<NotFoundPage/>} />
           </Routes>
