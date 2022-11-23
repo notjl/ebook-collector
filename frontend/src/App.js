@@ -18,6 +18,7 @@ import UploadDelete from './pages/UploadDelete';
 
 import"./components/background/background.css";
 import Main from './components/background/homeBG';
+import SearchBar from './components/Searchbar';
 
 
 function App() {
@@ -46,9 +47,8 @@ function App() {
           </Routes>
         </div>
       </div>
-
+      
       <Main/>
-
 
     </BrowserRouter>
 

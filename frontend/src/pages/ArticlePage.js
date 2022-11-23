@@ -13,7 +13,9 @@ const ArticlePage = () => {
     
     const {articleID} = useParams();
     const [article, setArticle] = useState([]);
+    const [bookCover, setCover] = useState([]);
     const call = BOOK_URL+"?book_title="+articleID
+    const call2 = "/library/"+articleID+"/cover"
 
     const book = async () => {
         try{
@@ -24,9 +26,27 @@ const ArticlePage = () => {
             console.log(e)
         }
     };
-
+    const cover = async () => {
+        try{
+            await axios({
+                url: call2,
+                method: 'GET',
+                responseType: 'blob', // Important
+              }).then((response) => {
+                const file = new Blob(
+                    [response.data], 
+                    {type: 'application/png'});
+                const fileURL = URL.createObjectURL(file);
+                setCover(fileURL)
+              });
+              
+        }catch (e) {
+            console.log(e);
+        };
+    };
     useEffect(() => {
         book()
+        cover()
     }, [])
 
     if (!article) {
@@ -35,9 +55,17 @@ const ArticlePage = () => {
 
     return (
         <>
+        <img src={bookCover}/>
         <h1>{article.title}</h1>
         <p key={article.course_code}>
             {article.course_code}
+            <br/>author: {article.author}
+            <br/>publisher: {article.publisher}
+            <br/>ISBN: {article.isbn}
+            <br/>DOI: {article.doi}
+            
+            <br/>description: {article.description}
+
         </p>
         <Preview book={article}/>
         <Download book={article}/>

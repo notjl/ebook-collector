@@ -60,11 +60,11 @@ const LoginPage = () => {
                 setErrMsg('No server response');
                 toast.error('No server response')
             } else if (err.response?.status == 422) {
-                setErrMsg('Unauthorized');
-                toast.error('Unauthorized')
-            } else {
                 setErrMsg('Login Failed');
                 toast.error('Login Failed')
+            } else {
+                setErrMsg('Unauthorized');
+                toast.error('Unauthorized')
             }
             errRef.current.focus();
             
