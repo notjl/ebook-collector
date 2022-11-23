@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
-import { link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';//install toastify package
 import 'react-toastify/dist/ReactToastify.css'; 
 import axios from '../api/axios';
@@ -35,7 +35,7 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, pwd)
+
         var body = 'grant_type=&username='+user+'&password='+pwd+'&scope=&client_id=&client_secret='
 
         try {
@@ -45,27 +45,26 @@ const LoginPage = () => {
                     'Content-type': 'application/x-www-form-urlencoded'
                 }
             })
-            console.log(JSON.stringify(response?.data))
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data;
             const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken})
+            console.log(accessToken.access_token)
             setUser('');
             setPwd('');
+            //toast.error('Login Accepted')
+            navigate(from, {replace: true});
             
 
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
                 toast.error('No server response')
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-                toast.error('Missing Username or Password')
-            } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
-                toast.error('Unauthorized')
-            } else {
+            } else if (err.response?.status == 422) {
                 setErrMsg('Login Failed');
                 toast.error('Login Failed')
+            } else {
+                setErrMsg('Unauthorized');
+                toast.error('Unauthorized')
             }
             errRef.current.focus();
             
@@ -135,7 +134,6 @@ const LoginPage = () => {
                     autoComplete="off"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
-                    required
                 />
                 <button className='submit'>LOG IN</button>
 

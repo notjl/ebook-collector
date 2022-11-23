@@ -1,13 +1,10 @@
 from contextlib import suppress
 from os import getenv
 
-import vt
 from fastapi import Depends, HTTPException, status
 
 from ..database import schemas
 from ..utils import oauth2
-
-client = vt.Client(getenv("VT_API_KEY"))
 
 
 class RoleChecker:
