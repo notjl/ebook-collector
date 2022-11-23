@@ -15,9 +15,14 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  fastapi_build_test:
 
     runs-on: ubuntu-latest
+    # env:
+    #   DB_URI: "mongodb://mongo:h53iazbtNhJ4Yi1sNCF1@containers-us-west-93.railway.app:8046"
+    #   SECRET_KEY: "bec4d2ff2bf7c27d37ae5f17e88fe3689ccfff2b16b018bc31e832f00c54ce65"
+    #   ALGORITHM: "HS256"
+    #   ACCESS_TOKEN_EXPIRE_MINUTES: 30
 
     steps:
     - uses: actions/checkout@v3
@@ -32,5 +37,12 @@ jobs:
         python-version: 3.10.4
     - name: Install dependencies
       run: pdm install
+    - name: Make .env
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_DB_URI: "mongodb://mongo:h53iazbtNhJ4Yi1sNCF1@containers-us-west-93.railway.app:8046"
+        envkey_SECRET_KEY: "bec4d2ff2bf7c27d37ae5f17e88fe3689ccfff2b16b018bc31e832f00c54ce65"
+        envkey_ALGORITHM: "HS256"
+        envkey_ACCESS_TOKEN_EXPIRE_MINUTES: 30
     - name: Test with PDM pytest
       run: pdm run pytest
