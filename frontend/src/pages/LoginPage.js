@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
-import { link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';//install toastify package
 import 'react-toastify/dist/ReactToastify.css'; 
 import axios from '../api/axios';
@@ -51,16 +51,15 @@ const LoginPage = () => {
             setAuth({ user, pwd, roles, accessToken})
             setUser('');
             setPwd('');
+            //toast.error('Login Accepted')
+            navigate(from, {replace: true});
             
 
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
                 toast.error('No server response')
-            } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
-                toast.error('Missing Username or Password')
-            } else if (err.response?.status === 401) {
+            } else if (err.response?.status == 422) {
                 setErrMsg('Unauthorized');
                 toast.error('Unauthorized')
             } else {
@@ -135,7 +134,6 @@ const LoginPage = () => {
                     autoComplete="off"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
-                    required
                 />
                 <button className='submit'>LOG IN</button>
 
