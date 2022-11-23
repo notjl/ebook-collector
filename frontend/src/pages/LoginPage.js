@@ -35,7 +35,7 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, pwd)
+
         var body = 'grant_type=&username='+user+'&password='+pwd+'&scope=&client_id=&client_secret='
 
         try {
@@ -45,10 +45,10 @@ const LoginPage = () => {
                     'Content-type': 'application/x-www-form-urlencoded'
                 }
             })
-            console.log(JSON.stringify(response?.data))
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data;
             const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken})
+            console.log(accessToken.access_token)
             setUser('');
             setPwd('');
             //toast.error('Login Accepted')
