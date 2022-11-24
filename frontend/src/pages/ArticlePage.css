@@ -1,0 +1,47 @@
+.book-page{
+    max-width: 1200px;
+    width: 100%;
+    margin: 70px auto;
+    box-shadow: 0 0 8px #ccc;
+  }
+.book-cover{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 30px;
+    text-align: left;
+    margin-left: 25px;
+  }
+  
+  .details{
+    margin-left: 70px;
+    max-width: 650px;
+    min-width: 300px;
+    flex-wrap: wrap;
+  }
+  
+.book-cover .details .title{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.book-cover .details .coursecode{
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  font-size: large; 
+  padding-top: 10px;
+  color: #696969;
+  font-weight: 600;
+}
+
+.book-cover .details .info{
+  display: flex;
+  font-size: small; 
+  padding-top: 10px;
+  color: black;
+  font-weight: 600;
+  text-align: left;
+}

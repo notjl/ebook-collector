@@ -1,8 +1,11 @@
 import React from 'react';
 import { useState,useEffect } from "react";
 import axios from "../api/axios";
+import "./ArticlesListPage.css";
 import ArticlesList from "../components/ArticlesList";
 import CoursesList from '../components/CoursesList';
+
+
 const BOOKS_URL = "/library/books";
 
 const ArticlesListPage = () => {

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState,useEffect } from "react";
 import axios from "../api/axios";
+import "./download.css";
 const DOWNLOAD_URL = "/library";
+
 
 const Download = ( {book} ) => {
 
@@ -32,7 +34,7 @@ const Download = ( {book} ) => {
 
     return (
         <>
-        <button onClick={download}>Download</button>
+        <button className='download' onClick={download}>Download</button>
         </>
         
     );
