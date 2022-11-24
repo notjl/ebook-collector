@@ -7,14 +7,12 @@ import Preview from "../components/preview";
 
 import NotFoundPage from "./NotFoundPage";
 
-const BOOK_URL = "/library/book";
-
 const ArticlePage = () => {
     
     const {articleID} = useParams();
     const [article, setArticle] = useState([]);
     const [bookCover, setCover] = useState([]);
-    const call = BOOK_URL+"?book_title="+articleID
+    const call = "/library/book?book_title="+articleID
     const call2 = "/library/"+articleID+"/cover"
 
     const book = async () => {
@@ -57,7 +55,7 @@ const ArticlePage = () => {
         <>
         <img src={bookCover}/>
         <h1>{article.title}</h1>
-        <p key={article.course_code}>
+        <p>
             {article.course_code}
             <br/>author: {article.author}
             <br/>publisher: {article.publisher}
