@@ -17,7 +17,7 @@ const ArticlePage = () => {
     const {articleID} = useParams();
     const [article, setArticle] = useState([]);
     const [bookCover, setCover] = useState([]);
-    const call = BOOK_URL+"?book_title="+articleID
+    const call = "/library/book?book_title="+articleID
     const call2 = "/library/"+articleID+"/cover"
 
     const book = async () => {

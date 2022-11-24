@@ -10,16 +10,18 @@ import ArticlesListPage from './pages/ArticlesListPage';
 import CoursesListPage from './pages/CoursesListPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
-import UploadPage from './pages/UploadPage';
+import UploadPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
-import UploadPdf from './pages/UploadPdf';
-import UploadEdit from './pages/UploadEdit';
-import UploadDelete from './pages/UploadDelete';
+import UploadPdf from './pages/UploadPage';
+import UploadEdit from './pages/AdminEdit';
+import UploadDelete from './pages/AdminDelete';
+import UploadApprove from './pages/AdminApprove';
 
 import"./components/background/background.css";
 import Main from './components/background/homeBG';
-import SearchBar from './components/Searchbar';
-
+import ApprovePage from './pages/ApprovePage';
+import EditPage from './pages/EditPage';
+import DeletePage from './pages/DeletePage';
 
 function App() {
   return (
@@ -38,9 +40,13 @@ function App() {
             <Route path="/login"        element={<LoginPage />}/>
             <Route                      element={<RequireAuth />}>
               <Route path="/admin"     element={<UploadPage/>}>
-                <Route path="pdf"       element={<UploadPdf/>}/>
+                <Route path="upload"       element={<UploadPdf/>}/>
                 <Route path="edit"      element={<UploadEdit/>}/>
+                <Route path="edit=:articleID" element={<EditPage/>}/>
                 <Route path="delete"    element={<UploadDelete/>}/>
+                <Route path="delete=:articleID" element={<DeletePage/>}/>
+                <Route path="approve" element={<UploadApprove/>}/>
+                <Route path="approve=:articleID" element={<ApprovePage/>}/>
               </Route>
             </Route>
             <Route path="*"             element={<NotFoundPage/>} />
