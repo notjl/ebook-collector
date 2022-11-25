@@ -29,14 +29,16 @@ const UploadApprove = () => {
 
     return (
         <>
-        <div className="uploadPDF"></div>
-        
-        <div className="uploadDiv">
+        <div className="adminEdit"></div>
+        <div className="adminSearch">
             <h1>&lt; A P P R O V E &gt;</h1>
-            <div>
-                <input type="text" id="Reactive-Search" onChange={goSearch} />
+            <div className='searchbar'>
+                <input type="text" id="Reactive-Search" placeholder="SEARCH <BOOK>" onChange={goSearch} />
             </div>
-            <UnApprovedList action={"approve"} articles={articles} search={search} />
+
+            <div className="editResults">
+                <UnApprovedList action={"approve"} articles={articles} search={search} />
+            </div>
         </div>
         </>
     )

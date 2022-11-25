@@ -3,6 +3,7 @@
     width: 100%;
     margin: 70px auto;
     box-shadow: 0 0 8px #ccc;
+    background-color: #eeeeee;
   }
 .book-cover{
     display: flex;
@@ -43,5 +44,5 @@
   padding-top: 10px;
   color: black;
   font-weight: 600;
-  text-align: left;
+  text-align: justify;
 }

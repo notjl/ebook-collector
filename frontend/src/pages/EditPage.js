@@ -62,9 +62,6 @@ const EditPage = () => {
         return <NotFoundPage />
     }
 
-    console.log("1 "+JSON.stringify(article.author))
-    console.log("2 "+article.author)
-    console.log("3 "+author)
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -85,9 +82,6 @@ const EditPage = () => {
             description = article.description;
         }
 
-        console.log("4 "+JSON.stringify(article.author))
-        console.log("5 "+article.author)
-        console.log("6 "+author)
 
         const formData = new FormData();
         formData.append('book_title',articleID);
