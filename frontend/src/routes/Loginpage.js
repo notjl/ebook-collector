@@ -1,11 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import ImageBG from '../components/ImageBG'
 
 const Loginpage = () => {
   return (
     <div>
       <Navbar />
-      <h1>Login</h1>
+      <ImageBG heading='LOGIN'/>
     </div>
   )
 }

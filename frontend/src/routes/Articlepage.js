@@ -1,9 +1,12 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
+import ImageBG from '../components/ImageBG'
 
 const Articlepage = () => {
   return (
     <div>
-        <h1>Article</h1>
+      <Navbar />
+      <ImageBG heading='E-BOOKS'/>
     </div>
   )
 }
