@@ -21,9 +21,10 @@ description = """
 * **Search using Course Code / Book Title**
 * **Read Book/Books**
 * **Preview Books**
-* **Download Books** [🧑‍🏫]
+* **Download Books**
 * **Update Books** [🔒]
 * **Delete Books** [🔒]
+* **Approve Book** [🔒] - _TO BE IMPLEMENTED_
 
 ## Users 🧑‍💻
 ### Features:
@@ -114,5 +115,5 @@ async def add_process_time_header(request: Request, call_next):
 async def index():
     # Minimal application
     return {
-        "BACKEND CONNECTED TO FRONTEND",
+        "ping": "pong",
     }

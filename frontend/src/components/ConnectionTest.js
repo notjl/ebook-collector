@@ -17,11 +17,10 @@ export default function ConnectionTest() {
 
     useEffect(() => {
         message()
+        console.log({result})
     }, [])
 
     return (
-        <div>
-            {result}
-        </div>
+        <></>
     )
 }
