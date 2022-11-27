@@ -1,4 +1,4 @@
-.book-page{
+.book-page {
     max-width: 1200px;
     width: 100%;
     margin: 70px auto;
@@ -12,7 +12,7 @@
     text-align: left;
     margin-left: 25px;
   }
-  
+
   .details{
     margin-left: 70px;
     max-width: 650px;
@@ -46,3 +46,56 @@
   font-weight: 600;
   text-align: justify;
 }
+
+.editInputs {
+  margin-top: 25px;
+  margin-bottom: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e1e3eb;
+  height: auto;
+  width: 700px;
+  box-shadow: 6px 7px 7px 6px rgb(207, 207, 207);
+  padding:25px;
+  padding-top: 10px;
+  border-radius: 20px; 
+  background-color: white;
+  display: block;
+  text-align: center;
+  align-items: center;
+}
+
+.deleteButton{
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #C21807;
+  font-weight: 600;
+  color: white;
+  display: block;
+  margin-top: 20px;
+}
+
+.book-cover .details .warningMsg{
+  font-style: oblique;
+  font-size: 15px;
+  color: #C21807;
+  font-weight: 700;
+  padding-top: 30px;
+}
+
+.approveButton{
+  width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #03C04A;
+  font-weight: 600;
+  color: white;
+  display: block;
+  margin-top: 20px;
+}
+

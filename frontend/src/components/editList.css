@@ -18,6 +18,7 @@
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+    align-self: normal;
 }
 
 .link{
@@ -32,3 +33,6 @@
     color: grey;
  }
  
+ ::-webkit-scrollbar {
+    display: none;
+ }

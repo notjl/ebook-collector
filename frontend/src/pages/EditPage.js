@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 
+import "./EditPage.css";
+
 import NotFoundPage from "./NotFoundPage";
 
 const EditPage = () => {
@@ -109,45 +111,61 @@ const EditPage = () => {
 
 
     return (
-        <>
-        <img src={bookCover}/>
-        <p>
-            <br/>course code: {article.course_code}
-            <br/>author: {article.author}
-            <br/>publisher: {article.publisher}
-            <br/>ISBN: {article.isbn}
-            <br/>DOI: {article.doi}
+        <body>
+            <div className="all-container">
+                <h1>E D I T</h1>
+                <div className="box">
+                    <div className="book-inputs">
+                        <h2>Update</h2>
+                        <form onSubmit={handleUpdate}>
+                            <input id="title"type="text" placeholder="Enter New Title" 
+                                onChange={(e) => setNewTitle(e.target.value)}
+                                required/><br/>
+                            <input id="course_code" type="text" placeholder="Enter New Course Code" 
+                                onChange={(e) => setCourseCode(e.target.value)}
+                                required/><br/>
+                            <input id="author" type="text" placeholder="Enter New Author"
+                                onChange={(e) => setAuthor(e.target.value)}
+                                /><br/>
+                            <input id="publisher" type="text" placeholder="Enter New Publisher"
+                                onChange={(e) => setPublisher(e.target.value)}
+                                /><br/>
+                            <input id="isbn" type="text" placeholder="Enter New ISBN"
+                                onChange={(e) => setIsbn(e.target.value)}
+                                /><br/>
+                            <input id="doi" type="text" placeholder="Enter New DOI"
+                                onChange={(e) => setDoi(e.target.value)}
+                                /><br/>
+                            <textarea id="description" type="text" placeholder="Enter New Description"
+                                onChange={(e) => setDescription(e.target.value)}
+                                /><br/>
+
+                            <button className="uploadButton" type="submit">EDIT</button>
+                        </form>
+
+                    </div>
+
+                    <div className="infos">
+                        <h2>Current Book Details</h2>
+                        <img src={bookCover} width="300" height="380"/>
+                        <div className="detailbox">
+                            <p className="edit-title"><b>Title: </b>{article.title}</p>
+                            <p className="edit-coursecode"><b>Course Code: </b>{article.course_code}</p>
+                            <p className="edit-info"><b>Author: </b>{article.author}</p>
+                            <p className="edit-info"><b>Publisher: </b>{article.publisher}</p>
+                            <p className="edit-info"><b>ISBN: </b>{article.isbn}</p>
+                            <p className="edit-info"><b>DOI: </b>{article.doi}</p>
+                            <p className="edit-info"><b>Description: </b>{article.description}</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </body>
             
-            <br/>description: {article.description}
-
-            <form onSubmit={handleUpdate}>
-
-            <input id="title"type="text" placeholder="Enter New Title" 
-                onChange={(e) => setNewTitle(e.target.value)}
-                required/><br/>
-            <input id="course_code" type="text" placeholder="Enter New Course Code" 
-                onChange={(e) => setCourseCode(e.target.value)}
-                required/><br/>
-            <input id="author" type="text" placeholder="Enter New Author"
-                onChange={(e) => setAuthor(e.target.value)}
-                /><br/>
-            <input id="publisher" type="text" placeholder="Enter New Publisher"
-                onChange={(e) => setPublisher(e.target.value)}
-                /><br/>
-            <input id="isbn" type="text" placeholder="Enter New ISBN"
-                onChange={(e) => setIsbn(e.target.value)}
-                /><br/>
-            <input id="doi" type="text" placeholder="Enter New DOI"
-                onChange={(e) => setDoi(e.target.value)}
-                /><br/>
-            <input id="description" type="text" placeholder="Enter New Description"
-                onChange={(e) => setDescription(e.target.value)}
-                /><br/>
-
-            <button type="submit">EDIT</button>
-        </form>
-        </p>
-        </>
     );
 }
 

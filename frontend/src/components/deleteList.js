@@ -11,9 +11,11 @@ const DeleteList = ({articles, search}) => {
     return (
         <div className="editResults">
         {data.map(article => (
-            <div className="container"><Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/delete=${article.title}`}>
+            <div className="container">
+                <img className="imgEdit" src={article.bookCover} width="200" height="250"/>
+                <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/delete=${article.title}`}>
                 <p>{article.title}</p>
-            </Link><img className="imgEdit" src={article.bookCover} width="200" height="250"/></div>
+            </Link></div>
             ))
         }
         
