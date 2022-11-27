@@ -1,23 +1,23 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom';
 
-import Aboutpage from "./routes/Aboutpage";
-import ArticlePage from "./routes/Articlepage";
-import Homepage from "./routes/Homepage";
-import LoginPage from "./routes/Loginpage";
+import Aboutpage from "./pages/Aboutpage";
+import ArticlePage from "./pages/Articlepage";
+import Homepage from "./pages/Homepage";
+import LoginPage from "./pages/Loginpage";
 import RequireAuth from './components/RequireAuth';
-import ArticlesListPage from './routes/ArticlesListPage';
-import CoursesListPage from './routes/CoursesListPage';
-import SearchPage from './routes/SearchPage';
-import NotFoundPage from './routes/NotFoundPage';
-import UploadPage from './routes/AdminPage';
-import UploadPdf from './routes/UploadPage';
-import UploadEdit from './routes/AdminEdit';
-import UploadDelete from './routes/AdminDelete';
-import UploadApprove from './routes/AdminApprove';
-import ApprovePage from './routes/ApprovePage';
-import EditPage from './routes/EditPage';
-import DeletePage from './routes/DeletePage';
+import ArticlesListPage from './pages/ArticlesListPage';
+import CoursesListPage from './pages/CoursesListPage';
+import SearchPage from './pages/SearchPage';
+import NotFoundPage from './pages/NotFoundPage';
+import UploadPage from './pages/AdminPage';
+import UploadPdf from './pages/UploadPage';
+import UploadEdit from './pages/AdminEdit';
+import UploadDelete from './pages/AdminDelete';
+import UploadApprove from './pages/AdminApprove';
+import ApprovePage from './pages/ApprovePage';
+import EditPage from './pages/EditPage';
+import DeletePage from './pages/DeletePage';
 
 function App() {
   return (
