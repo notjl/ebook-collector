@@ -4,7 +4,7 @@ from os import getenv
 
 
 def get_library_database():
-    return AsyncIOMotorClient(getenv("DB_URI"))["LibraryDB"]
+    return AsyncIOMotorClient(getenv("MONGO_URL"))["LibraryDB"]
 
 
 def get_user_collection():
