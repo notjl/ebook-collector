@@ -1,31 +1,33 @@
-import React from "react";
-import {Routes, Route} from 'react-router-dom';
-
-import Aboutpage from "./pages/Aboutpage";
-import ArticlePage from "./pages/Articlepage";
-import Homepage from "./pages/Homepage";
-import LoginPage from "./pages/Loginpage";
 import RequireAuth from './components/RequireAuth';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import HomePage from './pages/Homepage';
+import AboutPage from './pages/Aboutpage';
+import ArticlePage from './pages/Articlepage';
 import ArticlesListPage from './pages/ArticlesListPage';
 import CoursesListPage from './pages/CoursesListPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UploadPage from './pages/AdminPage';
+import LoginPage from './pages/Loginpage';
 import UploadPdf from './pages/UploadPage';
 import UploadEdit from './pages/AdminEdit';
 import UploadDelete from './pages/AdminDelete';
 import UploadApprove from './pages/AdminApprove';
+
 import ApprovePage from './pages/ApprovePage';
 import EditPage from './pages/EditPage';
 import DeletePage from './pages/DeletePage';
 
 function App() {
   return (
-    <div className="App">
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/about' element={<Aboutpage />} />
-          <Route path="/a"            element={<ArticlesListPage/>} />
+    <BrowserRouter>
+      <div className="App">
+        <div id="page-body">
+            <Routes>
+            <Route path="/"             element={<HomePage/>} />
+            <Route path="/about"        element={<AboutPage/>} />
+            <Route path="/a"            element={<ArticlesListPage/>} />
             <Route path="/a/:articleID" element={<ArticlePage/>} />
             <Route path="/c/:courseID"  element={<CoursesListPage/>} />
             <Route path="/s/"           element={<ArticlesListPage/>} />
@@ -44,7 +46,13 @@ function App() {
             </Route>
             <Route path="*"             element={<NotFoundPage/>} />
           </Routes>
-    </div>
+        </div>
+      </div>
+      
+     
+
+    </BrowserRouter>
+
   );
 }
 

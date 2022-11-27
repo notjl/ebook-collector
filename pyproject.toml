@@ -21,8 +21,9 @@ license = {text = "MIT"}
 [tool.pdm]
 [tool.pdm.scripts]
 _.env_file = ".env"
-server.cmd = "uvicorn backend.main:app --reload"
+server.cmd = "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
 black = "black backend"
+pytest = "pytest backend"
 
 [[tool.pdm.source]]
 url = "https://pypi.org/simple"

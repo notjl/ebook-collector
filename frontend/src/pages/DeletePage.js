@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import "./Articlepage.css";
 
 import NotFoundPage from "./NotFoundPage";
 

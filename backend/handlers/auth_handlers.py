@@ -22,7 +22,6 @@ async def authenticate_user(
             detail=f"User [{request.username}] does not exist!",
         )
     if not hashing.verify(request.password, user["password"]):
-        print("wrong password")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Password incorrect"
         )

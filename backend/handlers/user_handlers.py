@@ -15,7 +15,7 @@ async def create_user(
 
     if await check_if_exists(tmp["username"], collection, "username"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f'User [{tmp["username"]}] exists',
         )
 
@@ -65,7 +65,7 @@ async def update_user(
 
     if await check_if_exists(tmp["username"], collection, "username"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f'User [{tmp["username"]}] exists',
         )
 
@@ -92,41 +92,47 @@ async def delete_user(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"User [{username}] does not exist!",
         )
-    return document
-
-
-async def get_all_user(
-    collection: AsyncIOMotorCollection,
-) -> List[schemas.User]:
-    return [schemas.User(**document) async for document in collection.find({})]
-
-
-async def update_user(
-    username: str, changes: dict, collection: AsyncIOMotorCollection
-) -> schemas.User:
-    changes["password"] = argon2h(changes["password"])
-    await collection.update_one(
-        {
-            "username": username,
-        },
-        {
-            "$set": changes,
-        },
-    )
-
-    document: schemas.User = await collection.find_one(
-        {"username": changes["username"]}
-    )
-    if not document:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"User [{username}] does not exist!",
-        )
-    return document
-
-
-async def delete_user(
-    username: str, collection: AsyncIOMotorCollection
-) -> List[schemas.User]:
     await collection.delete_one({"username": username})
     return [schemas.User(**document) async for document in collection.find({})]
+
+
+# async def delete_user(
+#     username: str, collection: AsyncIOMotorCollection
+# ) -> List[schemas.User]:
+#     document: schemas.User = await collection.find_one({"username": username})
+#     if not document:
+#         raise HTTPException(
+#             status_code=status.HTTP_404_NOT_FOUND,
+#             detail=f"User [{username}] does not exist!",
+#         )
+#     return document
+
+
+# async def get_all_user(
+#     collection: AsyncIOMotorCollection,
+# ) -> List[schemas.User]:
+#     return [schemas.User(**document) async for document in collection.find({})]
+
+
+# async def update_user(
+#     username: str, changes: dict, collection: AsyncIOMotorCollection
+# ) -> schemas.User:
+#     changes["password"] = argon2h(changes["password"])
+#     await collection.update_one(
+#         {
+#             "username": username,
+#         },
+#         {
+#             "$set": changes,
+#         },
+#     )
+
+#     document: schemas.User = await collection.find_one(
+#         {"username": changes["username"]}
+#     )
+#     if not document:
+#         raise HTTPException(
+#             status_code=status.HTTP_404_NOT_FOUND,
+#             detail=f"User [{username}] does not exist!",
+#         )
+#     return document

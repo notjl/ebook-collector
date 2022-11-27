@@ -4,9 +4,9 @@ import axios from "../api/axios";
 import "./ArticlesListPage.css";
 import ArticlesList from "../components/ArticlesList";
 import CoursesList from '../components/CoursesList';
-import Navbar from '../components/Navbar';
-import ImageBG from '../components/ImageBG';
 
+import NavBar from '../components/Navbar';
+import ImageBG from '../components/ImageBG';
 
 const BOOKS_URL = "/library/books";
 
@@ -30,9 +30,12 @@ const ArticlesListPage = () => {
     
     return (
         <>
-        <Navbar />
-        <ImageBG heading='E-BOOKS'/>
+        <div>
+          <NavBar />
+          <ImageBG heading='E-BOOK COLLECTION'/>
+        </div>
         <CoursesList articles={articles} />
+        <h1>Articles!</h1>
         <ArticlesList articles={articles} />
         </>
         

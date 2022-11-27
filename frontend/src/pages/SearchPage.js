@@ -30,8 +30,8 @@ const SearchPage = () => {
     
     return (
         <>
-        <Navbar/>
-        <ImageBG heading='SEARCH'/>
+        <Navbar />
+        <ImageBG heading='SEARCH RESULTS'/>
         <h1>{searchID}</h1>
         <ArticlesList articles={articles} />
         </>

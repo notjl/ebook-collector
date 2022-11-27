@@ -1,7 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import axios from '../api/axios';
-import ImageBG from '../components/ImageBG';
-import Navbar from '../components/Navbar';
 import useAuth from '../hooks/useAuth';
 
 import "./UploadPage.css"
@@ -44,7 +42,7 @@ const UploadPdf = () => {
         formData.append('isbn',isbn);
         formData.append('doi',doi);
         formData.append('description',description);
-        if (cover != undefined ) {
+        if (cover !== undefined ) {
             formData.append('cover_page',cover);
         }
         

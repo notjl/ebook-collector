@@ -1,7 +1,7 @@
 import React from 'react'
 import './VideoBG.css'
 
-import libVideo from '../assets/videoBG.mp4'
+import libVideo from './assets/videoBG.mp4'
 import SearchBar from './Searchbar'
 
 const VideoBG = () => {
@@ -11,7 +11,7 @@ const VideoBG = () => {
         <source src={libVideo} type='video/mp4' />
       </video>
       <div className='content'>
-        <img src={require('../assets/titleLogo.png')} alt='logo'></img>
+        <img src={require('./assets/titleLogo.png')} alt='logo'></img>
         <p>E-book repository</p>
         <SearchBar placeholder="SEARCH <BOOK>, <COURSE CODE>"/>
       </div>

@@ -5,8 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from pymongo import TEXT
 
+from .handlers import user_handlers
 from .routers import users, auth, library
-from .database import db
+from .database import db, schemas
+
+from contextlib import suppress
 
 description = """
 📚 E-book Collector by Team 6 of CPE41S1 🐙
@@ -24,7 +27,7 @@ description = """
 * **Download Books**
 * **Update Books** [🔒]
 * **Delete Books** [🔒]
-* **Approve Book** [🔒] - _TO BE IMPLEMENTED_
+* **Approve Book** [🔒]
 
 ## Users 🧑‍💻
 ### Features:
@@ -69,6 +72,8 @@ origins = [
     "http://localhost:3000",
     "https://127.0.0.1:3000",
     "http://127.0.0.1:3000",
+    "https://0.0.0.0",
+    "http://0.0.0.0"
 ]
 
 app = FastAPI(
@@ -92,6 +97,14 @@ async def startup_event():
         name="book_title_course_code_search",
     )
 
+    admin_data = {"username": "admin", "password": "somestrongadminpassword", "email": "admin@admin.com", "role": "admin"}
+    admin = schemas.User(**admin_data)
+
+    prof_data = {"username": "professor", "password": "professor", "email": "professor@professor.com", "role": "professor"}
+    prof = schemas.User(**prof_data)
+    with suppress(Exception):
+        await user_handlers.create_user(admin, db.get_library_database()["users"])
+        await user_handlers.create_user(prof, db.get_library_database()["users"])
 
 app.add_middleware(
     CORSMiddleware,

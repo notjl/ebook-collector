@@ -27,33 +27,6 @@ class RoleChecker:
             )
 
 
-async def virus_analysis_hash(sha256_hash):
-    with suppress(Exception):
-        result = await client.get_object_async(f"/files/{sha256_hash}")
-        return result.last_analysis_stats
-
-    return None
-
-
-async def virus_analysis_file(file):
-    tmp_file = None
-    with suppress(Exception):
-        tmp_file = file._file
-        tmp_file = file._file.file
-
-    result = await client.scan_file_async(tmp_file, True)
-    return result.stats
-
-
-async def virus_analysis(sha256_hash, file):
-    if not (result := await virus_analysis_hash(sha256_hash)):
-        result = await virus_analysis_file(file)
-
-    return (
-        True if result["malicious"] > 0 or result["suspicious"] > 0 else False
-    )
-
-
 async def check_if_exists(query, collection, key) -> bool:
     # Wrapper for checking a document exists in the collection
     temp_data = await collection.find_one({key: query})

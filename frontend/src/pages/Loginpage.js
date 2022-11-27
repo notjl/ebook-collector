@@ -1,16 +1,19 @@
-import { React, useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';//install toastify package
 import 'react-toastify/dist/ReactToastify.css'; 
-import axios from '../api/axios'
-import Navbar from '../components/Navbar';
-import './Loginpage.css'
+import axios from '../api/axios';
+import "./Loginpage.css";
+
+import NavBar from '../components/Navbar';
 import ImageBG from '../components/ImageBG';
+
 const LOGIN_URL = '/login';
 
 
 const LoginPage = () => {
+
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
@@ -52,14 +55,15 @@ const LoginPage = () => {
             console.log(accessToken.access_token)
             setUser('');
             setPwd('');
-            toast.error('Login Accepted')
+            //toast.error('Login Accepted')
             navigate(from, {replace: true});
+            
 
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
                 toast.error('No server response')
-            } else if (err.response?.status === 422) {
+            } else if (err.response?.status == 422) {
                 setErrMsg('Login Failed');
                 toast.error('Login Failed')
             } else {
@@ -76,8 +80,9 @@ const LoginPage = () => {
 
     return (
         <>
-        <Navbar/>
+        <NavBar />
         <ImageBG heading='LOGIN'/>
+
          {success ? (
             <section>
                 <h1>You are logged In!</h1>
@@ -116,7 +121,6 @@ const LoginPage = () => {
                 theme="light"
                 />
                 
-            
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'></label>
                 <input className="email" type="text" placeholder='EMAIL'

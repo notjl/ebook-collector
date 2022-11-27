@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <div className='header'>
-        <Link to = '/'><img src={require('../assets/iconNB.png')} alt='logo'></img></Link>
+        <Link to = '/'><img src={require('./assets/iconNB.png')} alt='logo'></img></Link>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li>
                 <Link to = '/about'>About</Link>
@@ -19,7 +19,7 @@ const Navbar = () => {
                 <Link to = '/a'>E-Books</Link>
             </li>
             <li>
-                <Link to = '/login'>Admin</Link>
+                <Link to = '/admin'>Admin</Link>
             </li>
         </ul>
         <div className='hamburger' onClick={handleClick}>

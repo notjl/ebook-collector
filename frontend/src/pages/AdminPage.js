@@ -1,13 +1,17 @@
 import { Link, Outlet } from "react-router-dom";
-import ImageBG from "../components/ImageBG";
-import Navbar from "../components/Navbar";
 import "./AdminPage.css"
+
+import NavBar from "../components/Navbar";
+import ImageBG from "../components/ImageBG";
+
 
 function UploadNav() {
     return(
+      <>
         <div>
-        <Navbar />
-        <ImageBG heading='ADMIN'/>
+          <NavBar />
+          <ImageBG heading='ADMIN PANEL'/>
+        </div>
         <div className="upload">
         <div className="uploadNav">
           <Link style={{textDecoration: 'none'}} to="/admin/upload"> <button>UPLOAD</button> </Link>
@@ -17,8 +21,8 @@ function UploadNav() {
         </div>
   
         <Outlet />
-      </div>
-      </div>
+        </div>
+      </>
     );
   }
 

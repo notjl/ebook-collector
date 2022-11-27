@@ -4,63 +4,67 @@ import { useState,useEffect } from "react";
 
 import Download from "../components/download";
 import Preview from "../components/preview";
-
+import NavBar from "../components/Navbar";
+import ImageBG from "../components/ImageBG";
 import NotFoundPage from "./NotFoundPage";
+
 
 import "./Articlepage.css";
 
-import Navbar from '../components/Navbar'
-import ImageBG from '../components/ImageBG'
 
 const BOOK_URL = "/library/book";
 
-const Articlepage = () => {
-  const {articleID} = useParams();
-  const [article, setArticle] = useState([]);
-  const [bookCover, setCover] = useState([]);
-  const call = "/library/book?book_title="+articleID
-  const call2 = "/library/"+articleID+"/cover"
+const ArticlePage = () => {
+    
+    const {articleID} = useParams();
+    const [article, setArticle] = useState([]);
+    const [bookCover, setCover] = useState([]);
+    const call = "/library/book?book_title="+articleID
+    const call2 = "/library/"+articleID+"/cover"
 
-  const book = async () => {
-      try{
-          let res = await axios.get(call);
-          let result = await res.data;
-          setArticle(result);
-      } catch (e) {
-          console.log(e)
-      }
-  };
-  const cover = async () => {
-      try{
-          await axios({
-              url: call2,
-              method: 'GET',
-              responseType: 'blob', // Important
-            }).then((response) => {
-              const file = new Blob(
-                  [response.data], 
-                  {type: 'application/png'});
-              const fileURL = URL.createObjectURL(file);
-              setCover(fileURL)
-            });
-            
-      }catch (e) {
-          console.log(e);
-      };
-  };
-  useEffect(() => {
-      book()
-      cover()
-  }, [])
+    const book = async () => {
+        try{
+            let res = await axios.get(call);
+            let result = await res.data;
+            setArticle(result);
+        } catch (e) {
+            console.log(e)
+        }
+    };
+    const cover = async () => {
+        try{
+            await axios({
+                url: call2,
+                method: 'GET',
+                responseType: 'blob', // Important
+              }).then((response) => {
+                const file = new Blob(
+                    [response.data], 
+                    {type: 'application/png'});
+                const fileURL = URL.createObjectURL(file);
+                setCover(fileURL)
+              });
+              
+        }catch (e) {
+            console.log(e);
+        };
+    };
+    useEffect(() => {
+        book()
+        cover()
+    }, [])
 
-  if (!article) {
-      return <NotFoundPage />
-  }
-  return (
-    <div>
-      <Navbar />
-      <ImageBG heading='E-BOOKS'/>
-      <div className="book-page">
+    if (!article) {
+        return <NotFoundPage />
+    }
+
+    return (
+        <>
+        <div>
+          <NavBar />
+          <ImageBG heading={article.title}/>
+        </div>
+        <div className="book-page">
             <div className="book-cover">
                 <img src={bookCover} width="350" height="450"/>
                 <div className="details">
@@ -76,8 +80,8 @@ const Articlepage = () => {
                 </div>
             </div>
         </div>
-    </div>
-  )
+        </>
+    );
 }
 
-export default Articlepage
+export default ArticlePage;
