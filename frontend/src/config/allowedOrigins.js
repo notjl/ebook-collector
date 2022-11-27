@@ -1,5 +1,5 @@
 const allowedOrigins = [
-    'http://localhost:8000'
+    'https://backend-production-cdf0.up.railway.app/'
 ];
 
 module.exports = allowedOrigins;
