@@ -3,6 +3,10 @@ import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 import ArticlesList from "../components/ArticlesList";
+
+import NavBar from '../components/Navbar';
+import ImageBG from '../components/ImageBG';
+
 const QUERY_URL = "/library/search?query=";
 
 const CoursesListPage = () => {
@@ -26,7 +30,10 @@ const CoursesListPage = () => {
     
     return (
         <>
-        <h1>{courseID}</h1>
+        <div>
+          <NavBar />
+          <ImageBG heading={courseID}/>
+        </div>
         <ArticlesList articles={articles} />
         </>
         

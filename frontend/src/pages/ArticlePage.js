@@ -4,8 +4,10 @@ import { useState,useEffect } from "react";
 
 import Download from "../components/download";
 import Preview from "../components/preview";
-
+import NavBar from "../components/Navbar";
+import ImageBG from "../components/ImageBG";
 import NotFoundPage from "./NotFoundPage";
+
 
 import "./ArticlePage.css";
 
@@ -58,6 +60,10 @@ const ArticlePage = () => {
 
     return (
         <>
+        <div>
+          <NavBar />
+          <ImageBG heading={article.title}/>
+        </div>
         <div className="book-page">
             <div className="book-cover">
                 <img src={bookCover} width="350" height="450"/>

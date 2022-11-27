@@ -1,16 +1,15 @@
-import ConnectionTest from "../components/ConnectionTest";
-import Searchbar from "../components/Searchbar";
-import "./HomePage.css";
+import React from 'react'
+import Navbar from '../components/Navbar'
+import VideoBG from '../components/VideoBG'
 
-const HomePage = () => {
-    return (
-        <>
-        <div className="search">
-            <Searchbar placeholder="SEARCH <BOOK>, <COURSE CODE>" />
-        </div>
-        <ConnectionTest/>
-        </>
-    )
+
+const Homepage = () => {
+  return (
+    <div>
+        <Navbar />
+        <VideoBG />
+    </div>
+  )
 }
 
-export default HomePage;
+export default Homepage

@@ -1,0 +1,36 @@
+
+#video{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.google {
+    height: 100vh;
+    width: 100%;
+    object-fit: contain;
+}
+
+.google .content {
+    text-align: center;
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    top: 20vh;
+}
+
+.google .content h1 {
+    font-size: 4rem;
+    color: blanchedalmond;
+}
+
+.google p {
+    font-size: 1.8rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    color: rgb(17, 17, 17);
+}

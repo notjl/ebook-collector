@@ -5,6 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';//install toastify packag
 import 'react-toastify/dist/ReactToastify.css'; 
 import axios from '../api/axios';
 import "./LoginPage.css";
+
+import NavBar from '../components/Navbar';
+import ImageBG from '../components/ImageBG';
+
 const LOGIN_URL = '/login';
 
 
@@ -76,6 +80,9 @@ const LoginPage = () => {
 
     return (
         <>
+        <NavBar />
+        <ImageBG heading='LOGIN'/>
+
          {success ? (
             <section>
                 <h1>You are logged In!</h1>
@@ -114,7 +121,6 @@ const LoginPage = () => {
                 theme="light"
                 />
                 
-            <h1>&lt; L O G I N &gt;</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor='username'></label>
                 <input className="email" type="text" placeholder='EMAIL'

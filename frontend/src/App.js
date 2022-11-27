@@ -2,7 +2,6 @@ import './App.css';
 import RequireAuth from './components/RequireAuth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import NavBar from './NavBar';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ArticlePage from './pages/ArticlePage';
@@ -18,7 +17,6 @@ import UploadDelete from './pages/AdminDelete';
 import UploadApprove from './pages/AdminApprove';
 
 import"./components/background/background.css";
-import Main from './components/background/homeBG';
 import ApprovePage from './pages/ApprovePage';
 import EditPage from './pages/EditPage';
 import DeletePage from './pages/DeletePage';
@@ -27,7 +25,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <NavBar />
         <div id="page-body">
             <Routes>
             <Route path="/"             element={<HomePage/>} />
