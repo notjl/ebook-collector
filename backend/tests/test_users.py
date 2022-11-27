@@ -1,11 +1,9 @@
 from ..main import app
 from ..database import db
-from .utils import override_user_collection
 
 from fastapi.testclient import TestClient
-from fastapi import HTTPException, status
-import pytest
-import json
+
+client = TestClient(app)
 
 
 def user_bearer_token(username: str, password: str) -> dict:
@@ -17,7 +15,6 @@ def user_bearer_token(username: str, password: str) -> dict:
     return bearer_token
 
 
-client = TestClient(app)
 client.headers["Authorization"] = user_bearer_token(
     "admin", "somestrongadminpassword"
 )
