@@ -1,22 +1,16 @@
-.uploadPdf {
-    width: 60vw;
-    max-width: 500px;
-    min-width: 300px;
-    margin: 0 auto;
-    padding-bottom: 2em;
-}
-.uploadDiv{
+.all-container{
+    width: 1400px;
     margin-top: 50px;
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
     background-color: #e1e3eb;
     height: auto;
-    width: 700px;
     box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
     padding-top: 5px;
     padding-left: 0px;
     padding-right: 0px;
+    padding-bottom: 5px;
     border-radius: 60px; 
     background-color: white;
     display: block;
@@ -24,11 +18,41 @@
     align-items: center;
 }
 
-.uploadDiv h1{
-    padding: 20px;
+.all-container h1{
+    margin: 20px;
 }
 
-.uploadDiv input{
+.box{
+    display: flex; 
+    margin: 40px;
+    margin-top: 0px;
+}
+.infos {
+    flex-basis: 60%;
+    padding: 40px 60px;
+    background: #eeeeee;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.infos h2{
+    margin: 10px;
+    color: rgb(87, 87, 87);
+}
+.book-inputs{
+    flex-basis: 40%;
+    padding:40px;
+    background: #696969;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.book-inputs h2{
+    margin: 20px;
+    color:#eeeeee;
+}
+
+.book-inputs input{
     width: 270px;
     height: 30px;
     border-radius: 10px;
@@ -44,7 +68,7 @@
     margin-left: 105px;
 }
 
-.uploadDiv textarea{
+.book-inputs textarea{
     width: 270px;
     height: 30px;
     border-radius: 10px;
@@ -62,13 +86,7 @@
     margin-left: 105px;
 }
 
-.uploadDiv label{
-    text-align: center ;
-    font-weight: 600;
-
-}
-
-.uploadDiv button{
+.uploadButton{
     margin-top: 20px;
     margin-bottom: 0.5rem ;
     margin-left: 160px;
@@ -77,9 +95,26 @@
     border-radius: 10px;
     border: none;
     outline: none;
-    background-color: #52adf8;
+    background-color: #333;
+    color: white;
     display: block;
     height: 2em;
     font-size: 1.1rem;
+}
+
+.detailbox{
+    text-align: justify;
+}
+
+.detailbox p{
+    margin: 5px;
+}
+
+.edit-title{
+    text-transform: capitalize;
+}
+
+.detailbox b{
+    font-weight: 500;
 }
 

@@ -68,23 +68,26 @@ const ApprovePage = () => {
     }
 
     return (
-        <>
-        <img src={bookCover}/>
-        <h1>{article.title}</h1>
-        <p key={article.course_code}>
-            {article.course_code}
-            <br/>author: {article.author}
-            <br/>publisher: {article.publisher}
-            <br/>ISBN: {article.isbn}
-            <br/>DOI: {article.doi}
-            
-            <br/>description: {article.description}
-            <form onSubmit={getApproved}>
-                <button type="submit">Approve</button>
-            </form>
-        </p>
-        </>
+        <div className="book-page">
+            <div className="book-cover">
+                <img src={bookCover} width="350" height="450"/>
+                <div className="details">
+                    <p className="title">{article.title}</p>
+                    <p className="coursecode">{article.course_code}</p>
+                    <p className="info">Author: {article.author}</p>
+                    <p className="info">Publisher: {article.publisher}</p>
+                    <p className="info">ISBN: {article.isbn}</p>
+                    <p className="info">DOI: {article.doi}</p>
+                    <p className="info">Description: {article.description}</p>
+                    <form onSubmit={getApproved}>
+                        <label className="warningMsg">WARNING: Are you sure to approve this book?</label>
+                        <button className="approveButton" type="submit">Approve</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     );
 }
+
 
 export default ApprovePage;

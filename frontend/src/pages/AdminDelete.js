@@ -2,7 +2,7 @@ import {  useState, useEffect } from 'react';
 import axios from '../api/axios';
 import DeleteList from '../components/deleteList';
 
-import "./UploadPage.css"
+import "./AdminEdit.css"
 
 const BOOKS_URL = "/library/books";
 
@@ -31,13 +31,16 @@ const DeletePdf = () => {
 
     return (
         <>
-        <div className="updatePDF"></div>
-        <div className="deleteDiv">
+        <div className="adminEdit"></div>
+        <div className="adminSearch">
             <h1>&lt; D E L E T E &gt;</h1>
-            <div>
-                <input type="text" id="Reactive-Search" onChange={goSearch} />
+            <div className='searchbar'>
+                <input type="text" id="Reactive-Search" placeholder="SEARCH <BOOK>" onChange={goSearch} />
             </div>
-            <DeleteList action={"approve"} articles={articles} search={search} />
+
+            <div className="editResults">
+                <DeleteList action={"approve"} articles={articles} search={search} />
+            </div>
         </div>
         </>
     )

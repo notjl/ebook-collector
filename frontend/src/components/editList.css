@@ -1,0 +1,38 @@
+.editResults{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 10px;
+}
+.container {
+    width: min-content;
+    height:auto;
+    margin: 30px;
+    box-shadow: 0 0 8px #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    align-self: normal;
+}
+
+.link{
+  
+    color:black;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 15px;
+}
+
+.link:hover {
+    color: grey;
+ }
+ 
+ ::-webkit-scrollbar {
+    display: none;
+ }

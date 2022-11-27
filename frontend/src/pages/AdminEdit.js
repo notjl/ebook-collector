@@ -2,7 +2,7 @@ import {  useState, useEffect } from 'react';
 import axios from '../api/axios';
 import EditList from '../components/editList.js';
 
-import "./UploadPage.css"
+import "./AdminEdit.css"
 
 const BOOKS_URL = "/library/books";
 
@@ -31,13 +31,16 @@ const EditPdf = () => {
 
     return (
         <>
-        <div className="updatePDF"></div>
-        <div className="deleteDiv">
-            <h1>&lt; EDIT &gt;</h1>
-            <div>
-                <input type="text" id="Reactive-Search" onChange={goSearch} />
+        <div className="adminEdit"></div>
+        <div className="adminSearch">
+            <h1>&lt; E D I T &gt;</h1>
+            <div className='searchbar'>
+                <input type="text" id="Reactive-Search" placeholder="SEARCH <BOOK>" onChange={goSearch} />
             </div>
-            <EditList action={"approve"} articles={articles} search={search} />
+
+            <div className="editResults">
+                <EditList action={"approve"} articles={articles} search={search} />
+            </div>
         </div>
         </>
     )

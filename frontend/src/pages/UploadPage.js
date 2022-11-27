@@ -69,31 +69,32 @@ const UploadPdf = () => {
             <input id="title"type="text" placeholder="Enter Title" 
                 onChange={(e) => setTitle(e.target.value)}
                 required/>
-            <label>Document</label>
-            <input id="pdf" type="file"
-                onChange={changeFile}
-                />
-
+            
             <input id="course_code" type="text" placeholder="Enter Course Code" 
                 onChange={(e) => setCourseCode(e.target.value)}
                 required/>
-            <input id="author" type="text" placeholder="Enter author"
+            <input id="author" type="text" placeholder="Enter Author"
                 onChange={(e) => setAuthor(e.target.value)}
                 />
-            <input id="publisher" type="text" placeholder="Enter publisher"
+            <input id="publisher" type="text" placeholder="Enter Publisher"
                 onChange={(e) => setPublisher(e.target.value)}
                 />
-            <input id="isbn" type="text" placeholder="Enter isbn"
+            <input id="isbn" type="text" placeholder="Enter ISBN"
                 onChange={(e) => setIsbn(e.target.value)}
                 />
-            <input id="doi" type="text" placeholder="Enter doi"
+            <input id="doi" type="text" placeholder="Enter DOI"
                 onChange={(e) => setDoi(e.target.value)}
                 />
-            <input id="description" type="text" placeholder="Enter description"
+            <textarea rows="3" cols="30" id="description" type="text" placeholder="Enter Description"
                 onChange={(e) => setDescription(e.target.value)}
                 />
-            <label>Cover Page</label>
-            <input id="cover" type="file"
+            <label>&lt; Select Document &gt;</label>
+            <input id="pdf" type="file" title="Select Document"
+                onChange={changeFile}
+                />
+
+            <label>&lt; Select Cover Page &gt;</label>
+            <input id="cover" type="file" title="Select Cover Page"
                 onChange={changeCover}
                 />
             <button type="submit">UPLOAD</button>

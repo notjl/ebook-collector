@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import "./ArticlePage.css";
 
 import NotFoundPage from "./NotFoundPage";
 
@@ -69,20 +70,24 @@ const DeletePage = () => {
 
     return (
         <>
-        <img src={bookCover}/>
-        <h1>{article.title}</h1>
-        <p key={article.course_code}>
-            {article.course_code}
-            <br/>author: {article.author}
-            <br/>publisher: {article.publisher}
-            <br/>ISBN: {article.isbn}
-            <br/>DOI: {article.doi}
-            
-            <br/>description: {article.description}
-            <form onSubmit={getDeleted}>
-                <button type="submit">Delete</button>
-            </form>
-        </p>
+        <div className="book-page">
+            <div className="book-cover">
+                <img src={bookCover} width="350" height="450"/>
+                <div className="details">
+                    <p className="title">{article.title}</p>
+                    <p className="coursecode">{article.course_code}</p>
+                    <p className="info">Author: {article.author}</p>
+                    <p className="info">Publisher: {article.publisher}</p>
+                    <p className="info">ISBN: {article.isbn}</p>
+                    <p className="info">DOI: {article.doi}</p>
+                    <p className="info">Description: {article.description}</p>
+                    <form onSubmit={getDeleted}>
+                        <label className="warningMsg">WARNING: Are you sure to remove this book?</label>
+                        <button className="deleteButton" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         </>
     );
 }
