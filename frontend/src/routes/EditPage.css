@@ -1,0 +1,114 @@
+.all-container{
+    margin-top: 10vh;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e1e3eb;
+    height: auto;
+    width: 700px;
+    background-color: white;
+    display: block;
+    text-align: center;
+    align-items: center;
+}
+
+.all-container h1{
+    margin: 20px;
+}
+
+.box{
+    display: flex; 
+    margin: 40px;
+    margin-top: 0px;
+}
+.infos {
+    flex-basis: 60%;
+    padding: 40px 60px;
+    background: #eeeeee;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.infos h2{
+    margin: 10px;
+    color: rgb(87, 87, 87);
+}
+.book-inputs{
+    flex-basis: 40%;
+    padding:40px;
+    background: #696969;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.book-inputs h2{
+    margin: 20px;
+    color:#eeeeee;
+}
+
+.book-inputs input{
+    width: 270px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #eeeeee;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: medium;
+    display: block;
+    margin-bottom: 0.5rem ;
+    margin-left: 105px;
+}
+
+.book-inputs textarea{
+    width: 270px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #eeeeee;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+    margin-bottom: 0.5rem ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
+    font-size: 15.5px;   
+    resize: none;
+    margin-left: 105px;
+}
+
+.uploadButton{
+    margin-top: 20px;
+    margin-bottom: 0.5rem ;
+    margin-left: 160px;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: white;
+    display: block;
+    height: 2em;
+    font-size: 1.1rem;
+}
+
+.detailbox{
+    text-align: justify;
+}
+
+.detailbox p{
+    margin: 5px;
+}
+
+.edit-title{
+    text-transform: capitalize;
+}
+
+.detailbox b{
+    font-weight: 500;
+}
+

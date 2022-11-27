@@ -22,39 +22,39 @@ const AboutCards = () => {
                 <p>contact number</p>
             </div>
             <div className='card1'>
-                <h3>LEAD DEVELOPER</h3>
+                <h3>LEAD BACKEND DEVELOPER</h3>
                 <span className='bar'></span>
-                <img src={require('../assets/placeholder.png')} alt='DevImg'></img>
+                <img src={require('../assets/Dev1.png')} alt='DevImg'></img>
                 <p>Angel Gabriel Cabezas</p>
-                <p>qagpcabezas@tip.edu.ph</p>
-                <p>contact number</p>
+                <p>agcabezas@pm.me</p>
+                <p>09761441683</p>
             </div>
             <div className='card1'>
-                <h3>DEVELOPER</h3>
+                <h3>LEAD FRONTEND DEVELOPER</h3>
                 <span className='bar'></span>
                 <img src={require('../assets/Dev2.jpg')} alt='DevImg'></img>
                 <p>Jerome Christian Alapad</p>
                 <p>qjcmalapad@tip.edu.ph</p>
-                <p>contact number</p>
+                <p>09958621171</p>
             </div>
             <div className='card1'>
-                <h3>DEVELOPER</h3>
+                <h3>QUALITY ASSURANCE</h3>
                 <span className='bar'></span>
                 <img src={require('../assets/placeholder.png')} alt='DevImg'></img>
                 <p>Jade Vergil Orario</p>
                 <p>qjvorario@tip.edu.ph</p>
-                <p>contact number</p>
+                <p>09276688653</p>
             </div>
             <div className='card1'>
-                <h3>DEVELOPER</h3>
+                <h3>UI/UX FRONTEND DEVELOPER</h3>
                 <span className='bar'></span>
-                <img src={require('../assets/placeholder.png')} alt='DevImg'></img>
+                <img src={require('../assets/Dev4.jpg')} alt='DevImg'></img>
                 <p>Jan Angelo Paras</p>
                 <p>qjabparas@tip.edu.ph</p>
                 <p>contact number</p>
             </div>
             <div className='card1'>
-                <h3>DEVELOPER</h3>
+                <h3>UI/UX FRONTEND DEVELOPER</h3>
                 <span className='bar'></span>
                 <img src={require('../assets/Dev5.jpg')} alt='DevImg'></img>
                 <p>Kierwin Jov Ramos</p>

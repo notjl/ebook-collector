@@ -1,0 +1,85 @@
+.uploadPdf {
+    width: 60vw;
+    max-width: 500px;
+    min-width: 300px;
+    margin: 0 auto;
+    padding-bottom: 2em;
+}
+.uploadDiv{
+    margin-top: 10vh;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e1e3eb;
+    height: auto;
+    width: 700px;
+    box-shadow: 11px 12px 13px 12px rgb(207, 207, 207);
+    padding-top: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 60px; 
+    background-color: white;
+    display: block;
+    text-align: center;
+    align-items: center;
+}
+
+.uploadDiv h1{
+    padding: 20px;
+}
+
+.uploadDiv input{
+    width: 270px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #eeeeee;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: medium;
+    display: block;
+    margin-bottom: 0.5rem ;
+    margin-left: 105px;
+}
+
+.uploadDiv textarea{
+    width: 270px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #eeeeee;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: block;
+    margin-bottom: 0.5rem ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;  
+    font-size: 15.5px;   
+    resize: none;
+    margin-left: 105px;
+}
+
+.uploadDiv label{
+    text-align: center ;
+    font-weight: 600;
+
+}
+
+.uploadDiv button{
+    margin-top: 20px;
+    margin-bottom: 0.5rem ;
+    margin-left: 160px;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background-color: #52adf8;
+    display: block;
+    height: 2em;
+    font-size: 1.1rem;
+}
+

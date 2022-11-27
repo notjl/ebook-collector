@@ -13,13 +13,13 @@ const Navbar = () => {
         <Link to = '/'><img src={require('../assets/iconNB.png')} alt='logo'></img></Link>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li>
-                <Link to = '/About'>About</Link>
+                <Link to = '/about'>About</Link>
             </li>
             <li>
-                <Link to = '/Article'>E-Books</Link>
+                <Link to = '/a'>E-Books</Link>
             </li>
             <li>
-                <Link to = '/Login'>Login</Link>
+                <Link to = '/login'>Admin</Link>
             </li>
         </ul>
         <div className='hamburger' onClick={handleClick}>

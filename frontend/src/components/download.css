@@ -1,0 +1,14 @@
+.download{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #333;
+    font-weight: 600;
+    color: white;
+    display: block;
+    margin-top: 10px;
+}
+
+

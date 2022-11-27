@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState,useEffect } from "react";
 import axios from "../api/axios";
+import "./preview.css";
 const PV_URL = "/library";
 
 const Preview = ( {book} ) => {
@@ -35,7 +36,7 @@ const Preview = ( {book} ) => {
 
     return (
         <>
-        <button onClick={preview}>Preview</button>
+        <button className='preview' onClick={preview}>Preview</button>
         </>
         
     );

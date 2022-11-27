@@ -6,7 +6,7 @@ import SearchBar from './Searchbar'
 
 const VideoBG = () => {
   return (
-    <div className='hero'>
+    <div className='google'>
       <video autoPlay loop muted id='video'>
         <source src={libVideo} type='video/mp4' />
       </video>
