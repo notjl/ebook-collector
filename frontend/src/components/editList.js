@@ -14,7 +14,7 @@ const EditList = ({articles, search}) => {
         <div className="editResults">
             {data.map(article => (
                 <div className="container"> 
-                <img className="imgEdit" src={article.bookCover} width="200" height="250"/>
+                <img className="imgEdit" src={article.bookCover} width="200" height="250" alt='cover'/>
                 <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/edit=${article.title}`}>
                     <p>{article.title}</p>
                 </Link></div>

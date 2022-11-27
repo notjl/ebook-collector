@@ -52,7 +52,7 @@ const LoginPage = () => {
             console.log(accessToken.access_token)
             setUser('');
             setPwd('');
-            //toast.error('Login Accepted')
+            toast.error('Login Accepted')
             navigate(from, {replace: true});
 
         } catch (err) {
