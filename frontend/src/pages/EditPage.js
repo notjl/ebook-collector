@@ -111,9 +111,10 @@ const EditPage = () => {
 
 
     return (
+        <>
         <body>
             <div className="all-container">
-                <h1>E D I T</h1>
+                <h1>&lt; E D I T &gt;</h1>
                 <div className="box">
                     <div className="book-inputs">
                         <h2>Update</h2>
@@ -165,7 +166,7 @@ const EditPage = () => {
                 </div>
             </div>
         </body>
-            
+        </>    
     );
 }
 

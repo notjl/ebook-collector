@@ -57,6 +57,7 @@ const ArticlePage = () => {
     }
 
     return (
+        <>
         <div className="book-page">
             <div className="book-cover">
                 <img src={bookCover} width="350" height="450"/>
@@ -73,6 +74,7 @@ const ArticlePage = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

@@ -33,7 +33,7 @@ const EditPdf = () => {
         <>
         <div className="adminEdit"></div>
         <div className="adminSearch">
-            <h1>&lt; EDIT &gt;</h1>
+            <h1>&lt; E D I T &gt;</h1>
             <div className='searchbar'>
                 <input type="text" id="Reactive-Search" placeholder="SEARCH <BOOK>" onChange={goSearch} />
             </div>
