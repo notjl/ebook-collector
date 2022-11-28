@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
+import NavBar from '../components/Navbar';
+import ImageBG from '../components/ImageBG';
 
 import axios from "../api/axios";
 import ArticlesList from "../components/ArticlesList";
@@ -28,7 +30,9 @@ const SearchPage = () => {
     
     return (
         <>
-        <h1>{searchID}</h1>
+        <NavBar />
+        <ImageBG heading='LOGIN'/>
+        <h1>You Searched for "{searchID}"</h1>
         <ArticlesList articles={articles} />
         </>
         

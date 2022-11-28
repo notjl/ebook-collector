@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 import "./ArticlesList.css";
+import BookCover from "./BookCover";
+
+                
 
 
 const ArticlesList = ({articles}) => {                        
 
     return (
         <>
+        <div className="allBooks">
         {articles.map(article => (
-            <Link key={article.title} to={`/a/${article.title}`}>
-                <h3>{article.title}</h3>
-            </Link>
+            <div className="container">
+            <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/a/${article.title}`}> 
+            <BookCover title={article.title} />
+                <p>{article.title}</p> 
+            </Link> </div>
             ))
         }
+        </div>
         </>
     );
 }

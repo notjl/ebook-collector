@@ -34,9 +34,18 @@ const ArticlesListPage = () => {
           <NavBar />
           <ImageBG heading='E-BOOK COLLECTION'/>
         </div>
-        <CoursesList articles={articles} />
-        <h1>Articles!</h1>
-        <ArticlesList articles={articles} />
+        <div className="articleAll">
+            <div className="allCourse">
+                <h1>&lt; C O U R S E S &gt;</h1>   
+                <CoursesList articles={articles} />
+            </div>
+
+            
+            <div className="allBooks">
+                <h1>&lt; B O O K S &gt;</h1>
+                <ArticlesList articles={articles} />
+            </div>
+        </div>
         </>
         
     );

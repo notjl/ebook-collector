@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./CoursesList.css"
 
 const CoursesList = ({articles}) => {                        
 
@@ -19,13 +20,15 @@ const CoursesList = ({articles}) => {
 
     return (
         <>
-        {uniqueArticles.map(article => (
-            <Link key={article.course_code} to={`/c/${article.course_code}`}>
-                <p>{article.course_code}</p>
-            </Link>
-            ))
-        }
-        
+        <div className="allCourse">
+            {uniqueArticles.map(article => (
+                <div className="courseButton">
+                <Link className="link" style={{textDecoration: 'none'}} key={article.course_code} to={`/c/${article.course_code}`}>
+                    <button>{article.course_code}</button>
+                </Link> </div>
+                ))
+            }
+        </div>
         </>
     );
 }
