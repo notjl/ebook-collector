@@ -33,7 +33,7 @@
     font-size: 1.4rem;
 }
 
-@media screen and (max-width:640px) {
+@media screen and (max-width:1080px) {
     .hero-img h1 {
         font-size: 2rem;
     }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./searchbar.css";
-import SearchIcon from "@mui/icons-material/Search"; //add material-ui/utils
 
 function SearchBar({ placeholder, data }) {
   
@@ -23,7 +22,6 @@ function SearchBar({ placeholder, data }) {
         <Link to={`/s/${toSearch}`} className="searchIcon">
         <div className="searchIcon" onClick={Search}>
           {" "}
-          <SearchIcon style={{color: 'black' }} /> {" "}
         </div>
         </Link>
       </div>

@@ -18,5 +18,11 @@
     background: black;
     font-weight: 600;
     color: white;
-
 }
+
+.uploadNav button:hover{
+    background: gray;
+    color: black;
+    font-weight: 600;
+}
+

@@ -14,4 +14,4 @@ export class ImageBG extends Component {
   }
 }
 
-export default ImageBG
+export default ImageBG;

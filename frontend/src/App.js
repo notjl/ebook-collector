@@ -1,4 +1,3 @@
-import './App.css';
 import RequireAuth from './components/RequireAuth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -15,8 +14,6 @@ import UploadPdf from './pages/UploadPage';
 import UploadEdit from './pages/AdminEdit';
 import UploadDelete from './pages/AdminDelete';
 import UploadApprove from './pages/AdminApprove';
-
-import"./components/background/background.css";
 import ApprovePage from './pages/ApprovePage';
 import EditPage from './pages/EditPage';
 import DeletePage from './pages/DeletePage';
