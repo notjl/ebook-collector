@@ -73,7 +73,9 @@ origins = [
     "https://127.0.0.1:3000",
     "http://127.0.0.1:3000",
     "https://0.0.0.0",
-    "http://0.0.0.0"
+    "http://0.0.0.0",
+    "https://library-group6.up.railway.app",
+    "http://library-group6.up.railway.app"
 ]
 
 app = FastAPI(
