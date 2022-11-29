@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Searchbar.css";
+import "./searchbar.css";
 
 function SearchBar({ placeholder, data }) {
   
