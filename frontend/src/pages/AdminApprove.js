@@ -16,6 +16,7 @@ const UploadApprove = () => {
             setArticles(result);
         } catch (e) {
             console.log(e)
+            
         }
     };
 

@@ -13,4 +13,4 @@ const Aboutpage = () => {
   )
 }
 
-export default Aboutpage
+export default Aboutpage;

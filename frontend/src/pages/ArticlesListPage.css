@@ -1,0 +1,49 @@
+.articleAll{
+    display: flex;
+    flex-wrap: nowrap;
+    
+
+}
+.allBooks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 20px;   
+}
+
+.allBooks h1{
+    font-weight: 600;
+
+}
+
+.allCourse{
+    height: 800px;
+    min-width: 110px;
+    display: grid;
+    justify-content: justify;
+    align-items: center;
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+.allCourse h1{
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+

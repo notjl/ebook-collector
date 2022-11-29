@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Searchbar.css";
+import "./searchbar.css";
 
 function SearchBar({ placeholder, data }) {
   
@@ -20,6 +20,7 @@ function SearchBar({ placeholder, data }) {
         <input type="text" placeholder={placeholder} onChange={handleChange} value={toSearch}/>
         <Link to={`/s/${toSearch}`} className="searchIcon">
         <div className="searchIcon" onClick={Search}>
+          {" "}
         </div>
         </Link>
       </div>

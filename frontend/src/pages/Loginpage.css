@@ -49,11 +49,13 @@ section {
     border-radius: 10px;
     border: none;
     outline: none;
-    background-color: #52adf8;
     display: block;
     margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
+    background: black;
+    font-weight: 600;
+    color: white;
 
 }
 
