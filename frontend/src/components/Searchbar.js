@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-import "./searchbar.css";
-import SearchIcon from "@mui/icons-material/Search"; //add material-ui/utils
+import "./Searchbar.css";
 
 function SearchBar({ placeholder, data }) {
   

@@ -1,22 +1,20 @@
-import './App.css';
 import RequireAuth from './components/RequireAuth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ArticlePage from './pages/ArticlePage';
+import HomePage from './pages/Homepage';
+import AboutPage from './pages/Aboutpage';
+import ArticlePage from './pages/Articlepage';
 import ArticlesListPage from './pages/ArticlesListPage';
 import CoursesListPage from './pages/CoursesListPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UploadPage from './pages/AdminPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/Loginpage';
 import UploadPdf from './pages/UploadPage';
 import UploadEdit from './pages/AdminEdit';
 import UploadDelete from './pages/AdminDelete';
 import UploadApprove from './pages/AdminApprove';
 
-import"./components/background/background.css";
 import ApprovePage from './pages/ApprovePage';
 import EditPage from './pages/EditPage';
 import DeletePage from './pages/DeletePage';

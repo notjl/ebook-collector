@@ -40,7 +40,7 @@ const AboutCards = () => {
             <div className='card1'>
                 <h3>QUALITY ASSURANCE</h3>
                 <span className='bar'></span>
-                <img src={require('./assets/placeholder.png')} alt='DevImg'></img>
+                <img src={require('./assets/Dev3.png')} alt='DevImg'></img>
                 <p>Jade Vergil Orario</p>
                 <p>qjvorario@tip.edu.ph</p>
                 <p>09276688653</p>

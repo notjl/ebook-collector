@@ -6,6 +6,8 @@ import ImageBG from '../components/ImageBG';
 
 import axios from "../api/axios";
 import ArticlesList from "../components/ArticlesList";
+import ImageBG from '../components/ImageBG';
+import Navbar from '../components/Navbar';
 
 const QUERY_URL = "/library/search?query=";
 
@@ -30,9 +32,9 @@ const SearchPage = () => {
     
     return (
         <>
-        <NavBar />
-        <ImageBG heading='LOGIN'/>
-        <h1>You Searched for "{searchID}"</h1>
+        <Navbar />
+        <ImageBG heading='SEARCH RESULTS'/>
+        <h1>{searchID}</h1>
         <ArticlesList articles={articles} />
         </>
         
