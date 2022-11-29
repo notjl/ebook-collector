@@ -21,6 +21,8 @@ const UploadPdf = () => {
     const [doi, setDoi] = useState('');
     const [description, setDescription] = useState('');
 
+    const errRef = useRef();
+
     const [pdf, setPDF] = useState();
     const [cover, setCover] = useState(null);
 
@@ -47,20 +49,28 @@ const UploadPdf = () => {
             formData.append('cover_page',cover);
         }
         
-        await axios.post(
-            UPLOAD_URL,
-            formData,
-            {
-                headers: {
-                    'accept': 'application/json',
-                    'Authorization': token,
-                    'Content-Type': 'multipart/form-data'
+        try {
+            await axios.post(
+                UPLOAD_URL,
+                formData,
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Authorization': token,
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
+            ) 
+            toast.success("Upload Complete");
+        } catch(err) {
+            if (err.response?.status === 422) {
+                toast.error("Unauthorized, please log in as Professor")
+            } else {
+                toast.error("<Unknown Error")    
             }
-        ) 
-        toast.success("Upload Complete");
-    }
-
+            errRef.current.focus();
+            }
+        }
 
     return (
         <>

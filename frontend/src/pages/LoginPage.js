@@ -18,7 +18,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/admin/upload";
 
     const userRef = useRef();
     const errRef = useRef();
@@ -55,7 +55,7 @@ const LoginPage = () => {
             console.log(accessToken.access_token)
             setUser('');
             setPwd('');
-            //toast.error('Login Accepted')
+            toast.error('Login Accepted')
             navigate(from, {replace: true});
             
 
@@ -63,7 +63,7 @@ const LoginPage = () => {
             if (!err.response) {
                 setErrMsg('No server response');
                 toast.error('No server response')
-            } else if (err.response?.status == 422) {
+            } else if (err.response?.status === 422) {
                 setErrMsg('Login Failed');
                 toast.error('Login Failed')
             } else {

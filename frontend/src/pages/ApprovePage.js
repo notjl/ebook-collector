@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
@@ -9,6 +9,7 @@ import NotFoundPage from "./NotFoundPage";
 const ApprovePage = () => {
 
     const { auth } = useAuth();
+    const errRef = useRef();
     const token = "Bearer " + auth?.accessToken.access_token
 
     const {articleID} = useParams();
@@ -59,21 +60,26 @@ const ApprovePage = () => {
         e.preventDefault();
 
         try {
-        await axios.get(
-            APPROVE_URL,
-            {
-                headers: {
-                    'accept': 'application/json',
-                    'Authorization': token
+            await axios.get(
+                APPROVE_URL,
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Authorization': token
+                    }
                 }
-            }
-        )
+            )
         toast.success("Book Approved")
 
-        } catch{
-            toast.error("Unauthorized")
-            } 
+        } catch(err) {
+        if (err.response?.status === 422) {
+            toast.error("Unauthorized, please log in as Admin")
+        } else {
+            toast.error("Unknown Error")    
         }
+        errRef.current.focus();
+        } 
+    }
 
     return (
         <div className="book-page">

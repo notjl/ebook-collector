@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
@@ -18,6 +18,8 @@ const DeletePage = () => {
     const call = "/library/books?book_title="+articleID
     const call2 = "/library/"+articleID+"/cover"
     const DELETE_URL = "/library/"+articleID+"/delete"
+
+    const errRef = useRef();
 
     const book = async () => {
         try{
@@ -69,9 +71,13 @@ const DeletePage = () => {
             }
         )
         toast.success("Book Deleted")
-
-        } catch{
-            toast.error("Unauthorized")
+        } catch(err) {
+            if (err.response?.status === 422) {
+                toast.error("Unauthorized, please log in as Admin")
+            } else {
+                toast.error("Unknown Error")    
+            }
+            errRef.current.focus();
             } 
         }
 

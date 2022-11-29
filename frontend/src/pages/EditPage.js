@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
@@ -22,6 +22,7 @@ const EditPage = () => {
     var [doi, setDoi] = useState('');
     var [description, setDescription] = useState('');
 
+    const errRef = useRef();
     const { auth } = useAuth();
     const token = "Bearer " + auth?.accessToken.access_token
 
@@ -96,20 +97,30 @@ const EditPage = () => {
         formData.append('doi',doi);
         formData.append('description',description)
 
-        const response = await axios.put(
-            UPDATE_URL+articleID+'/update',
-            formData,
-            {
-                headers: {
-                    'accept': 'application/json',
-                    'Authorization': token,
-                    'Content-Type': 'multipart/form-data'
+        try {
+            const response = await axios.put(
+                UPDATE_URL+articleID+'/update',
+                formData,
+                {
+                    headers: {
+                        'accept': 'application/json',
+                        'Authorization': token,
+                        'Content-Type': 'multipart/form-data'
+                    }
                 }
+            ) 
+            toast.success("Update Successful");
+            console.log(response)
+        } catch(err) {
+            if (err.response?.status === 422) {
+                toast.error("Unauthorized, please log in as Admin")
+            } else {
+                toast.error("Unknown Error")    
             }
-        ) 
-        toast.success("Update Successful");
-        console.log(response)
-    }
+            errRef.current.focus();
+            } 
+        }
+    
 
 
     return (
