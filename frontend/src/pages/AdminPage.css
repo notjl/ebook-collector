@@ -13,8 +13,16 @@
     border-radius: 10px;
     border: none;
     outline: none;
-    background-color: #52adf8;
     display: block;
     font-size: 1rem;
-    font-weight: 525;
+    background: black;
+    font-weight: 600;
+    color: white;
 }
+
+.uploadNav button:hover{
+    background: gray;
+    color: black;
+    font-weight: 600;
+}
+

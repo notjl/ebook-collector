@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import { ToastContainer, toast } from 'react-toastify'
 
 import "./UploadPage.css"
 
@@ -56,7 +57,8 @@ const UploadPdf = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             }
-        );
+        ) 
+        toast.success("Upload Complete");
     }
 
 
@@ -98,6 +100,18 @@ const UploadPdf = () => {
                 onChange={changeCover}
                 />
             <button type="submit">UPLOAD</button>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+                theme="light"
+            />
         </form>
         </div>
         </>

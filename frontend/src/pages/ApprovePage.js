@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import { ToastContainer, toast } from 'react-toastify'
 
 import NotFoundPage from "./NotFoundPage";
 
@@ -42,6 +43,7 @@ const ApprovePage = () => {
               
         }catch (e) {
             console.log(e);
+
         };
     };
     useEffect(() => {
@@ -56,6 +58,7 @@ const ApprovePage = () => {
     const getApproved = async (e) => {
         e.preventDefault();
 
+        try {
         await axios.get(
             APPROVE_URL,
             {
@@ -65,7 +68,12 @@ const ApprovePage = () => {
                 }
             }
         )
-    }
+        toast.success("Book Approved")
+
+        } catch{
+            toast.error("Unauthorized")
+            } 
+        }
 
     return (
         <div className="book-page">
@@ -81,6 +89,18 @@ const ApprovePage = () => {
                     <p className="info">Description: {article.description}</p>
                     <form onSubmit={getApproved}>
                         <label className="warningMsg">WARNING: Are you sure to approve this book?</label>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable={false}
+                            pauseOnHover
+                            theme="light"
+                            />
                         <button className="approveButton" type="submit">Approve</button>
                     </form>
                 </div>

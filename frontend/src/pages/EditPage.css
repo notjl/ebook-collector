@@ -54,7 +54,7 @@
 
 .book-inputs input{
     width: 270px;
-    height: 30px;
+    height: 45px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -70,7 +70,7 @@
 
 .book-inputs textarea{
     width: 270px;
-    height: 30px;
+    height: 100px;
     border-radius: 10px;
     border: none;
     outline: none;

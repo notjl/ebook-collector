@@ -35,8 +35,24 @@
 }
 
 .card1 {
+    margin-top: 5vh;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e1e3eb;
+    height: auto;
+    width: auto;
+    box-shadow: 5px 5px 5px 5px rgb(207, 207, 207);
     text-align: center;
     padding: 1rem;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px; 
+    background-color: white;
+    display: block;
+    text-align: center;
+    align-items: center;
 }
 
 .card:hover {

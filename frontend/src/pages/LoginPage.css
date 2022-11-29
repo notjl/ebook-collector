@@ -13,7 +13,7 @@ label, button {
 
 section {
     margin-top: 50px;
-    margin-bottom: auto;
+    margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
     background-color: #e1e3eb;
@@ -32,7 +32,7 @@ section {
 
 .email, .password {
     width: 250px;
-    height: 30px;
+    height: 45px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -49,16 +49,19 @@ section {
     border-radius: 10px;
     border: none;
     outline: none;
-    background-color: #52adf8;
     display: block;
     margin: 1em auto;
     height: 2em;
     font-size: 1.1rem;
+    background: black;
+    font-weight: 600;
+    color: white;
 
 }
 
 button:hover {
-    background-color:#3e88c5;
+    background-color:gray;
+    color: black;
     transition: 0.7s;
     cursor: pointer;
 }
