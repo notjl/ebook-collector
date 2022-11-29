@@ -21,7 +21,6 @@ function SearchBar({ placeholder, data }) {
         <Link to={`/s/${toSearch}`} className="searchIcon">
         <div className="searchIcon" onClick={Search}>
           {" "}
-          <SearchIcon style={{color: 'black' }} /> {" "}
         </div>
         </Link>
       </div>

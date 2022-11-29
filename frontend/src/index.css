@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;500&display=swap');
 *{
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 h1,p,a{
@@ -17,7 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background: rgb(205, 220, 253);
+  background: white;
 }
 
 ul {

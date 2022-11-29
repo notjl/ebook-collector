@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
-import "./ArticlePage.css";
+import "./Articlepage.css";
 import { ToastContainer, toast } from 'react-toastify'
 
 import NotFoundPage from "./NotFoundPage";

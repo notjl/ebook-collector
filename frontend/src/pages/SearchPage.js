@@ -1,9 +1,6 @@
 import React from 'react';
 import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
-import NavBar from '../components/Navbar';
-import ImageBG from '../components/ImageBG';
-
 import axios from "../api/axios";
 import ArticlesList from "../components/ArticlesList";
 import ImageBG from '../components/ImageBG';
