@@ -9,7 +9,7 @@ import ImageBG from "../components/ImageBG";
 import NotFoundPage from "./NotFoundPage";
 
 
-import "./Articlepage.css";
+import "./ArticlePage.css";
 
 
 const BOOK_URL = "/library/book";

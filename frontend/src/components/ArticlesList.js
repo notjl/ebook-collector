@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./ArticlesList.css";
+import "../pages/ArticlesListPage.css";
 import BookCover from "./BookCover";
 
                 
