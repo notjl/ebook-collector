@@ -39,13 +39,13 @@ async def upload_ebook(
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f'Book titled [{tmp["title"]}] exists',
         )
 
     if await check_if_exists(ebook.filename, collection, "filename"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f"Book with file named [{ebook.filename}] exists",
         )
 
@@ -53,7 +53,7 @@ async def upload_ebook(
 
     if await check_if_exists(tmp["hashes"], collection, "hashes"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f"Book with hashing [{tmp['hashes']}] exists",
         )
 
@@ -206,7 +206,7 @@ async def update_book(
 
     if await check_if_exists(tmp["title"], collection, "title"):
         raise HTTPException(
-            status_code=status.HTTP_302_FOUND,
+            status_code=status.HTTP_409_CONFLICT,
             detail=f'Book [{tmp["title"]}] exists',
         )
 
