@@ -66,7 +66,7 @@ const UploadPdf = () => {
             if (err.response?.status === 422) {
                 toast.error("Unauthorized, please log in as Professor")
             } else {
-                toast.error("<Unknown Error")    
+                toast.error("<Unknown Error>")    
             }
             errRef.current.focus();
             }
@@ -109,8 +109,7 @@ const UploadPdf = () => {
             <input id="cover" type="file" title="Select Cover Page"
                 onChange={changeCover}
                 />
-            <button type="submit">UPLOAD</button>
-            <ToastContainer
+                <ToastContainer
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -122,6 +121,8 @@ const UploadPdf = () => {
                 pauseOnHover
                 theme="light"
             />
+            <button type="submit">UPLOAD</button>
+            
         </form>
         </div>
         </>

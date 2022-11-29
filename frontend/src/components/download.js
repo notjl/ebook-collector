@@ -29,8 +29,7 @@ const Download = ( {book} ) => {
     useEffect(() => {
         download()
     }, [])
-    
-    console.log(FileDownload)
+
 
     return (
         <>

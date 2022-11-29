@@ -52,10 +52,9 @@ const LoginPage = () => {
             const accessToken = response?.data;
             const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken})
-            console.log(accessToken.access_token)
             setUser('');
             setPwd('');
-            toast.error('Login Accepted')
+            //toast.error('Login Accepted')
             navigate(from, {replace: true});
             
 

@@ -22,7 +22,7 @@ const Navbar = () => {
                 <Link style={{textDecoration: 'none'}} to = '/a'>E-Books</Link>
             </li>
             <li>
-                <Link style={{textDecoration: 'none'}} to = '/admin'>Admin</Link>
+                <Link style={{textDecoration: 'none'}} to = '/admin/upload'>Admin</Link>
             </li>
         </ul>
         <div className='hamburger' onClick={handleClick}>

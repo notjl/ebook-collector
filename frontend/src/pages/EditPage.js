@@ -110,7 +110,6 @@ const EditPage = () => {
                 }
             ) 
             toast.success("Update Successful");
-            console.log(response)
         } catch(err) {
             if (err.response?.status === 422) {
                 toast.error("Unauthorized, please log in as Admin")

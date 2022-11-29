@@ -12,7 +12,6 @@ function SearchBar({ placeholder, data }) {
   };
 
   const Search = () => {
-    console.log(toSearch)
   };
 
   return (

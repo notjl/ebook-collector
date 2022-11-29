@@ -16,7 +16,6 @@ const CoursesList = ({articles}) => {
       
         return false;
     });
-    console.log(articles)
 
     return (
         <>
