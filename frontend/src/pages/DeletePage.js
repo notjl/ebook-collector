@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 import "./ArticlePage.css";
+import { ToastContainer, toast } from 'react-toastify'
 
 import NotFoundPage from "./NotFoundPage";
 
@@ -57,6 +58,7 @@ const DeletePage = () => {
     const getDeleted = async (e) => {
         e.preventDefault();
 
+        try {
         await axios.delete(
             DELETE_URL,
             {
@@ -66,7 +68,12 @@ const DeletePage = () => {
                 }
             }
         )
-    }
+        toast.success("Book Deleted")
+
+        } catch{
+            toast.error("Unauthorized")
+            } 
+        }
 
     return (
         <>
@@ -83,6 +90,18 @@ const DeletePage = () => {
                     <p className="info">Description: {article.description}</p>
                     <form onSubmit={getDeleted}>
                         <label className="warningMsg">WARNING: Are you sure to remove this book?</label>
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable={false}
+                            pauseOnHover
+                            theme="light"
+                            />
                         <button className="deleteButton" type="submit">Delete</button>
                     </form>
                 </div>

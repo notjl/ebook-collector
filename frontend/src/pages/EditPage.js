@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
+import { ToastContainer, toast } from 'react-toastify'
 
 import "./EditPage.css";
 
@@ -105,7 +106,8 @@ const EditPage = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             }
-        );
+        ) 
+        toast.success("Update Successful");
         console.log(response)
     }
 
@@ -142,6 +144,18 @@ const EditPage = () => {
                                 /><br/>
 
                             <button className="uploadButton" type="submit">EDIT</button>
+                            <ToastContainer
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable={false}
+                            pauseOnHover
+                            theme="light"
+                            />
                         </form>
 
                     </div>
