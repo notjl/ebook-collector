@@ -8,12 +8,12 @@ import ArticlesListPage from './pages/ArticlesListPage';
 import CoursesListPage from './pages/CoursesListPage';
 import SearchPage from './pages/SearchPage';
 import NotFoundPage from './pages/NotFoundPage';
-import UploadPage from './pages/AdminPage';
+import AdminPage from './pages/AdminPage';
 import LoginPage from './pages/LoginPage';
-import UploadPdf from './pages/UploadPage';
-import UploadEdit from './pages/AdminEdit';
-import UploadDelete from './pages/AdminDelete';
-import UploadApprove from './pages/AdminApprove';
+import UploadPage from './pages/UploadPage';
+import AdminEdit from './pages/AdminEdit';
+import AdminDelete from './pages/AdminDelete';
+import AdminApprove from './pages/AdminApprove';
 import ApprovePage from './pages/ApprovePage';
 import EditPage from './pages/EditPage';
 import DeletePage from './pages/DeletePage';
@@ -33,13 +33,13 @@ function App() {
             <Route path="/s/:searchID"  element={<SearchPage/>} />
             <Route path="/login"        element={<LoginPage />}/>
             <Route                      element={<RequireAuth />}>
-              <Route path="/admin"     element={<UploadPage/>}>
-                <Route path="upload"       element={<UploadPdf/>}/>
-                <Route path="edit"      element={<UploadEdit/>}/>
+              <Route path="/admin"     element={<AdminPage/>}>
+                <Route path="upload"       element={<UploadPage/>}/>
+                <Route path="edit"      element={<AdminEdit/>}/>
                 <Route path="edit=:articleID" element={<EditPage/>}/>
-                <Route path="delete"    element={<UploadDelete/>}/>
+                <Route path="delete"    element={<AdminDelete/>}/>
                 <Route path="delete=:articleID" element={<DeletePage/>}/>
-                <Route path="approve" element={<UploadApprove/>}/>
+                <Route path="approve" element={<AdminApprove/>}/>
                 <Route path="approve=:articleID" element={<ApprovePage/>}/>
               </Route>
             </Route>

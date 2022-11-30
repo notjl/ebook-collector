@@ -1,4 +1,4 @@
-import {  useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import EditList from '../components/editList.js';
 

@@ -30,7 +30,6 @@ const Download = ( {book} ) => {
         download()
     }, [])
 
-
     return (
         <>
         <button className='download' onClick={download}>Download</button>

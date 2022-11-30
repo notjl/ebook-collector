@@ -1,15 +1,17 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import axios from '../api/axios';
 import UnApprovedList from '../components/unapprovedList';
 
-const BOOKS_URL = "/library/books";
-
-const UploadApprove = () => {
+const AdminApprove = () => {
 
     const [ articles, setArticles ] = useState([]);
     const [ search, setSearch ] = useState('');
 
     const books = async () => {
+
+        const BOOKS_URL = "/library/books";
+
         try{
             let res = await axios.get(BOOKS_URL);
             let result = await res.data;
@@ -45,4 +47,4 @@ const UploadApprove = () => {
     )
 }
 
-export default UploadApprove;
+export default AdminApprove;

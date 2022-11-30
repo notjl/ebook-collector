@@ -1,7 +1,8 @@
-import React from 'react'
-import ImageBG from '../components/ImageBG'
-import Navbar from '../components/Navbar'
-import Cards from '../components/AboutCards'
+import React from 'react';
+
+import ImageBG from '../components/ImageBG';
+import Navbar from '../components/Navbar';
+import Cards from '../components/AboutCards';
 
 const Aboutpage = () => {
   return (

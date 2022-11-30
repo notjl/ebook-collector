@@ -13,7 +13,6 @@ const CoursesList = ({articles}) => {
           
           return true;
         }
-      
         return false;
     });
 

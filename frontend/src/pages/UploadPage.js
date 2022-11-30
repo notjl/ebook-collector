@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import axios from '../api/axios';
 import useAuth from '../hooks/useAuth';
 import { ToastContainer, toast } from 'react-toastify'
@@ -8,7 +8,6 @@ import "./UploadPage.css"
 const UPLOAD_URL = "/library/upload"
 
 const UploadPdf = () => {
-
 
     const { auth } = useAuth();
     const token = "Bearer " + auth?.accessToken.access_token

@@ -26,13 +26,13 @@ const EditPage = () => {
     const { auth } = useAuth();
     const token = "Bearer " + auth?.accessToken.access_token
 
-    const call = "/library/book?book_title="+articleID
-    const call2 = "/library/"+articleID+"/cover"
-    const UPDATE_URL = "library/"
+    const BOOK_URL = "/library/book?book_title="+articleID
+    const COVER_URL = "/library/"+articleID+"/cover"
+    const UPDATE_URL = "library/"+articleID+"/update"
 
     const book = async () => {
         try{
-            let res = await axios.get(call);
+            let res = await axios.get(BOOK_URL);
             let result = await res.data;
             setArticle(result);
         } catch (e) {
@@ -42,7 +42,7 @@ const EditPage = () => {
     const cover = async () => {
         try{
             await axios({
-                url: call2,
+                url: COVER_URL,
                 method: 'GET',
                 responseType: 'blob', // Important
               }).then((response) => {
@@ -66,7 +66,6 @@ const EditPage = () => {
         return <NotFoundPage />
     }
 
-
     const handleUpdate = async (e) => {
         e.preventDefault();
 
@@ -86,7 +85,6 @@ const EditPage = () => {
             description = article.description;
         }
 
-
         const formData = new FormData();
         formData.append('book_title',articleID);
         formData.append('title',new_title);
@@ -99,7 +97,7 @@ const EditPage = () => {
 
         try {
             const response = await axios.put(
-                UPDATE_URL+articleID+'/update',
+                UPDATE_URL,
                 formData,
                 {
                     headers: {
@@ -119,8 +117,6 @@ const EditPage = () => {
             errRef.current.focus();
             } 
         }
-    
-
 
     return (
         <>

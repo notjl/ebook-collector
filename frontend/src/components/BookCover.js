@@ -19,7 +19,6 @@ const BookCover = (article) => {
                 const fileURL = URL.createObjectURL(file);
                 setCover(fileURL)
               });
-              
         }catch (e) {
             console.log(e);
         };

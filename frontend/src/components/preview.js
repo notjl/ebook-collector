@@ -1,17 +1,17 @@
 import React from 'react';
-import { useState,useEffect } from "react";
+import { useEffect } from "react";
+
 import axios from "../api/axios";
 import "./preview.css";
-const PV_URL = "/library";
 
 const Preview = ( {book} ) => {
 
-    const PV_Path = PV_URL+"/preview?book_title="+book.title
+    const PV_URL = "/library/preview?book_title="+book.title;
 
     const preview = async () => {
         try{
             await axios({
-                url: PV_Path,
+                url: PV_URL,
                 method: 'GET',
                 responseType: 'blob', // Important
               }).then((response) => {
@@ -31,8 +31,6 @@ const Preview = ( {book} ) => {
         preview()
         
     }, [])
-
-    
 
     return (
         <>

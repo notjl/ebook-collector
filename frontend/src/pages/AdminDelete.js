@@ -1,17 +1,19 @@
 import {  useState, useEffect } from 'react';
+
 import axios from '../api/axios';
 import DeleteList from '../components/deleteList';
 
-import "./AdminEdit.css"
+import "./AdminEdit.css";
 
-const BOOKS_URL = "/library/books";
-
-const DeletePdf = () => {
+const AdminDelete = () => {
 
     const [ articles, setArticles ] = useState([]);
     const [ search, setSearch ] = useState('');
 
     const books = async () => {
+
+        const BOOKS_URL = "/library/books";
+
         try{
             let res = await axios.get(BOOKS_URL);
             let result = await res.data;
@@ -46,4 +48,4 @@ const DeletePdf = () => {
     )
 }
 
-export default DeletePdf;
+export default AdminDelete;

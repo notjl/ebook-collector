@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import "./ArticlesList.css";
 import BookCover from "./BookCover";
 
-                
-
-
 const ArticlesList = ({articles}) => {                        
 
     return (

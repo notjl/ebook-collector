@@ -1,24 +1,19 @@
 import { useRef, useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';//install toastify package
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
+
 import axios from '../api/axios';
 import "./LoginPage.css";
-
+import useAuth from '../hooks/useAuth';
 import NavBar from '../components/Navbar';
 import ImageBG from '../components/ImageBG';
-
-const LOGIN_URL = '/login';
-
 
 const LoginPage = () => {
 
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/admin/upload";
 
     const userRef = useRef();
     const errRef = useRef();
@@ -26,12 +21,25 @@ const LoginPage = () => {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [success, setSuccess] = useState('');
 
+    const checkAuth = () => {
+        let refreshauth = JSON.parse(sessionStorage.getItem('key'))
+        if (refreshauth !== null) {
+          const user = refreshauth.user
+          const accessToken = refreshauth.accessToken 
+          setAuth({ user, accessToken })
+          navigate('/admin/upload', {replace: false});
+        }
+    }
 
+    useEffect(() => {
+        checkAuth();
+      }, [])
+    
     useEffect(() => {
         userRef.current.focus();
     }, [])
+
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd])
@@ -40,8 +48,9 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        var body = 'grant_type=&username='+user+'&password='+pwd+'&scope=&client_id=&client_secret='
+        const LOGIN_URL = '/login';
 
+        var body = 'grant_type=&username='+user+'&password='+pwd+'&scope=&client_id=&client_secret='
         try {
             const response = await axios.post(LOGIN_URL, body, {
                 headers: {
@@ -50,14 +59,10 @@ const LoginPage = () => {
                 }
             })
             const accessToken = response?.data;
-            const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken})
+            setAuth({ user, accessToken })
             setUser('');
             setPwd('');
-            //toast.error('Login Accepted')
-            navigate(from, {replace: true});
-            
-
+            navigate('/admin/upload', {replace: true});
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response');
@@ -70,41 +75,14 @@ const LoginPage = () => {
                 toast.error('Unauthorized')
             }
             errRef.current.focus();
-            
-             
         }
         
     }
-    
 
     return (
         <>
         <NavBar />
         <ImageBG heading='LOGIN'/>
-
-         {success ? (
-            <section>
-                <h1>You are logged In!</h1>
-              
-                <ToastContainer //not yet tested  
-                    position="top-right"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable={false}
-                    pauseOnHover
-                    theme="light"
-                    />
-
-                <br />
-                <p>
-                    <a href="/">Go to Home</a>
-                </p>
-            </section>
-         ) : (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"></p> 
             <ToastContainer
@@ -151,7 +129,6 @@ const LoginPage = () => {
                 </span>
             </p>
         </section>
-        )}
         </>
     )
 } 
