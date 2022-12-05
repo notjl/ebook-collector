@@ -110,13 +110,15 @@ const EditPage = () => {
             toast.success("Update Successful");
         } catch(err) {
             if (err.response?.status === 422) {
+                toast.error("Unauthorized")
+            } if (err.response?.status === 403) {
                 toast.error("Unauthorized, please log in as Admin")
             } else {
                 toast.error("Unknown Error")    
             }
             errRef.current.focus();
-            } 
         }
+    }
 
     return (
         <>
