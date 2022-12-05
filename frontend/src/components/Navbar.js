@@ -10,7 +10,9 @@ const Navbar = () => {
 
   return (
     <div className='header'>
-        <Link to = '/'><img src={require('./assets/iconNB.png')} alt='logo'></img></Link>
+        <div className='logo'>
+            <Link to = '/'><img src={require('./assets/iconNB.png')} alt='logo'></img></Link>
+        </div>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li>
                 <Link to = '/about'>About</Link>

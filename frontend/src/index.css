@@ -2,6 +2,7 @@
 *{
   box-sizing: border-box;
   margin: 0;
+
 }
 
 h1,p,a{
@@ -20,7 +21,7 @@ body {
 }
 
 ul {
-  list-style-type:none;
+  list-style-type: none;
 }
 
 code {
