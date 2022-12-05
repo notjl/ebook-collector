@@ -1,9 +1,9 @@
 import RequireAuth from './components/RequireAuth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import ArticlePage from './pages/ArticlePage';
+import HomePage from './pages/Homepage';
+import AboutPage from './pages/Aboutpage';
+import ArticlePage from './pages/Articlepage';
 import ArticlesListPage from './pages/ArticlesListPage';
 import CoursesListPage from './pages/CoursesListPage';
 import SearchPage from './pages/SearchPage';

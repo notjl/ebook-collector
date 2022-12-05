@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Searchbar.css";
+import "./SearchbarNav.css";
 
 function SearchBar({ placeholder, data }) {
   
   const [ toSearch,setSearch ] = useState('');
-
+  
   const handleChange = event => {
     setSearch(event.target.value);
   };
 
   const Search = () => {
+    console.log(toSearch)
   };
 
   return (
-    <div className="search">
-      <div className="searchInputs">
+    <div className="searchNav">
+      <div className="searchInputsNav">
         <input type="text" placeholder={placeholder} onChange={handleChange} value={toSearch}/>
-        <Link to={`/s/${toSearch}`} className="searchIcon">
-        <div className="searchIcon" onClick={Search}>
+        <Link to={`/s/${toSearch}`} className="searchIconNav">
+        <div className="searchIconNav" onClick={Search}>
           {" "}
         </div>
         </Link>
       </div>
-      <div className="dataResults"></div>
     </div>
   );
 }
