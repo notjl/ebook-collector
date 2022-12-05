@@ -1,0 +1,72 @@
+.AboutCards {
+    width: 100%;
+    padding: 6rem 1rem;
+    background-color: black;
+}
+
+.project {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20;
+}
+
+.project h1 {
+    font-size: 4rem;
+    color: rgb(139, 137, 133);
+}
+
+.project p {
+    font-size: 1rem;
+    font-weight: 200;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    color: rgb(17, 17, 17);
+}
+
+.card-container {
+    max-width: 900px;
+    margin: auto;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card1 {
+    margin-top: 5vh;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e1e3eb;
+    height: auto;
+    width: auto;
+    box-shadow: 5px 5px 5px 5px rgb(207, 207, 207);
+    text-align: center;
+    padding: 1rem;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px; 
+    background-color: white;
+    display: block;
+    text-align: center;
+    align-items: center;
+}
+
+.card:hover {
+    background-color: black;
+}
+
+.card h3 {
+    font-size: 1.4rem;
+    padding: 1rem;
+}
+
+.card .bar{
+    border-bottom: 1px solid black;
+    width: 10%;
+    margin: 1.5rem auto;
+    display: block;
+}

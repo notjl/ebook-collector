@@ -167,3 +167,5 @@ scratch*.py
 
 # Ignore PEP582 pypackage
 __pypackage__/
+
+frontend/node_modules
