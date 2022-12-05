@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import {FaBars, FaTimes} from 'react-icons/fa'
 
 import './Navbar.css'
-import Searchbar from './SearchbarNav'
 
 const Navbar = () => {
     const[click, setClick] = useState(false)
@@ -14,7 +13,6 @@ const Navbar = () => {
         <div className='logo'>
             <Link to = '/'><img src={require('./assets/iconNB.png')} alt='logo'></img></Link>
         </div>
-        <Searchbar/>
         <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li>
                 <Link to = '/about'>About</Link>

@@ -1,0 +1,41 @@
+.searchInputsNav {
+  display: flex;
+  transform: scale(.7);
+}
+
+.searchNav {
+  padding: 0;
+}
+
+.searchNav input {
+  background-color: #ffffff;
+  border: 0;
+  border-radius: 2px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  font-size: x-large;
+  height: 30px;
+  width: 551px;
+  padding: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.searchIconNav {
+  height: 60px;
+  width: 50px;
+  background-position: center;
+  background-image: url('./assets/searchIcon.png');
+  background-repeat: no-repeat;
+  background-color:  #ffffff;
+  border-radius: 2px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+input:focus {
+  outline: none;
+}
+  .searchIconNav svg {
+  font-size: 35px;
+}
