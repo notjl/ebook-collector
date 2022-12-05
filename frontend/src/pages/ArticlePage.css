@@ -22,7 +22,7 @@
   
 .book-cover .details .title{
   text-transform: uppercase;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   display: flex;
   font-size: x-large;
   font-weight: 600;
@@ -45,7 +45,6 @@
   color: black;
   font-weight: 600;
   text-align: justify;
-  
 }
 
 .editInputs {
@@ -99,3 +98,4 @@
   display: block;
   margin-top: 20px;
 }
+
