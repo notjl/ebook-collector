@@ -132,8 +132,14 @@ async def get_book(
 
 
 async def get_all_book(
+    approved: bool,
     collection: AsyncIOMotorCollection,
 ) -> List[schemas.Book]:
+    if approved:
+        return [
+            schemas.ShowBook(**document)
+            async for document in collection.find({"approved": True})
+        ]
     return [
         schemas.ShowBook(**document) async for document in collection.find({})
     ]

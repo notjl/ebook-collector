@@ -87,6 +87,7 @@ async def search(
     summary="Get all books in the gridfs",
 )
 async def get_all(
+    approved: bool = False,
     collection: AsyncIOMotorCollection = Depends(db.get_ebooks_collection),
 ) -> List[schemas.ShowBook]:
     """
@@ -95,7 +96,7 @@ async def get_all(
     Returns:
     * List[**schemas._Book_**]: List of Books
     """
-    return await handler.get_all_book(collection)
+    return await handler.get_all_book(approved, collection)
 
 
 @router.get(

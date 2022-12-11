@@ -99,14 +99,29 @@ async def startup_event():
         name="book_title_course_code_search",
     )
 
-    admin_data = {"username": "admin", "password": "somestrongadminpassword", "email": "admin@admin.com", "role": "admin"}
+    admin_data = {
+        "username": "admin",
+        "password": "somestrongadminpassword",
+        "email": "admin@admin.com",
+        "role": "admin",
+    }
     admin = schemas.User(**admin_data)
 
-    prof_data = {"username": "professor", "password": "professor", "email": "professor@professor.com", "role": "professor"}
+    prof_data = {
+        "username": "professor",
+        "password": "professor",
+        "email": "professor@professor.com",
+        "role": "professor",
+    }
     prof = schemas.User(**prof_data)
     with suppress(Exception):
-        await user_handlers.create_user(admin, db.get_library_database()["users"])
-        await user_handlers.create_user(prof, db.get_library_database()["users"])
+        await user_handlers.create_user(
+            admin, db.get_library_database()["users"]
+        )
+        await user_handlers.create_user(
+            prof, db.get_library_database()["users"]
+        )
+
 
 app.add_middleware(
     CORSMiddleware,
