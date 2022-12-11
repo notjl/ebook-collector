@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavbarHome';
 import VideoBG from '../components/VideoBG';
 import useAuth from '../hooks/useAuth';
 

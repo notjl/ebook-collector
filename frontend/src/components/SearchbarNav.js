@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./Searchbar.css";
+import "./SearchbarNav.css";
 
 function SearchBar({ placeholder, data }) {
   
@@ -25,11 +25,11 @@ function SearchBar({ placeholder, data }) {
   }
 
   return (
-    <div className="search">
-      <div className="searchInputs">
+    <div className="searchNav">
+      <div className="searchInputsNav">
         <input type="text" placeholder={placeholder} onChange={handleChange} value={toSearch} onKeyPress={handleEnter}/>
-        <Link onClick={handlePress} className="searchIcon">
-        <div className="searchIcon">
+        <Link onClick={handlePress} className="searchIconNav">
+        <div className="searchIconNav">
           {" "}
         </div>
         </Link>

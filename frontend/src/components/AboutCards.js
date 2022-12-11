@@ -56,7 +56,7 @@ const AboutCards = () => {
                 <p>Jan Angelo Paras</p>
                 <a style={{textDecoration: "none"}} href="https://github.com/qjabparas">&lt; g e l o &gt;</a>
                 <p>qjabparas@tip.edu.ph</p>
-                <p>091</p>
+                <p>09051701726</p>
             </div>
             <div className='card1'>
                 <h3>UI/UX FRONTEND DEVELOPER</h3>

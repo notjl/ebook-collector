@@ -63,13 +63,15 @@ const UploadPdf = () => {
             toast.success("Upload Complete");
         } catch(err) {
             if (err.response?.status === 422) {
+                toast.error("Unauthorized")
+            } if (err.response?.status === 403) {
                 toast.error("Unauthorized, please log in as Professor")
             } else {
-                toast.error("<Unknown Error>")    
+                toast.error("Unknown Error")    
             }
             errRef.current.focus();
-            }
         }
+    }
 
     return (
         <>
