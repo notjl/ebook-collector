@@ -8,7 +8,7 @@ import CoursesList from '../components/CoursesList';
 import NavBar from '../components/Navbar';
 import ImageBG from '../components/ImageBG';
 
-const BOOKS_URL = "/library/books";
+const BOOKS_URL = "/library/books?approved=true";
 
 const ArticlesListPage = () => {
 
