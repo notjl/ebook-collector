@@ -18,7 +18,7 @@ const AboutCards = () => {
                 <span className='bar'></span>
                 <img src={require('./assets/Adviser.jpg')} alt='DevImg'></img>
                 <p>Dr. Jonathan Taylar</p>
-                <a style={{textDecoration: "none"}} href="https://www.linkedin.com/in/jonathan-taylar-b56502b7/?originalSubdomain=ph">&lt; o t i t s &gt;</a>
+                <a style={{textDecoration: "none"}} href="https://www.linkedin.com/in/jonathan-taylar-b56502b7/?originalSubdomain=ph">&lt; D R &gt;</a>
                 <p>jtaylar.cpe@tip.edu.ph</p>
                 <p></p>
             </div>
