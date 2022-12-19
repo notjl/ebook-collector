@@ -36,11 +36,11 @@ function App() {
               <Route path="/admin"     element={<AdminPage/>}>
                 <Route path="upload"       element={<UploadPage/>}/>
                 <Route path="edit"      element={<AdminEdit/>}/>
-                <Route path="edit=:articleID" element={<EditPage/>}/>
+                <Route path="edit/:articleID" element={<EditPage/>}/>
                 <Route path="delete"    element={<AdminDelete/>}/>
-                <Route path="delete=:articleID" element={<DeletePage/>}/>
+                <Route path="delete/:articleID" element={<DeletePage/>}/>
                 <Route path="approve" element={<AdminApprove/>}/>
-                <Route path="approve=:articleID" element={<ApprovePage/>}/>
+                <Route path="approve/:articleID" element={<ApprovePage/>}/>
               </Route>
             </Route>
             <Route path="*"             element={<NotFoundPage/>} />

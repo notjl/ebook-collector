@@ -16,7 +16,7 @@ const UnApprovedList = ({ articles, search}) => {
         <div className="editResults">
         {data.map(article => (
             <div className="container">
-                <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/approve=${article.title}`}>
+                <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/approve/${article.title}`}>
                 <BookCover title={article.title} />
                 <p>{article.title}</p>
             </Link></div>

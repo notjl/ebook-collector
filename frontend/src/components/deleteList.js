@@ -14,7 +14,7 @@ const DeleteList = ({articles, search}) => {
         <div className="editResults">
         {data.map(article => (
             <div className="container">
-                <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/delete=${article.title}`}>
+                <Link className="link" style={{textDecoration: 'none'}} key={article.title} to={`/admin/delete/${article.title}`}>
                 <BookCover title={article.title} />
                 <p>{article.title}</p>
             </Link></div>
